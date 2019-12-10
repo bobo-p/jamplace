@@ -66,8 +66,20 @@ namespace JamPlace.IdentityServer4
             services.AddTransient<IIdentityServerConfigurationSetup, IdentityServerConfigurationSetup>();
             services.AddTransient<IDataSeeder, DataSeeder>();
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
+            services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+
+            });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
             services.AddAuthentication(options =>
             {
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -97,14 +109,15 @@ namespace JamPlace.IdentityServer4
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
+            app.UseIdentityServer();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Home}/{action=Index}/{id?}");
+            //    endpoints.MapRazorPages();
+            //});
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
