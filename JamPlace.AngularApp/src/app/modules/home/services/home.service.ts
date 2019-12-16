@@ -11,7 +11,6 @@ export class HomeService {
   ) { }
 
   getTestString(): Promise<string> {
-    console.log('dzialam');
     return this.authService.get(this.api + '/Home/GetTestString');
   }
 }

@@ -29,6 +29,7 @@ export class AppComponent {
       if (this.authService.isAuthorized) {
         this.homeService.getTestString().then(data => {
           this.text = data;
+          console.log(data);
           this.showNavbar = true;
         }, fail => {
           
