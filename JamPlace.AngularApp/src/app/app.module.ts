@@ -28,7 +28,7 @@ export function getBaseUrl() {
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },  
     { provide: 'AUTH_URL', useValue: 'http://localhost:5005' },
-    { provide: 'API_URL', useValue: 'http://localhost:26001' },
+    { provide: 'API_URL', useValue: 'http://localhost:26001/api' },
     AuthService
   ],
   bootstrap: [AppComponent]
