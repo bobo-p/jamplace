@@ -7,7 +7,7 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    public class JamEventDo : IJamEvent
+    internal class JamEventDo : IJamEvent
     {
         [Key]
         public int Id { get; set; }

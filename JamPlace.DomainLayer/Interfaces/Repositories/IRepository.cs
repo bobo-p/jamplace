@@ -6,7 +6,7 @@ using System.Text;
 
 namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> 
     {
         IQueryable<T> GetBy(Expression<Func<T, bool>> predicate);
         void Add(T entity);
