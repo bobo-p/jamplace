@@ -5,9 +5,8 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    internal class AdressDo : IAdress
+    public class AdressDo : AbstractParrentModelDo, IAdress
     {
-        public int Id { get; set; }
         public string Street { get; set; }
         public string LocalNumber { get; set; }
         public string City { get; set; }

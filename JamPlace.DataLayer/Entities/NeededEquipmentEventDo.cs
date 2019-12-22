@@ -1,14 +1,14 @@
-﻿using System;
+﻿using JamPlace.DomainLayer.Interfaces.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    internal class NeededEquipmentEventDo
+    public class NeededEquipmentEventDo: AbstractParrentModelDo, INeededEquipmentEvent
     {
-        int Id { get; set; }
-        int JamEventId { get; set; }
-        int EquipmentId { get; set; }
-        int Quanity { get; set; }
+        public int JamEventId { get; set; }
+        public int EquipmentId { get; set; }
+        public int Quanity { get; set; }
     }
 }

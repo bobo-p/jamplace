@@ -7,8 +7,10 @@ namespace JamPlace.DomainLayer.Models
 {
     public class JamUser : IJamUser
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
-        public ICollection<IEquipment> Equipment { get; set; }
+        public IEnumerable<IEquipment> PersonalEquipment { get; set; }
+        public string UserIdentityId { get; set; }
+        public IEnumerable<IEquipment> EventEquipment { get; set; }
     }
 }

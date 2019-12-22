@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
     public interface IRepository<T> 
     {
-        IQueryable<T> GetBy(Expression<Func<T, bool>> predicate);
-        void Add(T entity);
-        void Delete(T entity);
-        void Edit(T entity);
+        int Add(T item);
+        void Delete(T item);
+        void Update(T item);
+        T Get(int id);
+        IEnumerable<T> GetAll();
+        
     }
 }

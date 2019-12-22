@@ -6,8 +6,10 @@ namespace JamPlace.DomainLayer.Interfaces.Models
 {
     public interface IJamUser
     {
-        string Id { get; set; }
+        int Id { get; set; }
+        string UserIdentityId { get; set; }
         string UserName { get; set; }
-        ICollection<IEquipment> Equipment { get; set; }
+        IEnumerable<IEquipment> PersonalEquipment { get; set; }
+        IEnumerable<IEquipment> EventEquipment { get; set; }
     }
 }

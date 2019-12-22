@@ -7,18 +7,11 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    internal class JamEventDo : IJamEvent
+    public class BasicJamEventDo : AbstractParrentModelDo, IBasicJamEventObject
     {
-        [Key]
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Size { get; set; }
         public string Description { get; set; }
-        [NotMapped]
-        public IAdress Adress { get; set; }
-        [NotMapped]
-        public ICollection<IJamUser> Users { get; set; }
-        [NotMapped]
-        public ICollection<IEquipment> NeededEquipment { get; set; }
+       
     }
 }

@@ -5,9 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JamPlace.DataLayer\JamPlace.DataLayer.csproj" />
+    <ProjectReference Include="..\JamPlace.DomainLayer\JamPlace.DomainLayer.csproj" />
   </ItemGroup>
 
 

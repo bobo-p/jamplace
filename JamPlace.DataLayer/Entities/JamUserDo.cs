@@ -7,12 +7,17 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    internal class JamUserDo : IJamUser
+    public class JamUserDo : AbstractParrentModelDo, IJamUser
     {
-        [Key]
-        public string Id { get; set; }
         public string UserName { get; set; }
         [NotMapped]
-        public ICollection<IEquipment> Equipment { get; set; }
+        public IEnumerable<IEquipment> PersonalEquipment { get; set; }
+        [NotMapped]
+        public IEnumerable<PersonalEquipmentUserDo> UserPersonalEquipment { get; set; }
+        public string UserIdentityId { get; set; }
+        [NotMapped]
+        public IEnumerable<IEquipment> EventEquipment { get; set ; }
+        [NotMapped]
+        public IEnumerable<JamUserEventEquipmentDo> UserEventEquipment { get; set ; }
     }
 }

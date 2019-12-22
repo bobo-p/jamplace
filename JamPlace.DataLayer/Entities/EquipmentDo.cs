@@ -5,10 +5,10 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    internal class EquipmentDo : IEquipment
+    public class EquipmentDo : AbstractParrentModelDo, IEquipment
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<PersonalEquipmentUserDo> OwningUsers { get; set; }
     }
 }

@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JamPlace.DataLayer;
+using JamPlace.DataLayer.Entities;
+using JamPlace.DataLayer.Repositories;
+using JamPlace.DomainLayer.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
+using AutoMapper;
+using JamPlace.DataLayer.Mapper;
 
 namespace JamPlace.Api
 {
@@ -30,7 +37,11 @@ namespace JamPlace.Api
         {
             services.AddControllers();
             services.AddAuthorization();
-
+            services.AddEntityFrameworkNpgsql()
+             .AddDbContext<ApplicationDbContext>(options =>
+             {
+                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging();
+             });
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -51,6 +62,15 @@ namespace JamPlace.Api
                           .WithOrigins(Configuration.GetValue<string>("App:ClientRootAddress"));
                 });
             });
+            services.AddSingleton(provider => new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DataObjectsMapperProfile());
+            }).CreateMapper());
+
+            
+            services.AddTransient<IBasicJamEventRepository, BasicJamEventRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<IJamUserRepository, JamUserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +81,6 @@ namespace JamPlace.Api
             {
                 app.UseDeveloperExceptionPage();
             }          
-
             app.UseRouting();
 
             app.UseAuthentication();
