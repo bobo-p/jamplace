@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JamPlace.DataLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191222014748_AddedRelationJamUserEventEquipment")]
-    partial class AddedRelationJamUserEventEquipment
+    [Migration("20191224003459_AddedJamEventRelations")]
+    partial class AddedJamEventRelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,27 +42,6 @@ namespace JamPlace.DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("JamPlace.DataLayer.Entities.BasicJamEventDo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BasicJamEvents");
                 });
 
             modelBuilder.Entity("JamPlace.DataLayer.Entities.CommentDo", b =>
@@ -101,15 +80,27 @@ namespace JamPlace.DataLayer.Migrations
                     b.ToTable("Equipment");
                 });
 
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.EquipmentEventEquipmentDo", b =>
+                {
+                    b.Property<int>("EventEquipmentDoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EquipmentDoId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EventEquipmentDoId", "EquipmentDoId");
+
+                    b.HasIndex("EquipmentDoId");
+
+                    b.ToTable("EquipmentEventEquipment");
+                });
+
             modelBuilder.Entity("JamPlace.DataLayer.Entities.EventEquipmentDo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EquipmentId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("JamEventId")
                         .HasColumnType("integer");
@@ -119,7 +110,47 @@ namespace JamPlace.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EquipmentUser");
+                    b.HasIndex("JamEventId");
+
+                    b.HasIndex("JamUserId");
+
+                    b.ToTable("EventEquipment");
+                });
+
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.JamEventDo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("amEvents");
+                });
+
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.JamEventJamUserDo", b =>
+                {
+                    b.Property<int>("JamEventDoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("JamUserDoId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("JamEventDoId", "JamUserDoId");
+
+                    b.HasIndex("JamUserDoId");
+
+                    b.ToTable("JamEventJamUserDo");
                 });
 
             modelBuilder.Entity("JamPlace.DataLayer.Entities.JamUserDo", b =>
@@ -140,40 +171,22 @@ namespace JamPlace.DataLayer.Migrations
                     b.ToTable("JamUsers");
                 });
 
-            modelBuilder.Entity("JamPlace.DataLayer.Entities.JamUserEventEquipmentDo", b =>
-                {
-                    b.Property<int>("JamUserDoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EventEquipmentDoId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("JamUserDoId", "EventEquipmentDoId");
-
-                    b.HasIndex("EventEquipmentDoId");
-
-                    b.ToTable("JamUserEventEquipment");
-                });
-
             modelBuilder.Entity("JamPlace.DataLayer.Entities.NeededEquipmentEventDo", b =>
                 {
+                    b.Property<int>("JamEventDoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EquipmentDoId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EquipmentId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("JamEventId")
-                        .HasColumnType("integer");
+                    b.HasKey("JamEventDoId", "EquipmentDoId");
 
-                    b.Property<int>("Quanity")
-                        .HasColumnType("integer");
+                    b.HasIndex("EquipmentDoId");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("NeededEquipmentEvent");
+                    b.ToTable("NeededEquipmentEventDo");
                 });
 
             modelBuilder.Entity("JamPlace.DataLayer.Entities.PersonalEquipmentUserDo", b =>
@@ -215,17 +228,62 @@ namespace JamPlace.DataLayer.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("JamPlace.DataLayer.Entities.JamUserEventEquipmentDo", b =>
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.EquipmentEventEquipmentDo", b =>
                 {
+                    b.HasOne("JamPlace.DataLayer.Entities.EquipmentDo", "Equipment")
+                        .WithMany("EquipmentEventEquipmentDos")
+                        .HasForeignKey("EquipmentDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("JamPlace.DataLayer.Entities.EventEquipmentDo", "EventEquipment")
-                        .WithMany("EventParticipantsUsers")
+                        .WithMany("UserEventEventEqupiment")
                         .HasForeignKey("EventEquipmentDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.EventEquipmentDo", b =>
+                {
+                    b.HasOne("JamPlace.DataLayer.Entities.JamEventDo", "JamEvent")
+                        .WithMany()
+                        .HasForeignKey("JamEventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("JamPlace.DataLayer.Entities.JamUserDo", "JamUser")
-                        .WithMany("UserEventEquipment")
+                        .WithMany("EventEquipmentDos")
+                        .HasForeignKey("JamUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.JamEventJamUserDo", b =>
+                {
+                    b.HasOne("JamPlace.DataLayer.Entities.JamEventDo", "JamEvent")
+                        .WithMany("JamEventJamUser")
+                        .HasForeignKey("JamEventDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JamPlace.DataLayer.Entities.JamUserDo", "JamUser")
+                        .WithMany("JamEventJamUser")
                         .HasForeignKey("JamUserDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.NeededEquipmentEventDo", b =>
+                {
+                    b.HasOne("JamPlace.DataLayer.Entities.EquipmentDo", "Equipment")
+                        .WithMany("NeededForEvents")
+                        .HasForeignKey("EquipmentDoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JamPlace.DataLayer.Entities.JamEventDo", "JamEvent")
+                        .WithMany("NeededEventEquipment")
+                        .HasForeignKey("JamEventDoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

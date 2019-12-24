@@ -6,7 +6,7 @@ using System.Text;
 
 namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
-    public interface IBasicJamEventRepository : IRepository<IBasicJamEventObject>
+    public interface IJamEventRepository : IRepository<IJamEvent>
     { 
     }
 }

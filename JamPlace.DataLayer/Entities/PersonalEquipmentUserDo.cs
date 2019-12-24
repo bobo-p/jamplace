@@ -7,7 +7,7 @@ using System.Text;
 namespace JamPlace.DataLayer.Entities
 {
     [Table("PersonalEquipmentUser")]
-    public class PersonalEquipmentUserDo: IEquatable<PersonalEquipmentUserDo>
+    public class PersonalEquipmentUserDo : IEquatable<PersonalEquipmentUserDo>
     {
         public int JamUserDoId { get; set; }
         public JamUserDo JamUser { get; set; }

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\JamPlace.DomainLayer\JamPlace.DomainLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

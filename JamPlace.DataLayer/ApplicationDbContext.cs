@@ -11,10 +11,10 @@ namespace JamPlace.DataLayer
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<BasicJamEventDo> BasicJamEvents { get; set; }
+        public DbSet<JamEventDo> JamEvents { get; set; }
         public DbSet<CommentDo> Comments { get; set; }
         public DbSet<EquipmentDo> Equipment { get; set; }
-        public DbSet<UserEventEquipmentDo> EventEquipment{ get; set; }
+        public DbSet<EventEquipmentDo> EventEquipment{ get; set; }
         public DbSet<NeededEquipmentEventDo> NeededEquipmentEvent { get; set; }
         public DbSet<JamUserDo> JamUsers{ get; set; }
         public DbSet<AdressDo> Addresses { get; set;}
@@ -33,16 +33,40 @@ namespace JamPlace.DataLayer
                 .WithMany(c => c.OwningUsers)
                 .HasForeignKey(bc => bc.EquipmentDoId);
 
-            modelBuilder.Entity<JamUserEventEquipmentDo>()
-               .HasKey(bc => new { bc.JamUserDoId, bc.EventEquipmentDoId });
-            modelBuilder.Entity<JamUserEventEquipmentDo>()
-                .HasOne(bc => bc.JamUser)
-                .WithMany(b => b.UserEventEquipment)
-                .HasForeignKey(bc => bc.JamUserDoId);
-            modelBuilder.Entity<JamUserEventEquipmentDo>()
+            modelBuilder.Entity<EquipmentEventEquipmentDo>()
+                .HasKey(bc => new { bc.EventEquipmentDoId, bc.EquipmentDoId });
+            modelBuilder.Entity<EquipmentEventEquipmentDo>()
                 .HasOne(bc => bc.EventEquipment)
-                .WithMany(c => c.EventJamUsers)
+                .WithMany(b => b.UserEventEventEqupiment)
                 .HasForeignKey(bc => bc.EventEquipmentDoId);
+            modelBuilder.Entity<EquipmentEventEquipmentDo>()
+                .HasOne(bc => bc.Equipment)
+                .WithMany(c => c.EquipmentEventEquipmentDos)
+                .HasForeignKey(bc => bc.EquipmentDoId);
+
+            modelBuilder.Entity<JamEventJamUserDo>()
+               .HasKey(bc => new { bc.JamEventDoId, bc.JamUserDoId });
+            modelBuilder.Entity<JamEventJamUserDo>()
+                .HasOne(bc => bc.JamUser)
+                .WithMany(b => b.JamEventJamUser)
+                .HasForeignKey(bc => bc.JamUserDoId);
+            modelBuilder.Entity<JamEventJamUserDo>()
+                .HasOne(bc => bc.JamEvent)
+                .WithMany(c => c.JamEventJamUser)
+                .HasForeignKey(bc => bc.JamEventDoId);
+
+            modelBuilder.Entity<NeededEquipmentEventDo>()
+               .HasKey(bc => new { bc.JamEventDoId, bc.EquipmentDoId });
+            modelBuilder.Entity<NeededEquipmentEventDo>()
+                .HasOne(bc => bc.JamEvent)
+                .WithMany(b => b.NeededEventEquipment)
+                .HasForeignKey(bc => bc.JamEventDoId);
+            modelBuilder.Entity<NeededEquipmentEventDo>()
+                .HasOne(bc => bc.Equipment)
+                .WithMany(c => c.NeededForEvents)
+                .HasForeignKey(bc => bc.EquipmentDoId);
+
+
         }
     }
 }

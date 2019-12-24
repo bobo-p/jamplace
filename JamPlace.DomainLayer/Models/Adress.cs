@@ -12,5 +12,6 @@ namespace JamPlace.DomainLayer.Models
         public string LocalNumber { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public IEnumerable<IJamEvent> Jams { get; set; }
     }
 }

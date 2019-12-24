@@ -16,8 +16,10 @@ namespace JamPlace.DataLayer.Entities
         public IEnumerable<PersonalEquipmentUserDo> UserPersonalEquipment { get; set; }
         public string UserIdentityId { get; set; }
         [NotMapped]
-        public IEnumerable<IEquipment> EventEquipment { get; set ; }
+        public IEnumerable<IEventEquipment> EventEquipment { get; set ; }
+        public ICollection<EventEquipmentDo> EventEquipmentDos { get; set ; }
+        public ICollection<JamEventJamUserDo> JamEventJamUser { get; set ; }
         [NotMapped]
-        public IEnumerable<JamUserEventEquipmentDo> UserEventEquipment { get; set ; }
+        public IEnumerable<IJamEvent> JamEvents { get; set; }
     }
 }

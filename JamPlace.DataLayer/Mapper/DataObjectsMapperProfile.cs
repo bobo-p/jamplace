@@ -13,6 +13,7 @@ namespace JamPlace.DataLayer.Mapper
         {
             CreateMap<IJamUser, JamUserDo>();
             CreateMap<IEquipment, EquipmentDo>();
+            CreateMap<IJamEvent, JamEventDo>();
         }
     }
 }

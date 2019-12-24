@@ -7,11 +7,8 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Repositories
 {
-    public class NeededEquipmentEventRepository : GenericRepository<INeededEquipmentEvent,NeededEquipmentEventDo>, INeededEquipmentEventRepository
+    public class NeededEquipmentEventRepository 
     {
-        public NeededEquipmentEventRepository(ApplicationDbContext context): base(context)
-        {
-
-        }
+        
     }
 }

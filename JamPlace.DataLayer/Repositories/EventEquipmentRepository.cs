@@ -10,22 +10,21 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Repositories
 {
-    public class EventEquipmentRepository : GenericRepository<IUserEventEquipment, UserEventEquipmentDo>, IUserEventEquipmentRepository
+    public class EventEquipmentRepository : GenericRepository<IEventEquipment, EventEquipmentDo>, IUserEventEquipmentRepository
     {
         private readonly IMapper _mapper;
         public EventEquipmentRepository(ApplicationDbContext context, IMapper mapper) : base(context)
         {
             _mapper = mapper;
         }
-        public new IUserEventEquipment Get(int id)
+        public new IEventEquipment Get(int id)
         {
             var eventEquipment = Context.EventEquipment.AsNoTracking()
-                .Include(eventEq => eventEq.EventJamUsers)
-                    .ThenInclude(x => x.JamUser)
+                .Include(eventEq => eventEq.Equpiment)
                  .FirstOrDefault(p => p.Id == id);
             if (eventEquipment == null) return null;
-            eventEquipment.JamUsers = eventEquipment.EventJamUsers?.Select(p => (IJamUser)p.JamUser).ToList();
-            return eventEquipment as IUserEventEquipment;
+           
+            return eventEquipment as IEventEquipment;
         }
       
     }

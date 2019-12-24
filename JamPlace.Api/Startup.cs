@@ -68,7 +68,7 @@ namespace JamPlace.Api
             }).CreateMapper());
 
             
-            services.AddTransient<IBasicJamEventRepository, BasicJamEventRepository>();
+            services.AddTransient<IJamEventRepository, JamEventRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IJamUserRepository, JamUserRepository>();
         }

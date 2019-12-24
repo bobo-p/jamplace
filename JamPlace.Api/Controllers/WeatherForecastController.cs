@@ -18,9 +18,9 @@ namespace JamPlace.Api.Controllers
     {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IJamUserRepository _jamUserRepo;
-        private readonly IBasicJamEventRepository repo;
+        private readonly IJamEventRepository repo;
         private readonly ICommentRepository _commentRepo;
-        public WeatherForecastController(IJamUserRepository jamUserRepo,IBasicJamEventRepository repo, ILogger<WeatherForecastController> logger, ICommentRepository commentRepo)
+        public WeatherForecastController(IJamUserRepository jamUserRepo,IJamEventRepository repo, ILogger<WeatherForecastController> logger, ICommentRepository commentRepo)
         {
             _jamUserRepo = jamUserRepo;
             this.repo = repo;
@@ -56,10 +56,15 @@ namespace JamPlace.Api.Controllers
             //        }
             //    }
             //};
-            var user = _jamUserRepo.Get(3);
-            var list = user.PersonalEquipment.Skip(1).ToList();
+            var user = _jamUserRepo.GetWithEventEq(1,1);
+            var eqlistnew = user.EventEquipment.FirstOrDefault().Equpiment.Skip(1).ToList();
+            //eqlistnew.Add(new Equipment() {Name="huj",Description="muj" });
+            var evEqitem= user.EventEquipment.FirstOrDefault();
+            evEqitem.Equpiment = eqlistnew;
             //list.Add(new EquipmentDo() { Name = "trolololo", Description = "eeeeeeeeeeeeee" });
             //user.PersonalEquipment = list;
+            user.EventEquipment = new List<EventEquipmentDo>() { (EventEquipmentDo)evEqitem };
+
             _jamUserRepo.Update(user);
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

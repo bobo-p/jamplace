@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
-    public interface IUserEventEquipmentRepository : IRepository<IUserEventEquipment>
+    public interface IUserEventEquipmentRepository : IRepository<IEventEquipment>
     {
     }
 }

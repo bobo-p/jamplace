@@ -10,5 +10,7 @@ namespace JamPlace.DataLayer.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public ICollection<PersonalEquipmentUserDo> OwningUsers { get; set; }
+        public ICollection<NeededEquipmentEventDo> NeededForEvents { get; set; }
+        public ICollection<EquipmentEventEquipmentDo> EquipmentEventEquipmentDos { get; set; }
     }
 }

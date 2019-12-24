@@ -24,21 +24,6 @@ namespace JamPlace.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BasicJamEvents",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Size = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BasicJamEvents", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -67,18 +52,18 @@ namespace JamPlace.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EquipmentUser",
+                name: "JamEvents",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    JamUserId = table.Column<int>(nullable: false),
-                    EquipmentId = table.Column<int>(nullable: false),
-                    JamEventId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(nullable: true),
+                    Size = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipmentUser", x => x.Id);
+                    table.PrimaryKey("PK_JamEvents", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,6 +110,100 @@ namespace JamPlace.DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_Songs", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "EventEquipment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    JamUserId = table.Column<int>(nullable: false),
+                    JamEventId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventEquipment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EventEquipment_JamEvents_JamEventId",
+                        column: x => x.JamEventId,
+                        principalTable: "JamEvents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventEquipment_JamUsers_JamUserId",
+                        column: x => x.JamUserId,
+                        principalTable: "JamUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonalEquipmentUser",
+                columns: table => new
+                {
+                    JamUserDoId = table.Column<int>(nullable: false),
+                    EquipmentDoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonalEquipmentUser", x => new { x.JamUserDoId, x.EquipmentDoId });
+                    table.ForeignKey(
+                        name: "FK_PersonalEquipmentUser_Equipment_EquipmentDoId",
+                        column: x => x.EquipmentDoId,
+                        principalTable: "Equipment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonalEquipmentUser_JamUsers_JamUserDoId",
+                        column: x => x.JamUserDoId,
+                        principalTable: "JamUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventEventEquipmentDo",
+                columns: table => new
+                {
+                    EquipmentDoId = table.Column<int>(nullable: false),
+                    EventEquipmentDoId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventEventEquipmentDo", x => new { x.EventEquipmentDoId, x.EquipmentDoId });
+                    table.ForeignKey(
+                        name: "FK_EventEventEquipmentDo_Equipment_EquipmentDoId",
+                        column: x => x.EquipmentDoId,
+                        principalTable: "Equipment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventEventEquipmentDo_EventEquipment_EventEquipmentDoId",
+                        column: x => x.EventEquipmentDoId,
+                        principalTable: "EventEquipment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventEquipment_JamEventId",
+                table: "EventEquipment",
+                column: "JamEventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventEquipment_JamUserId",
+                table: "EventEquipment",
+                column: "JamUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EventEventEquipmentDo_EquipmentDoId",
+                table: "EventEventEquipmentDo",
+                column: "EquipmentDoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalEquipmentUser_EquipmentDoId",
+                table: "PersonalEquipmentUser",
+                column: "EquipmentDoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -133,25 +212,31 @@ namespace JamPlace.DataLayer.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "BasicJamEvents");
-
-            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Equipment");
-
-            migrationBuilder.DropTable(
-                name: "EquipmentUser");
-
-            migrationBuilder.DropTable(
-                name: "JamUsers");
+                name: "EventEventEquipmentDo");
 
             migrationBuilder.DropTable(
                 name: "NeededEquipmentEvent");
 
             migrationBuilder.DropTable(
+                name: "PersonalEquipmentUser");
+
+            migrationBuilder.DropTable(
                 name: "Songs");
+
+            migrationBuilder.DropTable(
+                name: "EventEquipment");
+
+            migrationBuilder.DropTable(
+                name: "Equipment");
+
+            migrationBuilder.DropTable(
+                name: "JamEvents");
+
+            migrationBuilder.DropTable(
+                name: "JamUsers");
         }
     }
 }
