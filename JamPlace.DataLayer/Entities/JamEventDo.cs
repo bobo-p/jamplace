@@ -15,6 +15,7 @@ namespace JamPlace.DataLayer.Entities
         [ForeignKey("AdressDo")]
         public int AddressId { get; set; }
         public AdressDo EventAdress { get; set; }
+        public DateTime Date { get; set; }
         [NotMapped]
         public IEnumerable<EventEquipmentDo> EventEquipmentDos { get; set; }
         [NotMapped]

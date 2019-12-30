@@ -13,6 +13,7 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         IAdress Adress { get; set; }
         ICollection<IJamUser> Users {get;set;}
         ICollection<IEquipment> NeededEquipment {get;set;}
+        DateTime Date { get; set; }
 
 
     }

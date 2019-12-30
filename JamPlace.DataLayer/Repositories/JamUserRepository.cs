@@ -111,5 +111,15 @@ namespace JamPlace.DataLayer.Repositories
             
             return user as IJamUser;
         }
+
+        public IEnumerable<IJamEvent> GetEventsFilteredPageByUserId(int pageIndex, int pageSize, bool orderByDate, string city, int userId)
+        {
+            var user = Context.JamUsers?.AsNoTracking().Where(u => u.Id == userId)
+                .Include(x => x.JamEventJamUser)
+                    .ThenInclude(x => x.JamEvent).FirstOrDefault();
+            user.JamEvents = user.JamEventJamUser?.Select(p=>p.JamEvent).ToList();
+
+            return user.JamEvents;
+        }
     }
 }

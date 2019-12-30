@@ -30,6 +30,19 @@ namespace JamPlace.DataLayer.Repositories
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
             return jamEvent as IJamEvent;
         }
+
+        public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
+        {
+            var jamEvents = Context.JamEvents?.AsNoTracking()
+                .Include(ev => ev.Adress)
+                .Where(p => (p.Adress==null || string.IsNullOrEmpty(city)) ? true : p.Adress.City.ToLower().Contains(city.ToLower())).Skip(pageIndex*pageSize).Take(pageSize);
+            if (jamEvents == null)
+                return null;
+            if (orderByDate)
+                jamEvents = jamEvents.OrderBy(p=>p.Date);
+            return jamEvents?.ToList();
+        }
+
         public new void Update(IJamEvent item)
         {
             var doEvent = _mapper.Map<JamEventDo>(item);

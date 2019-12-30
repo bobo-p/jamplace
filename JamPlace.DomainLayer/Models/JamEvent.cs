@@ -14,5 +14,6 @@ namespace JamPlace.DomainLayer.Models
         public IAdress Adress { get; set; }
         public ICollection<IJamUser> Users { get; set; }
         public ICollection<IEquipment> NeededEquipment { get; set; }
+        public DateTime Date { get; set; }
     }
 }
