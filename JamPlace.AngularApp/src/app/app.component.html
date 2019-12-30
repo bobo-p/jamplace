@@ -1,2 +1,40 @@
-<h3>{{text}}</h3>
-<router-outlet></router-outlet>
+<div class="navContainer">
+    <mat-toolbar *ngIf="showNavbar" color="secondary">
+      <mat-toolbar-row class="position-relative">
+        <button mat-icon-button [disableRipple]="true" id="menuIconButton">
+          <mat-icon class="menuIcon" (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <a class="logoContainer" [routerLink]="'/'" routerLinkActive="router-link-active"><img class="logo" src="assets/img/basebox_logo.svg" alt=""></a>
+        <div class="user-mail-container">
+          {{userMail}}
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div class="logOutBtn">
+          <a class="LogOutLink" (click)="authService.logout()">Wyloguj</a>
+        </div>
+  
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <mat-sidenav-container>
+      <mat-sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" #sidenav>
+        <mat-nav-list>
+          <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/'">
+            <mat-icon>folder</mat-icon> Projekty
+          </a>
+          <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/price-list'">
+            <mat-icon>attach_money</mat-icon> Cennik
+          </a>
+          <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/settings'">
+            <mat-icon>settings_applications</mat-icon> Ustawienia
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div [ngClass]="{withNavbar: showNavbar, withoutNavbar: !showNavbar}">
+          <router-outlet></router-outlet>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  

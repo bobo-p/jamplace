@@ -24,7 +24,7 @@ export class AppComponent {
     // {
     //   window.location.href="http://localhost:5006/Identity/Account/Login";
     // }
-    
+    this.text="Aaaaa";
     const tryGetMail = setInterval(() => {
       if (this.authService.isAuthorized) {
         this.homeService.getTestString().then(data => {

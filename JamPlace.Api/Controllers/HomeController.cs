@@ -21,7 +21,7 @@ namespace JamPlace.Api.Controllers
         [HttpGet("GetTestString")]
         public IActionResult GetTestString()
         {            
-            return Ok("String ok");
+            return Ok("{\"data\" :\"String ok\"}");
         }
     }
 }

@@ -70,8 +70,10 @@ namespace JamPlace.DataLayer.Repositories
             var existintJamEventRelations = Context.Set<JamEventJamUserDo>()?
                     .AsNoTracking()
                     .Where(p => p.JamUserDoId == doUser.Id).ToList();
-            removedJamEventtRelations = existintJamEventRelations.Except(doUser.JamEventJamUser).ToList();
-            addedJamEventRelations = doUser.JamEventJamUser.Except(existintJamEventRelations).ToList();
+            if(doUser?.JamEventJamUser!=null)
+                removedJamEventtRelations = existintJamEventRelations.Except(doUser?.JamEventJamUser).ToList();
+            if (doUser?.JamEventJamUser != null)
+                addedJamEventRelations = doUser.JamEventJamUser.Except(existintJamEventRelations).ToList();
 
             Context.Update(doUser);
             Context.Set<JamEventJamUserDo>().RemoveRange(removedJamEventtRelations);

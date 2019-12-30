@@ -10,6 +10,7 @@ namespace JamPlace.DomainLayer.Services
     public class JamEventService : IJamEventService
     {
         private readonly IJamEventRepository _jamEventRepository;
+        private readonly IJamUserRepository _jamUserRepository;
 
         public JamEventService(IJamEventRepository jamEventRepository)
         {
@@ -43,7 +44,7 @@ namespace JamPlace.DomainLayer.Services
 
         public IEnumerable<IJamEvent> GetFilteredPageByUserId(int pageIndex, int pageSize, bool orderByDate, string city, int userId)
         {
-            throw new NotImplementedException();
+            return _jamUserRepository.GetEventsFilteredPageByUserId(pageIndex, pageSize, orderByDate, city,userId);
         }
     }
 }
