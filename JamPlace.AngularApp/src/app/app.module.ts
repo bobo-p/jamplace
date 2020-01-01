@@ -6,8 +6,9 @@ import { AppAuthModule } from './modules/auth/app-auth.module';
 import {HomeModule} from './modules/home/home.module';
 import { AppComponent } from './app.component';
 import { LoginRedirectComponent } from './modules/auth/components/login-redirect/login-redirect.component';
-import { HttpClientModule } from '@angular/common/http'; 
-
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { MaterialModule } from './modules/material/material.module'; 
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
 }
@@ -22,7 +23,9 @@ export function getBaseUrl() {
     AppRoutingModule,
     AppAuthModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
 
   ],
   providers: [

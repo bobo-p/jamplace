@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectorRef } from '@angular/core';
 import { AuthService } from './modules/auth/services/auth.service';
 import {HomeService} from './modules/home/services/home.service';
-
+import {MediaMatcher} from '@angular/cdk/layout';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,11 +11,18 @@ export class AppComponent {
   title = 'JamPlace';
   text: string;
   showNavbar = false;
-
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   constructor(
+    media: MediaMatcher,
+    changeDetectorRef: ChangeDetectorRef,
     public authService: AuthService,   
     private homeService: HomeService
-   ) { }
+   ) { 
+    this.mobileQuery = media.matchMedia('(max-width: 650px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+   }
 
    ngOnInit() {
     
