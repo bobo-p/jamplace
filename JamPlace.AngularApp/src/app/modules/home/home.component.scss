@@ -1,0 +1,42 @@
+
+
+ .mat-card{
+   width:80%;
+   height:89%;
+   border-radius: 20px;
+}
+.card.custom-card{
+   height: 670px;
+   overflow: hidden;
+   border-radius: 20px;
+  
+}
+.card{
+  border-radius: 20px;
+}
+.card:hover {
+  box-shadow: 1px 2px 30px rgba(0,0,0,0.6);
+}
+ .card img {
+  height: 490px;
+  object-fit: cover;
+}
+.card img.materialized.active {
+  max-height: none;
+  object-fit: none;
+}
+.container{
+  //margin-top: 40px;
+}
+.flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+.tile-title{
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 15px !important;
+}

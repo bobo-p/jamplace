@@ -29,9 +29,12 @@
 			  { "glob": "**/*", "input": "src/assets", "output": "/" }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+			  "node_modules/materialize-css/sass/materialize.scss"
             ],
-            "scripts": []
+            "scripts": [
+				"node_modules/materialize-css/dist/js/materialize.js"
+			]
           },
           "configurations": {
             "production": {
@@ -94,9 +97,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+			  "node_modules/materialize-css/sass/materialize.scss"
             ],
-            "scripts": []
+            "scripts": [
+				"node_modules/materialize-css/dist/js/materialize.js"
+			]
           }
         },
         "lint": {
