@@ -1,16 +1,4 @@
 
-
- .mat-card{
-   width:80%;
-   height:89%;
-   border-radius: 20px;
-}
-.card.custom-card{
-   height: 670px;
-   overflow: hidden;
-   border-radius: 20px;
-  
-}
 .card{
   border-radius: 20px;
 }
@@ -18,15 +6,20 @@
   box-shadow: 1px 2px 30px rgba(0,0,0,0.6);
 }
  .card img {
-  height: 490px;
+  height: 181px;
   object-fit: cover;
 }
-.card img.materialized.active {
-  max-height: none;
-  object-fit: none;
+.small-card-img-border{
+  border-radius: 20px 20px 0px 0px;
+}
+.bottom-card-img-border{
+  border-radius: 20px 0px 0px 20px !important;
 }
 .container{
-  //margin-top: 40px;
+  margin-top: 25px;
+}
+.row{
+  margin-bottom: 1px;
 }
 .flexbox {
   display: flex;
@@ -36,7 +29,13 @@
   height: 400px;
 }
 .tile-title{
-  font-size: 25px;
-  font-weight: 500;
-  margin-bottom: 15px !important;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px !important;
 }
+// @media (max-width: 600px) {
+//   .card.small {
+//     height: unset !important;
+//     max-height: 300px !important;
+//   }
+// }
