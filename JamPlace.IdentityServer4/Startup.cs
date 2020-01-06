@@ -73,7 +73,7 @@ namespace JamPlace.IdentityServer4
                 options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                 options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
 
-            });
+            }).AddRazorRuntimeCompilation();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Identity/Account/Login";
