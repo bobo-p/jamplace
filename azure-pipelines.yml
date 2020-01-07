@@ -32,7 +32,7 @@ stages:
       displayName: Build and push an image to container registry
       inputs:
         command: buildAndPush
-        repository: $(imageRepository)
+        repository: jamplace/api
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
