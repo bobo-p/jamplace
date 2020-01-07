@@ -1,0 +1,62 @@
+version: '3.4'
+
+services:
+  # haproxy:
+    # image: haproxy:latest
+    # container_name: haproxy
+    # depends_on:
+      # - "identityserver"
+      # - "googleshopping"
+    # volumes:
+      # - ./haproxycfg/:/usr/local/etc/haproxy/
+    # ports:
+      # - "81:80"
+  jamplace-api:
+    image: jamplace/api:0.1
+    container_name: jamplaceapi
+    depends_on:
+      - "db"
+    ports:
+       - "26001:26001"
+    volumes:
+      - ./JamPlace.Api/appsettings.json:/app/appsettings.json   
+  jamplace-identity:
+    image: jamplace/identity:0.1
+    container_name: identitysrv
+    depends_on:
+      - "db"
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./JamPlace.IdentityServer4/appsettings.json:/app/appsettings.json  
+  angular:
+    image: jamplace/angularapp:0.1
+    container_name: angular_www
+    ports:
+     - "4200:4200"
+     #- "41154:49153"
+    volumes:
+       - ./ngnixcfg:/etc/nginx/conf.d/
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: sa
+      POSTGRES_USER: postgres
+    ports:
+     - "5433:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    hostname: "pgadmin"
+    depends_on:
+      - "db"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@db.pl"
+      PGADMIN_DEFAULT_PASSWORD: "db123"
+    volumes:
+      - ./pgadmincfg/servers.json:/pgadmin4/servers.json
+    ports:
+      - "82:80"
+      
+  
+

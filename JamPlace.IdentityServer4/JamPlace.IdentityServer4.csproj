@@ -30,6 +30,14 @@
 
   <ItemGroup>
     <Folder Include="Emails\" />
+    <Folder Include="Config\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -19,15 +19,24 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using AutoMapper;
 using JamPlace.DataLayer.Mapper;
+using System.IO;
 
 namespace JamPlace.Api
 {
     public class Startup
     {
         private const string CorsPolicyName = "MainPolicy";
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+               .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
+
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }

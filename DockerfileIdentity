@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS builder 
+WORKDIR /app  
+COPY ./JamPlace.IdentityServer4   ./
+
+#COPY ./JamPlace.IdentityServer4/GoogleShopping.IdentityServer.csproj  ./GoogleShopping.IdentityServer/GoogleShopping.IdentityServer.csproj  
+RUN   dotnet restore
+
+
+RUN dotnet publish "JamPlace.IdentityServer4.csproj" -c Release -o "./dist" --no-restore 
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+
+WORKDIR /app  
+RUN mkdir Logs
+ENV ASPNETCORE_ENVIRONMENT Production  
+COPY --from=builder /app/dist .
+ENTRYPOINT ["dotnet", "JamPlace.IdentityServer4.dll"]
+EXPOSE 5005

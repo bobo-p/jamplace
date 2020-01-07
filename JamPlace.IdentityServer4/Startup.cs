@@ -17,14 +17,23 @@ using IdentityServer4.EntityFramework.DbContexts;
 using JamPlace.IdentityServer4.Models.AppConfigModels;
 using JamPlace.IdentityServer4.IdentityServerConfig;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IO;
 
 namespace JamPlace.IdentityServer4
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+               .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
+
+
+            builder.AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
