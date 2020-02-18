@@ -20,7 +20,7 @@ namespace JamPlace.Api
         {
             _configuration = CreateConfiguration();
             var url = _configuration.GetValue<string>("ApiHostUrl");
-
+            
             var host=CreateHostBuilder(args, url).Build();
             using (var scope = host.Services.CreateScope())
             {
@@ -53,9 +53,8 @@ namespace JamPlace.Api
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(confFolder)
-                .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true);
+                .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
 
             builder.AddEnvironmentVariables();
             return builder.Build();

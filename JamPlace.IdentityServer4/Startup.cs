@@ -18,18 +18,22 @@ using JamPlace.IdentityServer4.Models.AppConfigModels;
 using JamPlace.IdentityServer4.IdentityServerConfig;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IO;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace JamPlace.IdentityServer4
 {
     public class Startup
     {
+        private const string CorsPolicyName = "MainPolicy";
         public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                .SetBasePath(env.ContentRootPath)
+
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
+
+
 
 
             builder.AddEnvironmentVariables();
@@ -44,13 +48,23 @@ namespace JamPlace.IdentityServer4
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddSingleton(Configuration.GetSection("Urls").Get<Urls>());
             services.AddSingleton(Configuration.GetSection("IdentityServerConfigData").Get<IdentityServerConfigData>());
-
+            var cfg = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.RequireHeaderSymmetry = false;
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
 
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
             services.AddIdentityServer(x =>
@@ -95,11 +109,22 @@ namespace JamPlace.IdentityServer4
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
             }).AddJwtBearer();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicyName, policy =>
+                {
+                    policy.AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials()
+                          .WithOrigins(Configuration.GetValue<string>("Urls:AppUrl"));
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(CorsPolicyName);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -109,8 +134,9 @@ namespace JamPlace.IdentityServer4
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
+            app.UseForwardedHeaders();
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
 

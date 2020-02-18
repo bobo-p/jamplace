@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Logging;
 using AutoMapper;
 using JamPlace.DataLayer.Mapper;
 using System.IO;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace JamPlace.Api
 {
@@ -29,10 +30,9 @@ namespace JamPlace.Api
         public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-               .SetBasePath(env.ContentRootPath)
-               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-               .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
 
 
             builder.AddEnvironmentVariables();
@@ -61,6 +61,16 @@ namespace JamPlace.Api
                 o.Audience = Configuration.GetValue<string>("App:Audience");
                 o.RequireHttpsMetadata = false;
             });
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.RequireHeaderSymmetry = false;
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                options.KnownNetworks.Clear();
+                options.KnownProxies.Clear();
+            });
+
             services.AddCors(options =>
             {
                 options.AddPolicy(CorsPolicyName, policy =>
@@ -89,7 +99,8 @@ namespace JamPlace.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }          
+            }
+            app.UseForwardedHeaders();
             app.UseRouting();
 
             app.UseAuthentication();

@@ -21,7 +21,6 @@ namespace JamPlace.IdentityServer4
 
             var url = _configuration.GetValue<string>("IdentityHostUrl");
 
-
             var host = CreateHostBuilder(args, url).Build();
             using (var scope = host.Services.CreateScope())
             {
@@ -56,11 +55,12 @@ namespace JamPlace.IdentityServer4
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(confFolder)
-                .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true);
+                .AddJsonFile(Path.Combine("Config", $"appsettings.{Environment.MachineName}.json"), optional: true);
+                
+                //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true);
 
-            builder.AddEnvironmentVariables();
+            //builder.AddEnvironmentVariables();
             return builder.Build();
         }
     }

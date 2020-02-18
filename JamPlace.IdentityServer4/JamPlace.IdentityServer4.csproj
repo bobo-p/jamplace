@@ -30,12 +30,14 @@
 
   <ItemGroup>
     <Folder Include="Emails\" />
-    <Folder Include="Config\" />
   </ItemGroup>
 
 
   <ItemGroup>
     <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Config\appsettings.DESKTOP-SQV7ENH.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

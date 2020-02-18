@@ -1,18 +1,18 @@
 version: '3.4'
 
 services:
-  # haproxy:
-    # image: haproxy:latest
-    # container_name: haproxy
-    # depends_on:
-      # - "identityserver"
-      # - "googleshopping"
-    # volumes:
-      # - ./haproxycfg/:/usr/local/etc/haproxy/
-    # ports:
-      # - "81:80"
+  jamplace-haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    depends_on:
+      - "jamplace-identity"
+      - "jamplace-api"
+    volumes:
+      - ./haproxycfg/:/usr/local/etc/haproxy/
+    ports:
+      - "81:80"
   jamplace-api:
-    image: jamplace/api:0.1
+    image: rpetlak/jamplace-api:0.1
     container_name: jamplaceapi
     depends_on:
       - "db"
@@ -21,7 +21,7 @@ services:
     volumes:
       - ./JamPlace.Api/appsettings.json:/app/appsettings.json   
   jamplace-identity:
-    image: jamplace/identity:0.1
+    image: rpetlak/jamplace-identity:0.1
     container_name: identitysrv
     depends_on:
       - "db"
@@ -29,8 +29,8 @@ services:
       - "5005:5005"
     volumes:
       - ./JamPlace.IdentityServer4/appsettings.json:/app/appsettings.json  
-  angular:
-    image: jamplace/angularapp:0.1
+  jamplace-angular:
+    image: rpetlak/jamplace-angularapp:0.1
     container_name: angular_www
     ports:
      - "4200:4200"
