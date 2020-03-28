@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    public  class CommentDo : AbstractParrentModelDo,IComment
+    public  class CommentDo : AbstractParrentModelDo, IComment
     {
         public string Content { get; set; }
         public string UserId { get; set; }

@@ -77,7 +77,7 @@ namespace JamPlace.Api
                 {
                     policy.AllowAnyHeader()
                           .AllowAnyMethod()
-                          .AllowCredentials() 
+                          .AllowCredentials()
                           .WithOrigins(Configuration.GetValue<string>("App:ClientRootAddress"));
                 });
             });
