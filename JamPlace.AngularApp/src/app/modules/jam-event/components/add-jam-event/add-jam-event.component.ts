@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl,Validators  } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import {JamEventInfo} from '../../models/jam-event-info'
+
 @Component({
   selector: 'app-add-jam-event',
   templateUrl: './add-jam-event.component.html',
@@ -16,6 +18,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class AddJamEventComponent implements OnInit {
   addJamEventForm: FormGroup;
+  submitted = false;
+
   constructor() {
     this.addJamEventForm=this.createFormGroup();
    }
@@ -23,10 +27,19 @@ export class AddJamEventComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit() {
+    this.submitted = true;
+      if (this.addJamEventForm.invalid) {
+        return;
+    }
+    const result: JamEventInfo = Object.assign({}, this.addJamEventForm.value);
+    result.address = Object.assign({}, result.address);
+
+    // Do useful stuff with the gathered data
+    console.log(result);
   }
   createFormGroup() {
     return new FormGroup({
-      name: new FormControl(),
+      name: new FormControl('',[Validators.required]),
       size: new FormControl(),
       description: new FormControl(),
       address: new FormGroup({
@@ -37,5 +50,9 @@ export class AddJamEventComponent implements OnInit {
       })
     });
   }
+  get name() {
+    return this.addJamEventForm.get('name');
+  }
+  get f() { return this.addJamEventForm.controls; }
 
 }

@@ -1,15 +1,24 @@
-<form class ="container-margin-top create-event full-height margin-bottom-0" [formGroup]="addJamEventForm" (ngSubmit)="onSubmit()" novalidate>
+<form class ="container-margin-top create-event full-height margin-bottom-0" [formGroup]="addJamEventForm" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="card col xl6 m7 s12 card-border"  [@flyInOut]>
-            <h5 class="card-header center-align">
-                <strong>Utwórz nowe wydarzenie</strong>
-            </h5>
+            <div class="row margin-bottom-0">
+                <h5 class="card-header center-align">                
+                        <strong>Utwórz nowe wydarzenie</strong>
+                </h5>
+            </div>
+            <div class="row margin-bottom-0">
+                <p class="helper-text margin-top-0 center-align">Pole z gwiazdką są wymagane</p>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col xl6 l6 m8">
                         <div class="input-field">
-                            <input id="event-name" type="text" class="validate" formControlName="name" />
-                            <label for="event-name">Miejsce</label>
+                            <input id="event-name" type="text"  formControlName="name" require [ngClass]="{ 'invalid': (name.dirty || name.touched || submitted) && name.invalid && name.errors.required }"/>
+                            <label for="event-name">Nazwa wydarzenia *</label>
+                            
+                            <span *ngIf="(name.dirty || name.touched) && name.invalid && name.errors.required" class="invalid">
+                                <small>Nazwa wydarzenia jest wymagana</small>
+                              </span>
                         </div>
                         <div class="input-field">
                             <input id="event-size" type="text" class="validate" formControlName="size" />
@@ -43,7 +52,7 @@
                     
                 </div>
                 <div class="row margin-bottom-0">
-                    <button class="col xl12  m12 s12 btn-large btn-bottom-radius main-button" type="submit">Utwórz
+                    <button  class="col xl12  m12 s12 btn-large btn-bottom-radius main-button" type="submit" name="action">Utwórz
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
