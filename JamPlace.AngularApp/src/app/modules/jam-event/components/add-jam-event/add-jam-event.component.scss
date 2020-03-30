@@ -1,0 +1,69 @@
+.create-event{
+    background-image: url("../../../../../assets/add-event.jpg");
+    background-size: 100% 100%;
+}
+.full-height {
+    height: calc(100vh - 124px);
+}
+.card img {
+    height: 81px;
+    object-fit: cover;
+  }
+.next-btn-color{
+    background: green;
+    height:242px
+}
+.margin-bottom-0{
+    margin-bottom: 0 !important;
+}
+.container-margin-top{
+    margin-top: 60px;
+}
+.card-border{
+    border-radius: 0px 30px 30px 0px;
+  }
+  .btn-bottom-radius{
+    border-radius: 0px 00px 30px 0px;
+  }
+  .btn-color{
+      background: #2DA28A !important;
+      
+  }
+  .main-button {
+    background-color: #364F6B;
+    color: #ffffff;
+    display: inline-block;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background-color .3s ease-in-out;
+}
+
+    .main-button:hover {
+        background-color: #446387;
+    }
+    .main-button:focus {
+        background-color: #446387 !important;
+    }
+    .main-button:focus {
+        outline: 0;
+    }
+@media (max-width: 500px) {
+    .container-margin-top{
+        margin-top: 0px;
+    }
+    .card-border{
+        border-radius: 0px;
+      }
+      .btn-bottom-radius{
+        border-radius: 0px;
+      }
+      .create-event{
+        background-image: none;
+    }
+      .card{
+          margin: 0px !important;
+      }
+}
