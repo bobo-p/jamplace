@@ -22,6 +22,8 @@ export class AddJamEventComponent implements OnInit {
 
   ngOnInit() {
   }
+  onSubmit() {
+  }
   createFormGroup() {
     return new FormGroup({
       name: new FormControl(),
