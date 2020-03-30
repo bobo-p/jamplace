@@ -114,9 +114,9 @@ namespace JamPlace.IdentityServer4
                 options.AddPolicy(CorsPolicyName, policy =>
                 {
                     policy.AllowAnyHeader()
-                          .AllowAnyMethod()
-                          .AllowCredentials()
-                          .WithOrigins(Configuration.GetValue<string>("Urls:AppUrl"));
+                          .AllowAnyMethod().AllowAnyOrigin();
+                          //.AllowCredentials()
+                          //.WithOrigins(Configuration.GetValue<string>("Urls:AppUrl"));
                 });
             });
         }

@@ -44,6 +44,7 @@ export class AuthService {
       auto_userinfo: true,
       log_console_warning_active: true,
       log_console_debug_active: true,
+      disable_iat_offset_validation: true,
       max_id_token_iat_offset_allowed_in_seconds: 10
     };
     const authWellKnownEndpoints: AuthWellKnownEndpoints = {

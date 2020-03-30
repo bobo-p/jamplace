@@ -1,0 +1,54 @@
+<form class ="container-margin-top create-event full-height margin-bottom-0" [formGroup]="addJamEventForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row">
+        <div class="card col xl6 m7 s12 card-border"  [@flyInOut]>
+            <h5 class="card-header center-align">
+                <strong>Utwórz nowe wydarzenie</strong>
+            </h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col xl6 l6 m8">
+                        <div class="input-field">
+                            <input id="event-name" type="text" class="validate" formControlName="name" />
+                            <label for="event-name">Miejsce</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="event-size" type="text" class="validate" formControlName="size" />
+                            <label for="event-size">Wielkość eventu</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="event-desc" type="text" class="validate" formControlName="description" />
+                            <label for="event-desc">Opis</label>
+                        </div>
+                    </div>
+                    <div class="col xl6 l6 m8" formGroupName="address" novalidate>
+                        <div class="row margin-bottom-0">
+                            <div class="input-field col l6 m6 margin-bottom-0">
+                                <input id="event-street" type="text" class="validate" formControlName="street" />
+                                <label for="event-street">Ulica</label>
+                            </div>
+                            <div class="input-field col l6 m6 margin-bottom-0">
+                                <input id="event-locNr" type="text" class="validate" formControlName="localNumber" />
+                                <label for="event-locNr">Nr</label>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <input id="event-city" type="text" class="validate" formControlName="city" />
+                            <label for="event-city">Miasto</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="event-country" type="text" class="validate" formControlName="country" />
+                            <label for="event-country">Państwo</label>
+                        </div>
+                    </div>                
+                    
+                </div>
+                <div class="row margin-bottom-0">
+                    <button class="col xl12  m12 s12 btn-large btn-bottom-radius main-button" type="submit">Utwórz
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</form>

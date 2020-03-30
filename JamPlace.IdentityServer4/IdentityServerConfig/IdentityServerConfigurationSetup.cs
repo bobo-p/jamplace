@@ -50,11 +50,12 @@ namespace JamPlace.IdentityServer4.IdentityServerConfig
                     AccessTokenType = AccessTokenType.Jwt,
                     RequireConsent = false,
                     AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 30,
+                    IdentityTokenLifetime = 9000,
                     RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
                     AllowAccessTokensViaBrowser = true,
+                    
                     RedirectUris = new List<string>
                     {
                         $"{_urls.AppUrl}/auth-callback",
