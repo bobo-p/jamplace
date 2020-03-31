@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,Validators  } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import {JamEventInfo} from '../../models/jam-event-info'
-
+import {AddEventService} from '../../services/add-event.service'
 @Component({
   selector: 'app-add-jam-event',
   templateUrl: './add-jam-event.component.html',
@@ -19,8 +19,9 @@ import {JamEventInfo} from '../../models/jam-event-info'
 export class AddJamEventComponent implements OnInit {
   addJamEventForm: FormGroup;
   submitted = false;
-
-  constructor() {
+  
+  constructor(
+    private addEventService: AddEventService) {
     this.addJamEventForm=this.createFormGroup();
    }
 
@@ -33,9 +34,10 @@ export class AddJamEventComponent implements OnInit {
     }
     const result: JamEventInfo = Object.assign({}, this.addJamEventForm.value);
     result.address = Object.assign({}, result.address);
+    this.addEventService.addJamEvent(result).then(ok => {}, function(data) {
+      console.log(data);
+  });
 
-    // Do useful stuff with the gathered data
-    console.log(result);
   }
   createFormGroup() {
     return new FormGroup({

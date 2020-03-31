@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JamPlace.DataLayer.Repositories
 {
-    public abstract class GenericRepository<T,C>  where C :  AbstractParrentModelDo,T
+    public abstract class GenericRepository<T,C>  where C :  AbstractParrentModelDo, T
     {
         protected readonly ApplicationDbContext Context;
         public GenericRepository(ApplicationDbContext context)
@@ -17,7 +17,8 @@ namespace JamPlace.DataLayer.Repositories
         }
         public int Add(T item)
         {
-            var data = Context.Add(item as C);
+            var ent = item as C;
+            var data = Context.Add(ent);
             Context.SaveChanges();
             Context.Entry(item).State = EntityState.Detached;
             return data.Entity.Id;

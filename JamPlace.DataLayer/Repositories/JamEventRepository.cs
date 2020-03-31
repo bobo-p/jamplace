@@ -18,6 +18,20 @@ namespace JamPlace.DataLayer.Repositories
         {
             
         }
+        public new int Add(IJamEvent item)
+        {
+            var jamEventDo = new JamEventDo()
+            {
+                Date = item.Date,
+                Size = item.Size,
+                Name = item.Name,
+                Description = item.Description
+            };
+            var data = Context.Add(jamEventDo);
+            Context.SaveChanges();
+            Context.Entry(jamEventDo).State = EntityState.Detached;
+            return data.Entity.Id;
+        }
         public new IJamEvent Get(int id)
         {
             var jamEvent = Context.JamEvents.AsNoTracking().Where(p=>p.Id==id)

@@ -21,6 +21,8 @@ using AutoMapper;
 using JamPlace.DataLayer.Mapper;
 using System.IO;
 using Microsoft.AspNetCore.HttpOverrides;
+using JamPlace.DomainLayer.Interfaces.Services;
+using JamPlace.DomainLayer.Services;
 
 namespace JamPlace.Api
 {
@@ -90,6 +92,7 @@ namespace JamPlace.Api
             services.AddTransient<IJamEventRepository, JamEventRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IJamUserRepository, JamUserRepository>();
+            services.AddTransient<IJamEventService, JamEventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
