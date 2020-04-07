@@ -66,6 +66,10 @@ namespace JamPlace.DataLayer
                 .WithMany(c => c.NeededForEvents)
                 .HasForeignKey(bc => bc.EquipmentDoId);
 
+            //modelBuilder.Entity<JamEventDo>()
+            //    .HasOne<AdressDo>(s => s.Adress)
+            //    .WithMany(g => g.JamEvents)
+            //    .HasForeignKey(s => s.AddressId);
 
         }
     }
