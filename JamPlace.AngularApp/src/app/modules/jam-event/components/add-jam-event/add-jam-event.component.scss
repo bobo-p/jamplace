@@ -1,9 +1,11 @@
+@import '../../../../../scss/variables';
+
 .create-event{
     background-image: url("../../../../../assets/add-event.jpg");
     background-size: 100% 100%;
 }
 .full-height {
-    height: calc(100vh - 124px);
+    height: calc(100vh - #{$top-panel-height} *2);
 }
 .card img {
     height: 81px;

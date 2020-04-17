@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {JamEventRouterComponent} from './jam-event-router.component';
 import {AddJamEventComponent} from './components/add-jam-event/add-jam-event.component'; 
+import {MainEventPanelComponent} from './components/main-event-panel/main-event-panel.component'; 
 
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
     children: [
       
       { path: 'addJamEvent', component: AddJamEventComponent },
+      { path: 'main-event', component: MainEventPanelComponent },
       { path: '**', redirectTo: '/'}
     ]
   }

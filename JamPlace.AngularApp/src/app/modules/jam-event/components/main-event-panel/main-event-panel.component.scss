@@ -1,0 +1,31 @@
+@import '../../../../../scss/variables';
+
+$event-info-height: 30vh;
+$song-list-height: 40vh;
+$equipment-list-height: 40vh;
+
+.full-height {
+    height: calc(100vh - #{$top-panel-height});
+    
+}
+.no-bottom-margin{
+    margin-bottom: 0 !important;
+}
+.event-info-panel{
+    height: $event-info-height
+}
+.song-list{
+    height: $song-list-height
+}
+.equipment-list{
+    height: $equipment-list-height
+}
+.user-list{
+    height: calc(100vh - #{$top-panel-height} - #{$event-info-height});
+}
+.forum-panel{
+    height: calc(100vh - #{$top-panel-height} - #{$song-list-height});
+}
+.needed-equipment{
+    height: calc(100vh - #{$top-panel-height} - #{$equipment-list-height});
+}
