@@ -16,7 +16,7 @@
                             <input id="event-name" type="text"  formControlName="name" require [ngClass]="{ 'invalid': (name.dirty || name.touched || submitted) && name.invalid && name.errors.required }"/>
                             <label for="event-name">Nazwa wydarzenia *</label>
                             
-                            <span *ngIf="(name.dirty || name.touched) && name.invalid && name.errors.required" class="invalid">
+                            <span *ngIf="(name.dirty || name.touched || submitted) && name.invalid && name.errors.required" class="invalid">
                                 <small>Nazwa wydarzenia jest wymagana</small>
                               </span>
                         </div>
