@@ -1,6 +1,6 @@
 @import '../../../../../scss/variables';
 
-$event-info-height: 30vh;
+$event-info-height: 35vh;
 $song-list-height: 40vh;
 $equipment-list-height: 40vh;
 
@@ -12,7 +12,9 @@ $equipment-list-height: 40vh;
     margin-bottom: 0 !important;
 }
 .event-info-panel{
-    height: $event-info-height
+    height: $event-info-height;
+    padding: 0;
+    margin: 0;
 }
 .song-list{
     height: $song-list-height
@@ -22,6 +24,8 @@ $equipment-list-height: 40vh;
 }
 .user-list{
     height: calc(100vh - #{$top-panel-height} - #{$event-info-height});
+    position: relative;
+    z-index: -1;
 }
 .forum-panel{
     height: calc(100vh - #{$top-panel-height} - #{$song-list-height});
