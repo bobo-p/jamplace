@@ -23,6 +23,7 @@ using System.IO;
 using Microsoft.AspNetCore.HttpOverrides;
 using JamPlace.DomainLayer.Interfaces.Services;
 using JamPlace.DomainLayer.Services;
+using JamPlace.Api.Mapper;
 
 namespace JamPlace.Api
 {
@@ -86,12 +87,15 @@ namespace JamPlace.Api
             services.AddSingleton(provider => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new DataObjectsMapperProfile());
+                cfg.AddProfile(new ApiMapperProfile());
             }).CreateMapper());
 
             
             services.AddTransient<IJamEventRepository, JamEventRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IJamUserRepository, JamUserRepository>();
+            services.AddTransient<ISongRepository, SongRepository>();
+            services.AddTransient<IEquipmentRepository, EquipmentRepository>();
             services.AddTransient<IJamEventService, JamEventService>();
         }
 

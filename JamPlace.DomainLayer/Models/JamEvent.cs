@@ -13,6 +13,7 @@ namespace JamPlace.DomainLayer.Models
         public string Description { get; set; }
         public IAdress Adress { get; set; }
         public ICollection<IJamUser> Users { get; set; }
+        public ICollection<ISong> Songs { get; set; }
         public ICollection<IEquipment> NeededEquipment { get; set; }
         public DateTime Date { get; set; }
     }

@@ -14,9 +14,9 @@ namespace JamPlace.DataLayer.Repositories
     public class JamEventRepository : GenericRepository<IJamEvent,JamEventDo>, IJamEventRepository
     {
         private readonly IMapper _mapper;
-        public JamEventRepository(ApplicationDbContext context): base(context)
+        public JamEventRepository(ApplicationDbContext context, IMapper mapper) : base(context)
         {
-            
+            _mapper = mapper;
         }
         public new int Add(IJamEvent item)
         {
@@ -51,9 +51,12 @@ namespace JamPlace.DataLayer.Repositories
                     .ThenInclude(x => x.JamUser)
                 .Include(ev => ev.NeededEventEquipment)
                     .ThenInclude(x => x.Equipment)
+                .Include(ev => ev.Songs)
+                .Include(ev => ev.EventAdress)
                  .FirstOrDefault();
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
+            jamEvent.Adress = (IAdress)jamEvent.EventAdress;
             return jamEvent as IJamEvent;
         }
 

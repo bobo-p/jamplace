@@ -12,9 +12,10 @@ namespace JamPlace.DomainLayer.Services
         private readonly IJamEventRepository _jamEventRepository;
         private readonly IJamUserRepository _jamUserRepository;
 
-        public JamEventService(IJamEventRepository jamEventRepository)
+        public JamEventService(IJamEventRepository jamEventRepository, IJamUserRepository jamUserRepository)
         {
             _jamEventRepository = jamEventRepository;
+            _jamUserRepository = jamUserRepository;
         }
 
         public void Add(IJamEvent item)
