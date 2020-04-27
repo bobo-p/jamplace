@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using JamPlace.Api.Helpers;
 using JamPlace.Api.Models;
+using JamPlace.DomainLayer.Interfaces.Models;
 using JamPlace.DomainLayer.Interfaces.Services;
 using JamPlace.DomainLayer.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,32 +21,27 @@ namespace JamPlace.Api.Controllers
     public class JamEventController : ControllerBase
     {
         private readonly IJamEventService _jamEventService;
+        private readonly IJamUserService _jamUserService;
         private readonly IMapper _mapper;
 
-        public JamEventController(IJamEventService jamEventService, IMapper mapper)
+        public JamEventController(IJamEventService jamEventService, IMapper mapper, IJamUserService jamUserService)
         {
             _jamEventService = jamEventService;
             _mapper = mapper;
+            _jamUserService = jamUserService;
         }
         [HttpPost("AddJamEvent")]
         public IActionResult AddJamEvent(AddJamEventViewModel jamEventInfo)
         {
-            _jamEventService.Add(new JamEvent()
-            {
-                Name=jamEventInfo.Name,
-                Size=jamEventInfo.Size,
-                Description=jamEventInfo.Description,
-                Adress = new Adress()
-                {
-                    City = jamEventInfo.Address.City,
-                    LocalNumber = jamEventInfo.Address.LocalNumber,
-                    Street = jamEventInfo.Address.Street,
-                    Country = jamEventInfo.Address.Country,
-                                        
-                    
-                }
-            });
-            return Ok("{\"data\" :\"String ok\"}");
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user = _jamUserService.GetByIdentityId(userId);
+
+            var jamEvent = JamEventBuilder.BuildJamEventFromViewModels(jamEventInfo);
+            jamEvent.Users = new List<IJamUser>() { user };
+
+            var addedEvent = _jamEventService.Add(jamEvent);
+
+            return Ok(addedEvent.Id);
         }
         [HttpGet("GetEvent/{id}")]
         public GetJamEventViewModel GetEvent(int id)

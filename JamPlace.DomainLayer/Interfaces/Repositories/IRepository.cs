@@ -9,7 +9,7 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
     public interface IRepository<T> 
     {
-        int Add(T item);
+        T Add(T item);
         void Delete(T item);
         void Update(T item);
         T Get(int id);

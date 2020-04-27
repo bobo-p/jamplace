@@ -19,31 +19,43 @@ namespace JamPlace.DataLayer.Repositories
         {
             _mapper = mapper;
         }
-        public new int Add(IJamEvent item)
+        public new IJamEvent Add(IJamEvent item)
         {
             var jamEventDo = new JamEventDo()
             {
                 Date = item.Date,
                 Size = item.Size,
                 Name = item.Name,
-                Description = item.Description,               
+                Description = item.Description,
             };
 
-            if (item.Adress != null)
+            jamEventDo.EventAdress = new AdressDo()
             {
-                jamEventDo.EventAdress = new AdressDo()
+                City = item.Adress?.City,
+                Country = item.Adress?.Country,
+                LocalNumber = item.Adress?.LocalNumber,
+                Street = item.Adress?.Street
+            };
+
+            jamEventDo.JamEventJamUser = new List<JamEventJamUserDo>();
+            if (item.Users != null)
+            {
+                foreach (var user in item.Users)
                 {
-                    City = item.Adress.City,
-                    Country = item.Adress.Country,
-                    LocalNumber = item.Adress.LocalNumber,
-                    Street = item.Adress.Street
-                };
+                    var jamEventJamUser = new JamEventJamUserDo()
+                    {
+                        JamEvent = jamEventDo,
+                        JamUser = Context.JamUsers.FirstOrDefault(usr => usr.Id == user.Id),
+                        AccessMode = Common.AccessModeEnum.Creator
+                    };
+                    jamEventDo.JamEventJamUser.Add(jamEventJamUser);
+                }
             }
 
             var data = Context.Add(jamEventDo);
             Context.SaveChanges();
             Context.Entry(jamEventDo).State = EntityState.Detached;
-            return data.Entity.Id;
+            return data.Entity;
         }
         public new IJamEvent Get(int id)
         {
@@ -51,9 +63,9 @@ namespace JamPlace.DataLayer.Repositories
                 .Include(ev => ev.JamEventJamUser)
                     .ThenInclude(x => x.JamUser)
                 .Include(ev => ev.NeededEventEquipment)
-                    .ThenInclude(x => x.Equipment)
-                .Include(ev => ev.Songs)
+                    .ThenInclude(x => x.Equipment)                
                 .Include(ev => ev.EventAdress)
+                .Include(ev => ev.Songs)
                  .FirstOrDefault();
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
@@ -97,6 +109,7 @@ namespace JamPlace.DataLayer.Repositories
                     .Where(p => p.JamEventDoId == doEvent.Id).ToList();
             removedJamEventtRelations = existintJamEventRelations.Except(doEvent.JamEventJamUser).ToList();
             addedJamEventRelations = doEvent.JamEventJamUser.Except(existintJamEventRelations).ToList();
+            addedJamEventRelations.ForEach(p => p.AccessMode = Common.AccessModeEnum.Guest);
 
             //mange NeedeEventEquipment relation
             var removeNeedeEventEquipmentRelations = new List<NeededEquipmentEventDo>();

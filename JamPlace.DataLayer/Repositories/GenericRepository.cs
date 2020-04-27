@@ -15,13 +15,13 @@ namespace JamPlace.DataLayer.Repositories
         {
             Context = context;
         }
-        public int Add(T item)
+        public T Add(T item)
         {
             var ent = item as C;
             var data = Context.Add(ent);
             Context.SaveChanges();
             Context.Entry(item).State = EntityState.Detached;
-            return data.Entity.Id;
+            return data.Entity;
         }
 
         public void  Delete(T item)

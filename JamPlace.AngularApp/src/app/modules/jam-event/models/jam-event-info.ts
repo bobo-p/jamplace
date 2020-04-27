@@ -5,4 +5,5 @@ export class JamEventInfo{
     size: string;
     description: string;
     address: Address;
+    date: Date;
 }

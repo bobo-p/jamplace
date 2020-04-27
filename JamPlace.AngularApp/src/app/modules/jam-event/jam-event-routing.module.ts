@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       
       { path: 'addJamEvent', component: AddJamEventComponent },
-      { path: 'main-event', component: MainEventPanelComponent },
+      { path: 'main-event/:id', component: MainEventPanelComponent },
       { path: '**', redirectTo: '/'}
     ]
   }

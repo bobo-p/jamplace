@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AddEventService } from './add-event.service';
+import { JamEventService } from './jam-event.service';
 
 describe('AddEventService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AddEventService = TestBed.get(AddEventService);
+    const service: JamEventService = TestBed.get(JamEventService);
     expect(service).toBeTruthy();
   });
 });

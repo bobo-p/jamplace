@@ -12,7 +12,7 @@ namespace JamPlace.DataLayer.Entities
         public string Artist { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
-        [ForeignKey("JamEventDo")]
+        [ForeignKey("Id")]
         public int EventId { get; set; }
         public JamEventDo Event { get; set; }
     }

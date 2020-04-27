@@ -15,9 +15,9 @@ namespace JamPlace.DomainLayer.Services
         {
             _jamUserRepository = jamUserRepository;
         }
-        public void Add(IJamUser item)
+        public IJamUser Add(IJamUser item)
         {
-            _jamUserRepository.Add(item);
+            return _jamUserRepository.Add(item);
         }
 
         public void Delete(IJamUser item)
@@ -41,8 +41,7 @@ namespace JamPlace.DomainLayer.Services
             if (user != null)
                 return user;
             user = new JamUser() { UserIdentityId = Id };
-            var userId = _jamUserRepository.Add(user);
-            user.Id = userId;
+            user = _jamUserRepository.Add(user);
             return user;
         }
     }

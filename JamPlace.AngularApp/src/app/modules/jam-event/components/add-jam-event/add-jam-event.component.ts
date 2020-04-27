@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,Validators  } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import {JamEventInfo} from '../../models/jam-event-info'
-import {AddEventService} from '../../services/add-event.service'
+import {JamEventService} from '../../services/jam-event.service'
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -24,7 +24,7 @@ export class AddJamEventComponent implements OnInit {
   submitted = false;
   
   constructor(
-    private addEventService: AddEventService,
+    private addEventService: JamEventService,
     private router: Router,private r:ActivatedRoute ) {
     this.addJamEventForm=this.createFormGroup();
    }
@@ -39,9 +39,9 @@ export class AddJamEventComponent implements OnInit {
     const result: JamEventInfo = Object.assign({}, this.addJamEventForm.value);
     result.address = Object.assign({}, result.address);
 
-    this.addEventService.addJamEvent(result).then(ok => {
+    this.addEventService.addJamEvent(result).then(resultId => {
       
-      this.router.navigate(['main-event'],{ relativeTo: this.r.parent });
+      this.router.navigate(['main-event',resultId],{ relativeTo: this.r.parent });
       },
        error => {
         console.log(error);

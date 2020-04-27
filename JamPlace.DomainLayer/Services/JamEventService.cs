@@ -1,4 +1,5 @@
-﻿using JamPlace.DomainLayer.Interfaces.Models;
+﻿using JamPlace.DomainLayer.Common;
+using JamPlace.DomainLayer.Interfaces.Models;
 using JamPlace.DomainLayer.Interfaces.Repositories;
 using JamPlace.DomainLayer.Interfaces.Services;
 using System;
@@ -18,9 +19,14 @@ namespace JamPlace.DomainLayer.Services
             _jamUserRepository = jamUserRepository;
         }
 
-        public void Add(IJamEvent item)
+        public IJamEvent Add(IJamEvent item)
         {
-            _jamEventRepository.Add(item);
+           return  _jamEventRepository.Add(item);
+        }
+
+        public void Add(IJamEvent jamEvent, IJamUser eventUser)
+        {
+            throw new NotImplementedException();
         }
 
         public void Delete(IJamEvent item)
@@ -36,6 +42,11 @@ namespace JamPlace.DomainLayer.Services
         public IJamEvent Get(int id)
         {
             return _jamEventRepository.Get(id);
+        }
+
+        public AccessModeEnum GetAccesTypeForUser(int eventId, string userId)
+        {
+            return _jamEventRepository.GetAccesTypeForUser(eventId,userId);
         }
 
         public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
