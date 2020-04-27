@@ -34,8 +34,8 @@ export function getBaseUrl() {
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
      { provide: 'AUTH_URL', useValue: 'http://localhost:5005' },
      { provide: 'API_URL', useValue: 'http://localhost:26001/api' },
-    // { provide: 'AUTH_URL', useValue: 'https://login-alfa.jamplace.pl:81' },
-    // { provide: 'API_URL', useValue: 'https://alfa-api.jamplace.pl:81/api' },
+    // { provide: 'AUTH_URL', useValue: 'https://login-alfa.jamplace.local:81' },
+    // { provide: 'API_URL', useValue: 'https://alfa-api.jamplace.local:81/api' },
     AuthService
   ],
   bootstrap: [AppComponent]

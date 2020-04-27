@@ -15,6 +15,5 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         ICollection<IEquipment> NeededEquipment {get;set;}
         DateTime Date { get; set; }
 
-
     }
 }

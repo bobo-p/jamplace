@@ -12,6 +12,9 @@ services:
     ports:
       - "81:80"
   jamplace-api:
+    build:
+        dockerfile: DockerfileApi
+        context: ./
     image: rpetlak/jamplace-api:0.1
     container_name: jamplaceapi
     depends_on:
@@ -21,6 +24,9 @@ services:
     volumes:
       - ./JamPlace.Api/appsettings.json:/app/appsettings.json   
   jamplace-identity:
+    build:
+      dockerfile: DockerfileIdentity
+      context: ./
     image: rpetlak/jamplace-identity:0.1
     container_name: identitysrv
     depends_on:

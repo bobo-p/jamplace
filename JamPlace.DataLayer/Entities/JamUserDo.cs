@@ -18,7 +18,7 @@ namespace JamPlace.DataLayer.Entities
         [NotMapped]
         public IEnumerable<IEventEquipment> EventEquipment { get; set ; }
         public ICollection<EventEquipmentDo> EventEquipmentDos { get; set ; }
-        public ICollection<JamEventJamUserDo> JamEventJamUser { get; set ; }
+        internal ICollection<JamEventJamUserDo> JamEventJamUser { get; set ; }
         [NotMapped]
         public IEnumerable<IJamEvent> JamEvents { get; set; }
     }

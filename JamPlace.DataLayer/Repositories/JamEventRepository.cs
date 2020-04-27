@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JamPlace.DataLayer.Entities;
+using JamPlace.DomainLayer.Common;
 using JamPlace.DomainLayer.Interfaces.Models;
 using JamPlace.DomainLayer.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +61,14 @@ namespace JamPlace.DataLayer.Repositories
             return jamEvent as IJamEvent;
         }
 
+        public AccessModeEnum GetAccesTypeForUser(int eventId, string userId)
+        {
+            var jamEvent = Context.JamEvents.AsNoTracking().Where(p => p.Id == eventId)
+                .Include(ev => ev.JamEventJamUser)
+                    .ThenInclude(x => x.JamUser.UserIdentityId == userId).FirstOrDefault();
+            return (AccessModeEnum)jamEvent.JamEventJamUser.FirstOrDefault()?.AccessMode;
+        }
+
         public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
         {
             var jamEvents = Context.JamEvents?.AsNoTracking()
@@ -103,7 +112,6 @@ namespace JamPlace.DataLayer.Repositories
             Context.Set<JamEventJamUserDo>().AddRange(addedJamEventRelations);
             Context.Set<NeededEquipmentEventDo>().RemoveRange(removeNeedeEventEquipmentRelations);
             Context.Set<NeededEquipmentEventDo>().AddRange(addedNeedeEventEquipmentRelations);
-
 
             Context.SaveChanges();
         }

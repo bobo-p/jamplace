@@ -58,12 +58,16 @@ namespace JamPlace.IdentityServer4.IdentityServerConfig
                     
                     RedirectUris = new List<string>
                     {
+                        "http://localhost/auth-callback",
+                        "http://localhost/silent-renew.html",
                         $"{_urls.AppUrl}/auth-callback",
                         $"{_urls.AppUrl}/silent-renew.html"
 
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
+                        "http://localhost/unauthorized",
+                        "http://localhost",
                         $"{_urls.AppUrl}/unauthorized",
                         $"{_urls.AppUrl}"
                     },

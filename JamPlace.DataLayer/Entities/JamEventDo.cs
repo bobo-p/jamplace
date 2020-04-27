@@ -14,18 +14,17 @@ namespace JamPlace.DataLayer.Entities
         public string Description { get; set; }
         [ForeignKey("AdressDo")]
         public int AddressId { get; set; }
-        public AdressDo EventAdress { get; set; }
-
+        public AdressDo EventAdress { get; set; }      
         public DateTime Date { get; set; }
-        public ICollection<SongDo> Songs { get; set; }
-        public ICollection<EventEquipmentDo> EventEquipmentDos { get; set; }
-        public ICollection<JamEventJamUserDo> JamEventJamUser { get; set; }
-        public ICollection<NeededEquipmentEventDo> NeededEventEquipment { get; set; }
         [NotMapped]
-        public IAdress Adress { get; set ; }
+        public IAdress Adress { get; set; }
         [NotMapped]
-        public ICollection<IJamUser> Users { get ; set ; }
+        public ICollection<IJamUser> Users { get; set; }
         [NotMapped]
         public ICollection<IEquipment> NeededEquipment { get; set; }
+        internal ICollection<SongDo> Songs { get; set; }
+        internal ICollection<EventEquipmentDo> EventEquipmentDos { get; set; }
+        internal ICollection<JamEventJamUserDo> JamEventJamUser { get; set; }
+        internal ICollection<NeededEquipmentEventDo> NeededEventEquipment { get; set; }
     }
 }

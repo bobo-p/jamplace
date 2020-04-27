@@ -97,6 +97,7 @@ namespace JamPlace.Api
             services.AddTransient<ISongRepository, SongRepository>();
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
             services.AddTransient<IJamEventService, JamEventService>();
+            services.AddTransient<IJamUserService, JamUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -31,7 +31,7 @@ namespace JamPlace.DataLayer.Repositories
         {
 
             var doUser = _mapper.Map<JamUserDo>(item);
-            doUser.UserPersonalEquipment = item.PersonalEquipment.Select(p => new PersonalEquipmentUserDo() { EquipmentDoId = p.Id, JamUser = doUser, JamUserDoId = item.Id, Equipment = _mapper.Map<EquipmentDo>(p) }).ToList();
+            doUser.UserPersonalEquipment = item?.PersonalEquipment?.Select(p => new PersonalEquipmentUserDo() { EquipmentDoId = p.Id, JamUser = doUser, JamUserDoId = item.Id, Equipment = _mapper.Map<EquipmentDo>(p) }).ToList();
             Context.Add(doUser);
             Context.SaveChanges();
             return doUser.Id;
@@ -122,6 +122,11 @@ namespace JamPlace.DataLayer.Repositories
             user.JamEvents = user.JamEventJamUser?.Select(p=>p.JamEvent).ToList();
 
             return user.JamEvents;
+        }
+
+        public IJamUser GetByIdentityId(string Id)
+        {
+            return Context.JamUsers?.AsNoTracking().FirstOrDefault(u => u.UserIdentityId == Id);
         }
     }
 }
