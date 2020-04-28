@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using JamPlace.Api.Filters;
 using JamPlace.Api.Helpers;
 using JamPlace.Api.Models;
 using JamPlace.DomainLayer.Interfaces.Models;
@@ -44,6 +45,7 @@ namespace JamPlace.Api.Controllers
             return Ok(addedEvent.Id);
         }
         [HttpGet("GetEvent/{id}")]
+        [ServiceFilter(typeof(UserAccessFilter))]
         public GetJamEventViewModel GetEvent(int id)
         {
             var getJamEvent = _jamEventService.Get(id);

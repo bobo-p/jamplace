@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using JamPlace.DomainLayer.Interfaces.Services;
 using JamPlace.DomainLayer.Services;
 using JamPlace.Api.Mapper;
+using JamPlace.Api.Filters;
 
 namespace JamPlace.Api
 {
@@ -98,6 +99,7 @@ namespace JamPlace.Api
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
             services.AddTransient<IJamEventService, JamEventService>();
             services.AddTransient<IJamUserService, JamUserService>();
+            services.AddScoped<UserAccessFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

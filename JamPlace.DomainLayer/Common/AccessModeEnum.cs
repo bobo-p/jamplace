@@ -6,6 +6,7 @@ namespace JamPlace.DomainLayer.Common
 {
     public enum AccessModeEnum
     {
+        None,
         Creator,
         Manager,
         Guest

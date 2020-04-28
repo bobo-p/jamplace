@@ -6,6 +6,7 @@ namespace JamPlace.DataLayer.Common
 {
     internal enum AccessModeEnum
     {
+        None,
         Creator,
         Manager,
         Guest

@@ -77,8 +77,10 @@ namespace JamPlace.DataLayer.Repositories
         {
             var jamEvent = Context.JamEvents.AsNoTracking().Where(p => p.Id == eventId)
                 .Include(ev => ev.JamEventJamUser)
-                    .ThenInclude(x => x.JamUser.UserIdentityId == userId).FirstOrDefault();
-            return (AccessModeEnum)jamEvent.JamEventJamUser.FirstOrDefault()?.AccessMode;
+                .ThenInclude(p => p.JamUser)
+                .FirstOrDefault();
+            var jamEventJamUser = jamEvent?.JamEventJamUser?.FirstOrDefault(usr => usr?.JamUser.UserIdentityId == userId);
+            return GetDomainAccesModeFromJamEventJamUser(jamEventJamUser);
         }
 
         public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
@@ -129,6 +131,12 @@ namespace JamPlace.DataLayer.Repositories
             Context.SaveChanges();
         }
 
+        private AccessModeEnum GetDomainAccesModeFromJamEventJamUser(JamEventJamUserDo jamEventJamUser)
+        {
+            if (jamEventJamUser == null)
+                return AccessModeEnum.None;
+            return (AccessModeEnum)jamEventJamUser.AccessMode;
+        }
 
     }
 }
