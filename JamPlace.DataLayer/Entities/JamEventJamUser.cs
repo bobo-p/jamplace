@@ -11,6 +11,6 @@ namespace JamPlace.DataLayer.Entities
         public JamUserDo JamUser { get; set; }
         public int JamEventDoId { get; set; }
         public JamEventDo JamEvent { get; set; }
-        public AccessModeEnum AccessMode { get; set; }
+        public UserAccessModeEnum AccessMode { get; set; }
     }
 }

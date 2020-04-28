@@ -10,6 +10,6 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
     public interface IJamEventRepository : IRepository<IJamEvent>
     {
         IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city);
-        AccessModeEnum GetAccesTypeForUser(int eventId, string userId);
+        UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId);
     }
 }

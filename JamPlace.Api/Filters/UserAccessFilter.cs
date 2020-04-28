@@ -28,7 +28,7 @@ namespace JamPlace.Api.Filters
             {
                 var eventId = int.Parse(id.ToString());
                 var accessMode = _jamEventService.GetAccesTypeForUser(eventId, userId);
-                if(accessMode == DomainLayer.Common.AccessModeEnum.None)
+                if(accessMode == DomainLayer.Common.UserAccessModeEnum.None)
                 {
                     context.Result = new ObjectResult("Nie masz dostępu do projektu")
                     {

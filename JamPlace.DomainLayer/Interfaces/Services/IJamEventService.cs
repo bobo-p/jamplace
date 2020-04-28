@@ -11,6 +11,6 @@ namespace JamPlace.DomainLayer.Interfaces.Services
         void  Add(IJamEvent jamEvent, IJamUser eventUser);
         IEnumerable<IJamEvent> GetFilteredPageByUserId(int pageIndex, int pageSize, bool orderByDate, string city,int userId);
         IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city);
-        AccessModeEnum GetAccesTypeForUser(int eventId, string userId);
+        UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId);
     }
 }

@@ -44,7 +44,7 @@ namespace JamPlace.DomainLayer.Services
             return _jamEventRepository.Get(id);
         }
 
-        public AccessModeEnum GetAccesTypeForUser(int eventId, string userId)
+        public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)
         {
             return _jamEventRepository.GetAccesTypeForUser(eventId,userId);
         }

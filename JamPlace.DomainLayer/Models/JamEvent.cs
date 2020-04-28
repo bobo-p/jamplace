@@ -1,4 +1,5 @@
-﻿using JamPlace.DomainLayer.Interfaces.Models;
+﻿using JamPlace.DomainLayer.Common;
+using JamPlace.DomainLayer.Interfaces.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +17,6 @@ namespace JamPlace.DomainLayer.Models
         public ICollection<ISong> Songs { get; set; }
         public ICollection<IEquipment> NeededEquipment { get; set; }
         public DateTime Date { get; set; }
+        public EventAccessTypeEnum AccessType { get; set; }
     }
 }

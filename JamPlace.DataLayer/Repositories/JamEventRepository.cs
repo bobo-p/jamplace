@@ -46,7 +46,7 @@ namespace JamPlace.DataLayer.Repositories
                     {
                         JamEvent = jamEventDo,
                         JamUser = Context.JamUsers.FirstOrDefault(usr => usr.Id == user.Id),
-                        AccessMode = Common.AccessModeEnum.Creator
+                        AccessMode = Common.UserAccessModeEnum.Creator
                     };
                     jamEventDo.JamEventJamUser.Add(jamEventJamUser);
                 }
@@ -73,7 +73,7 @@ namespace JamPlace.DataLayer.Repositories
             return jamEvent as IJamEvent;
         }
 
-        public AccessModeEnum GetAccesTypeForUser(int eventId, string userId)
+        public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)
         {
             var jamEvent = Context.JamEvents.AsNoTracking().Where(p => p.Id == eventId)
                 .Include(ev => ev.JamEventJamUser)
@@ -111,7 +111,7 @@ namespace JamPlace.DataLayer.Repositories
                     .Where(p => p.JamEventDoId == doEvent.Id).ToList();
             removedJamEventtRelations = existintJamEventRelations.Except(doEvent.JamEventJamUser).ToList();
             addedJamEventRelations = doEvent.JamEventJamUser.Except(existintJamEventRelations).ToList();
-            addedJamEventRelations.ForEach(p => p.AccessMode = Common.AccessModeEnum.Guest);
+            addedJamEventRelations.ForEach(p => p.AccessMode = Common.UserAccessModeEnum.Guest);
 
             //mange NeedeEventEquipment relation
             var removeNeedeEventEquipmentRelations = new List<NeededEquipmentEventDo>();
@@ -131,11 +131,11 @@ namespace JamPlace.DataLayer.Repositories
             Context.SaveChanges();
         }
 
-        private AccessModeEnum GetDomainAccesModeFromJamEventJamUser(JamEventJamUserDo jamEventJamUser)
+        private UserAccessModeEnum GetDomainAccesModeFromJamEventJamUser(JamEventJamUserDo jamEventJamUser)
         {
             if (jamEventJamUser == null)
-                return AccessModeEnum.None;
-            return (AccessModeEnum)jamEventJamUser.AccessMode;
+                return UserAccessModeEnum.None;
+            return (UserAccessModeEnum)jamEventJamUser.AccessMode;
         }
 
     }

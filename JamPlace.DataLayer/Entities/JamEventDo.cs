@@ -1,4 +1,5 @@
-﻿using JamPlace.DomainLayer.Interfaces.Models;
+﻿using JamPlace.DomainLayer.Common;
+using JamPlace.DomainLayer.Interfaces.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,7 @@ namespace JamPlace.DataLayer.Entities
         public int AddressId { get; set; }
         public AdressDo EventAdress { get; set; }      
         public DateTime Date { get; set; }
+        public EventAccessTypeEnum AccessType { get; set; }
         public ICollection<SongDo> Songs { get; set; }
         [NotMapped]
         public IAdress Adress { get; set; }

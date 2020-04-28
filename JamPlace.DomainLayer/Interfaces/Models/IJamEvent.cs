@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JamPlace.DomainLayer.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +15,7 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         ICollection<IJamUser> Users {get;set;}
         ICollection<IEquipment> NeededEquipment {get;set;}
         DateTime Date { get; set; }
+        EventAccessTypeEnum AccessType { get; set; }
 
     }
 }

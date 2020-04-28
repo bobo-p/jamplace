@@ -4,11 +4,9 @@ using System.Text;
 
 namespace JamPlace.DomainLayer.Common
 {
-    public enum AccessModeEnum
+    public enum EventAccessTypeEnum
     {
-        None,
-        Creator,
-        Manager,
-        Guest
+        Public,
+        Private
     }
 }

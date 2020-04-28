@@ -4,11 +4,9 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Common
 {
-    internal enum AccessModeEnum
+    internal enum EventAccessTypeEnum
     {
-        None,
-        Creator,
-        Manager,
-        Guest
+        Public,
+        Private
     }
 }
