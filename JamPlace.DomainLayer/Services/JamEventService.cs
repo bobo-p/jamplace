@@ -49,6 +49,11 @@ namespace JamPlace.DomainLayer.Services
             return _jamEventRepository.GetAccesTypeForUser(eventId,userId);
         }
 
+        public IEnumerable<IJamEvent> GetFiltereByUser(string userId)
+        {
+            return _jamEventRepository.GetFiltereByUser(userId);
+        }
+
         public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
         {
             return _jamEventRepository.GetFilteredPage(pageIndex,pageSize,orderByDate,city);

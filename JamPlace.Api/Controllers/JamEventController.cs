@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JamPlace.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class JamEventController : ControllerBase
@@ -50,6 +50,15 @@ namespace JamPlace.Api.Controllers
         {
             var getJamEvent = _jamEventService.Get(id);
             return _mapper.Map<GetJamEventViewModel>(getJamEvent);
+        }
+
+        [HttpGet("GetCurrentUserEvents")]
+        [ServiceFilter(typeof(UserAccessFilter))]
+        public IEnumerable<UserSpecificJamEventViewModel> GetCurrentUserEvents(int id)
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userSpecificJamEvents = _jamEventService.GetFiltereByUser(userId);
+            return userSpecificJamEvents.Select(item => _mapper.Map<UserSpecificJamEventViewModel>(item));
         }
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JamEventViewModel } from '../../models/jam-event-viewmodel';
 import { JamEventService } from '../../services/jam-event.service';
-import { JamEventInfo } from '../../models/jam-event-info';
+import { JamEventInfo } from '../../../shared/jam-event-info';
 
 @Component({
   selector: 'app-main-event-panel',

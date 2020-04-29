@@ -18,6 +18,7 @@ namespace JamPlace.Api.Mapper
             CreateMap<ISong, SongViewModel>();
             CreateMap<IAdress, AddressViewModel>();
             CreateMap<IJamEvent, GetJamEventViewModel>();
+            CreateMap<IJamEvent, UserSpecificJamEventViewModel>();
         }
     }
 }

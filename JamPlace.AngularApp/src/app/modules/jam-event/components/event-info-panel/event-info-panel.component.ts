@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, Input, OnDestroy } from '@angular/core';
 import * as M from "materialize-css/dist/js/materialize";
-import { JamEventInfo } from '../../models/jam-event-info';
+import { JamEventInfo } from '../../../shared/jam-event-info';
 
 @Component({
   selector: 'app-event-info-panel',

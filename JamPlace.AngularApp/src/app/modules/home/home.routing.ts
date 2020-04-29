@@ -7,7 +7,7 @@ const routes: Routes = [
     {
       path: '',
       children: [
-        { path: '', pathMatch: 'full', component: HomeComponent },
+        { path: '', component: HomeComponent },
       ]
     }
   ];

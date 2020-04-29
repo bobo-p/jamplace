@@ -21,17 +21,38 @@
 .row{
   margin-bottom: 1px;
 }
-.flexbox {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
-}
+// .flexbox {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   align-items: center;
+//   height: 400px;
+// }
 .tile-title{
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 10px !important;
+}
+.my-events {
+  .card-image img{
+    min-width:100%;
+    max-width: unset;
+  }
+
+  .card-content{
+    height: 400px;
+    max-height: 100%;
+    padding-left: 0px;
+    padding-bottom: 0px;
+    padding-right: 0px;
+    width: 100%;
+  }
+
+  .content-desc{
+    padding-left: 20px;
+    padding-bottom: 20px;
+  }
+  
 }
 // @media (max-width: 600px) {
 //   .card.small {

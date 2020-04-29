@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.homeService.getJamUserData().then( user => {     
       this.jamUserInfo = user;
-      console.log(user);
       },
        error => {
         console.log(error);

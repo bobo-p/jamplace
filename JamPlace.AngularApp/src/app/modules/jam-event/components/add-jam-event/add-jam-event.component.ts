@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,Validators  } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import {JamEventInfo} from '../../models/jam-event-info'
+import {JamEventInfo} from '../../../shared/jam-event-info'
 import {JamEventService} from '../../services/jam-event.service'
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -25,7 +25,7 @@ export class AddJamEventComponent implements OnInit {
   
   constructor(
     private addEventService: JamEventService,
-    private router: Router,private r:ActivatedRoute ) {
+    private router: Router, private r:ActivatedRoute ) {
     this.addJamEventForm=this.createFormGroup();
    }
 

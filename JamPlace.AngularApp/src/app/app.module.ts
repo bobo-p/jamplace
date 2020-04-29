@@ -17,8 +17,7 @@ export function getBaseUrl() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRedirectComponent,
-    HomeComponent
+    LoginRedirectComponent
   ],
   imports: [
     BrowserModule,

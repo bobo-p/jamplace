@@ -1,4 +1,4 @@
-import { Address } from './addres';
+import { Address } from '../../shared/addres';
 import { JamUserViewModel } from './jam-user-viewmodel';
 import { SongViewModel } from './song-vewmodel';
 import { EquipmentViewModel } from './equipment-vewmodel';

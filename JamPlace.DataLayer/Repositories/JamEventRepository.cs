@@ -83,6 +83,19 @@ namespace JamPlace.DataLayer.Repositories
             return GetDomainAccesModeFromJamEventJamUser(jamEventJamUser);
         }
 
+        public IEnumerable<IJamEvent> GetFiltereByUser(string userId)
+        {
+            var userDo = Context.JamUsers.AsNoTracking().Where(user => user.UserIdentityId == userId)
+                .Include(ev => ev.JamEventJamUser)
+                    .ThenInclude(ev => ev.JamEvent)
+                    .ThenInclude(x => x.EventAdress)
+                 .FirstOrDefault();
+            if (userDo == null) return null;
+            userDo.JamEvents = userDo.JamEventJamUser?.Select(p => p.JamEvent).ToList();
+            userDo.JamEvents?.ToList().ForEach(jamEvent => jamEvent.Adress = ((JamEventDo)jamEvent).EventAdress);
+            return userDo?.JamEvents;
+        }
+
         public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
         {
             var jamEvents = Context.JamEvents?.AsNoTracking()

@@ -5,7 +5,7 @@ import { LoginRedirectComponent } from './modules/auth/components/login-redirect
 import {HomeComponent} from './modules/home/home.component'
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', loadChildren: './modules/home/home.module#HomeModule' },
   { path: 'auth-callback', component: AuthCallbackComponent },
   { path: 'unauthorized', component: LoginRedirectComponent, },
   { path: 'jamevent', loadChildren: './modules/jam-event/jam-event.module#JamEventModule' },

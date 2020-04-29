@@ -11,5 +11,6 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
     {
         IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city);
         UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId);
+        IEnumerable<IJamEvent> GetFiltereByUser(string userId);
     }
 }

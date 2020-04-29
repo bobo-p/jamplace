@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service';
-import { JamEventInfo } from '../models/jam-event-info';
+import { JamEventInfo } from '../../shared/jam-event-info';
 import { JamEventViewModel } from '../models/jam-event-viewmodel';
 @Injectable({
   providedIn: 'root'
