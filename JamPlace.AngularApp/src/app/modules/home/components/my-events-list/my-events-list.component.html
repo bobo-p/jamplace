@@ -1,31 +1,21 @@
-<!-- <ul class="collection">
-    <li class="collection-item">
-        <div class="row">
-            <div class="col l2 valign-wrapper">
-                <div><h5 class="center-align">1</h5></div>
-            </div>
-            <div class="col l3 valign-wrapper">
-                <p>Granie na czekanie</p>
-            </div>
-            <div class="col l3 valign-wrapper">
-                <p>12.8.2020 godz 23:20</p>
-            </div>
-            <div class="col l3 valign-wrapper">
-                <p>Siemianowice slunskie</p>
-            </div>
-        </div>
-    </li>
-    <li class="collection-item">Alvin</li>
-    <li class="collection-item">Alvin</li>
-    <li class="collection-item">Alvin</li>
-  </ul> -->
-  <ul class="collection">
-    <li *ngFor="let myJamEvent of myEvents" (click)="onSelect(myJamEvent)" class="collection-item avatar event-collection">
-      <i class="medium  material-icons icon-style">account_circle</i>
+<div class="content-desc">
+  <div class="row valign-wrapper">
+    <p class="tile-title col l4 xl6">Moje wydarzenia</p>
+    <div class="col l8 xl6">
+        <input #searchBox type="search" name="gsearch" placeholder="Szukaj po nazwie" class="right search-box" (input)="search(searchBox.value)">
+    </div>
+  </div>
+  <!-- <p>
+    Pokaż listę wydarzeń w których bierzesz udział
+  </p> -->
+</div>
+<ul class="collection">
+  <li *ngFor="let myJamEvent of myEvents$ | async" (click)="onSelect(myJamEvent)" class="collection-item avatar event-collection">
+    <i class="medium  material-icons icon-style">account_circle</i>
       <span class="title">{{myJamEvent.name}}</span>
-      <p class="event-info">{{myJamEvent.date}} <br>
-        {{myJamEvent.address}}
-     </p>
-      <div class="secondary-content custom-buton"> <span>Zobacz</span></div>
-    </li>  
-  </ul>
+        <p class="event-info">{{myJamEvent.date}} <br>
+         {{myJamEvent.address}}
+        </p>
+    <div class="secondary-content custom-buton"> <span>Zobacz</span></div>
+  </li>  
+ </ul>

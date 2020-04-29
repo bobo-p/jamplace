@@ -51,13 +51,22 @@ namespace JamPlace.Api.Controllers
             var getJamEvent = _jamEventService.Get(id);
             return _mapper.Map<GetJamEventViewModel>(getJamEvent);
         }
-
+      
         [HttpGet("GetCurrentUserEvents")]
         [ServiceFilter(typeof(UserAccessFilter))]
-        public IEnumerable<UserSpecificJamEventViewModel> GetCurrentUserEvents(int id)
+        public IEnumerable<UserSpecificJamEventViewModel> GetCurrentUserEvents()
         {
             string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var userSpecificJamEvents = _jamEventService.GetFiltereByUser(userId);
+            return userSpecificJamEvents.Select(item => _mapper.Map<UserSpecificJamEventViewModel>(item));
+        }
+        [HttpGet("SearchUserEventsByName/{seacrhText}")]
+        [HttpGet("SearchUserEventsByName")]
+        [ServiceFilter(typeof(UserAccessFilter))]
+        public IEnumerable<UserSpecificJamEventViewModel> SearchUserEventsByName(string seacrhText)
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userSpecificJamEvents = _jamEventService.GetFiltereByNameForUser(seacrhText, userId);
             return userSpecificJamEvents.Select(item => _mapper.Map<UserSpecificJamEventViewModel>(item));
         }
     }

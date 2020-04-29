@@ -123,6 +123,14 @@ export class AuthService {
       })).toPromise();
   }
 
+  getAsObservable(url: string): Observable<any> {
+    return this.http.get(url, { headers: this.getHeaders() })
+      .pipe(catchError((err) => {
+        this.handleError(err);
+        return throwError(err);
+      }));
+  }
+
   put(url: string, data: any, contentType: string = null): Promise<any> {
     const body = JSON.stringify(data);
     return this.http.put(url, body, { headers: this.getHeaders(contentType) })

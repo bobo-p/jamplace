@@ -4,6 +4,7 @@ using JamPlace.DomainLayer.Interfaces.Repositories;
 using JamPlace.DomainLayer.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace JamPlace.DomainLayer.Services
@@ -47,6 +48,13 @@ namespace JamPlace.DomainLayer.Services
         public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)
         {
             return _jamEventRepository.GetAccesTypeForUser(eventId,userId);
+        }
+
+        public IEnumerable<IJamEvent> GetFiltereByNameForUser(string seacrhText, string userId)
+        {
+            var events =_jamEventRepository.GetFiltereByUser(userId).ToList();
+            if (string.IsNullOrEmpty(seacrhText)) return events;
+            return events.Where(ev => ev.Name.ToLower().Contains(seacrhText.ToLower()));
         }
 
         public IEnumerable<IJamEvent> GetFiltereByUser(string userId)
