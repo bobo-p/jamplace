@@ -37,7 +37,6 @@ export class SongListComponent implements OnInit {
     this.songs$ = new BehaviorSubject<SongViewModel[]>(this.songList);
     if(!this.songList || this.songList.length === 0) {
       this.listEmpty=true;
-      this.songList = new SongViewModel[0];
     }
   }
 
@@ -126,7 +125,7 @@ export class SongListComponent implements OnInit {
     let updateItem = this.songList.find(this.findIndexToUpdate, newItem.id);
     if(!updateItem)
     {
-      this.songList.unshift(updateItem);
+      this.songList.unshift(newItem);
       return;
     }
     let index = this.songList.indexOf(updateItem);
