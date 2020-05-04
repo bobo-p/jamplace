@@ -9,7 +9,7 @@ import { AddSongDialogComponent } from './add-song-dialog/add-song-dialog/add-so
 import { ConfirmDialogComponent } from 'src/app/modules/shared/components/confirm-dialog/confirm-dialog.component';
 import { SongService } from '../../services/song.service';
 import { SongSearchRequest } from '../../models/song-search-request';
-
+import {CustomSearchFieldComponent } from 'src/app/modules/shared/components/custom-search-field/custom-search-field.component';
 
 @Component({
   selector: 'app-song-list',
@@ -101,7 +101,9 @@ export class SongListComponent implements OnInit {
       obs.subscribe(items => {
         this.songList = items;
         if(this.songList.length === 0)
-            this.listEmpty=true;
+          this.listEmpty=true;
+        else
+          this.listEmpty=false;
         this. indexSongList();
         this.songs$.next(this.songList);
       });

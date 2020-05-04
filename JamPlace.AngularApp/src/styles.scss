@@ -46,10 +46,11 @@ body { margin: 0; font-family: system-ui, "Segoe UI", Tahoma;}
     color: inherit;
     border-radius: 20px !important; 
     border: 2px solid #d8daab  !important;
-    padding: 10px 25px 10px 25px !important;
+    padding: 6px 25px 7px 20px !important;
     width: unset !important;
     height: unset !important;
     margin: 0px 15px 0px 0px !important;
+    font-size: 14px !important;
     
 }  
 input:focus[class*="search-box"]{
@@ -64,10 +65,8 @@ input[type="search"][class*="search-box"][class*="search-box-light"] {
     box-sizing: content-box;
     -webkit-appearance: searchfield;
    }  
-input[type="search"][class*="search-box"][class*="search-box-light"]::-webkit-search-cancel-button {
-    -webkit-appearance: searchfield-cancel-button;  
-}
+
 input[class*="search-box"][class*="search-box-light"]::-webkit-search-cancel-button{
     position:relative;
-    right:-15px;  
+    right:-15px; 
 }
