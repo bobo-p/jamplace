@@ -1,1 +1,34 @@
-<p>song-list works!</p>
+<div class="content-desc">
+    <div class="row valign-wrapper row-desc">
+      <div class="col l4 xl4 tile-title">Lista utworów</div>
+      <div class="col l6 xl6 search-field">
+          <input #searchBox type="search" name="gsearch" placeholder="Szukaj po nazwie" class="right search-box-light" (input)="search(searchBox.value)">       
+      </div>
+      <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
+    </div>
+    <!-- <p>
+      Pokaż listę wydarzeń w których bierzesz udział
+    </p> -->
+</div>
+  <ul class="collection">
+    <li *ngFor="let song of songs$ | async" class="song-element card">
+      <!-- <i class="  material-icons icon-style">account_circle</i> -->
+      <div class="row valign-wrapper song-row">
+        <div class="col l1 center-align">
+          {{song.index}}
+        </div>
+        <div class="col l3">
+          <span class="song-title truncate">{{song.title}}</span>
+          <span class="song-artist truncate">{{song.artist}} </span>
+        </div>
+        <div class="col l5 truncate">
+          {{song.link}}
+        </div>
+        <div class="col l3">
+          <i class="material-icons right edit-song-button" (click)="openDialog(song)">edit</i>
+          <i class="material-icons right delete-song-button" (click)="deleteSong(song)">delete</i>
+        </div>
+      </div>
+    </li>  
+   </ul>
+   <p *ngIf="listEmpty" class="lack-od-elements center-align">Brak elementów</p>

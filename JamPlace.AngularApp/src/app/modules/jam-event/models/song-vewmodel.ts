@@ -4,4 +4,7 @@ export class SongViewModel {
     artist: string;
     description: string;
     link: string;
+    eventId: number;
+    addDate: Date;
+    index: number;
 }

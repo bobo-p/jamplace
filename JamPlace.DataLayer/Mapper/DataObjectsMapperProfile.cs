@@ -15,6 +15,7 @@ namespace JamPlace.DataLayer.Mapper
             CreateMap<IJamUser, JamUserDo>();
             CreateMap<IEquipment, EquipmentDo>();
             CreateMap<IJamEvent, JamEventDo>();
+            CreateMap<ISong, SongDo>();
 
             CreateMap<EquipmentDo, Equipment>().ForSourceMember(src => src.EquipmentEventEquipmentDos, opt => opt.DoNotValidate());
             CreateMap<JamUserDo, JamUser>();

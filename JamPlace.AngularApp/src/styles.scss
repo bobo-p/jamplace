@@ -31,3 +31,43 @@ $JamPlaceAngularApp-theme: mat-light-theme($JamPlaceAngularApp-primary, $JamPlac
 html, body { height: 100%; }
 /*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
 body { margin: 0; font-family: system-ui, "Segoe UI", Tahoma;}
+
+.search-box{
+    color: inherit;
+    border-radius: 20px !important; 
+    border: 1px solid rgb(29, 161, 242) !important;
+    padding: 10px 25px 10px 25px !important;
+    width: unset !important;
+    height: unset !important;
+    margin: 0px 15px 0px 0px !important;
+    
+}
+.search-box-light{
+    color: inherit;
+    border-radius: 20px !important; 
+    border: 2px solid #d8daab  !important;
+    padding: 10px 25px 10px 25px !important;
+    width: unset !important;
+    height: unset !important;
+    margin: 0px 15px 0px 0px !important;
+    
+}  
+input:focus[class*="search-box"]{
+    box-shadow: 0px 0px 3px rgb(29, 161, 242) !important;
+}
+input:focus[class*="search-box-light"]{
+    box-shadow: 0px 0px 3px #d8daab !important;
+}
+input[type="search"][class*="search-box"][class*="search-box-light"] {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-appearance: searchfield;
+   }  
+input[type="search"][class*="search-box"][class*="search-box-light"]::-webkit-search-cancel-button {
+    -webkit-appearance: searchfield-cancel-button;  
+}
+input[class*="search-box"][class*="search-box-light"]::-webkit-search-cancel-button{
+    position:relative;
+    right:-15px;  
+}

@@ -13,6 +13,7 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         string Description { get; set; }
         IAdress Adress { get; set; }
         ICollection<IJamUser> Users {get;set;}
+        ICollection<ISong> Songs { get; set; }
         ICollection<IEquipment> NeededEquipment {get;set;}
         DateTime Date { get; set; }
         EventAccessTypeEnum AccessType { get; set; }

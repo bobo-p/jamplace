@@ -25,8 +25,9 @@ namespace JamPlace.DataLayer.Repositories
         }
 
         public void  Delete(T item)
-        {            
-            Context.Remove(item as C);
+        {          
+            var toDelete=(C)item;
+            Context.Set<C>().Remove(toDelete);
             Context.SaveChanges();
             Context.Entry(item).State = EntityState.Detached;
         }

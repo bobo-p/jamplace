@@ -159,6 +159,16 @@ export class AuthService {
       })).toPromise();
   }
 
+  postAsObservable(url: string, data: any, contentType: string = null): Observable<any> {
+    contentType = contentType ? contentType : '';
+    const body = contentType.includes('application/json') ? JSON.stringify(data) : data;
+    return this.http.post(url, body, { headers: this.getHeaders(contentType) })
+      .pipe(catchError((err) => {
+        this.handleError(err);
+        debounceTime(300);
+        return throwError(err);
+      }));
+  }
   private handleError(err: any) {
     
     switch (err.status) {

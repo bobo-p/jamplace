@@ -1,11 +1,20 @@
+@import '../../../../../scss/variables';
 .event-name{
     color: white;
     font-size:18px;
     font-weight: 400;  
     margin: 0;  
-    padding: 15px 0px 15px 0px;
-    background-color:#446286;
+    padding: 0px 0px 15px 0px;
+
     
+}
+.content-desc{
+    padding-left: 20px;
+    // background-color: #282D38;
+    //background-image: linear-gradient(to right, #5a6273 , #382828);
+    color: white;
+    height: $content-desc-height;
+    background-image: linear-gradient(to right, #382828 , #5a6273);
 }
 .event-title{
     padding: 13px 0px 13px 0px;

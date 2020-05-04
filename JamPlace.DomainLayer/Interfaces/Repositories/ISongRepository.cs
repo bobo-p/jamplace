@@ -8,5 +8,6 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
     public interface ISongRepository : IRepository<ISong>
     {
+        IEnumerable<ISong> GetFilteredByEvent(int eventId);
     }
 }

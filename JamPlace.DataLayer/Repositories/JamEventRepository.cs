@@ -65,10 +65,11 @@ namespace JamPlace.DataLayer.Repositories
                 .Include(ev => ev.NeededEventEquipment)
                     .ThenInclude(x => x.Equipment)                
                 .Include(ev => ev.EventAdress)
-                .Include(ev => ev.Songs)
+                .Include(ev => ev.SongsDo)
                  .FirstOrDefault();
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
+            jamEvent.Songs = jamEvent.SongsDo?.OrderByDescending(item => item.AddDate).Select(CastToIsong).ToList();
             jamEvent.Adress = (IAdress)jamEvent.EventAdress;
             return jamEvent as IJamEvent;
         }
@@ -149,6 +150,11 @@ namespace JamPlace.DataLayer.Repositories
             if (jamEventJamUser == null)
                 return UserAccessModeEnum.None;
             return (UserAccessModeEnum)jamEventJamUser.AccessMode;
+        }
+        private ISong CastToIsong(SongDo song)
+        {
+            song.JamEvent = song.Event;
+            return (ISong)song;
         }
 
     }

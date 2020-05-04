@@ -15,10 +15,12 @@ namespace JamPlace.Api.Mapper
         {
             CreateMap<IEquipment, EquipmentViewModel>();
             CreateMap<IJamUser, JamEventUserViewModel>();
-            CreateMap<ISong, SongViewModel>();
+            CreateMap<ISong, SongViewModel>().ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.JamEvent.Id));
             CreateMap<IAdress, AddressViewModel>();
             CreateMap<IJamEvent, GetJamEventViewModel>();
             CreateMap<IJamEvent, UserSpecificJamEventViewModel>();
+
+            CreateMap<SongViewModel, ISong>();
         }
     }
 }

@@ -18,11 +18,13 @@ namespace JamPlace.DataLayer.Entities
         public AdressDo EventAdress { get; set; }      
         public DateTime Date { get; set; }
         public EventAccessTypeEnum AccessType { get; set; }
-        public ICollection<SongDo> Songs { get; set; }
+        public ICollection<SongDo> SongsDo { get; set; }
         [NotMapped]
         public IAdress Adress { get; set; }
         [NotMapped]
         public ICollection<IJamUser> Users { get; set; }
+        [NotMapped]
+        public ICollection<ISong> Songs { get; set; }
         [NotMapped]
         public ICollection<IEquipment> NeededEquipment { get; set; }       
         internal ICollection<EventEquipmentDo> EventEquipmentDos { get; set; }

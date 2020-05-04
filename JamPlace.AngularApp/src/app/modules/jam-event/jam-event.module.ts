@@ -9,15 +9,27 @@ import { EventInfoPanelComponent } from './components/event-info-panel/event-inf
 import { ForumComponent } from './components/forum/forum.component';
 import { SongListComponent } from './components/song-list/song-list.component';
 import { EquipmentListComponent } from './components/equipment-list/equipment-list.component';
-import { UserListComponent } from './components/user-list/user-list.component'
+import { UserListComponent } from './components/user-list/user-list.component';
+import { AddSongDialogComponent } from './components/song-list/add-song-dialog/add-song-dialog/add-song-dialog.component'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule  } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AddJamEventComponent, JamEventRouterComponent, MainEventPanelComponent, EventInfoPanelComponent, ForumComponent, SongListComponent, EquipmentListComponent, UserListComponent],
+  declarations: [AddJamEventComponent, JamEventRouterComponent, MainEventPanelComponent, EventInfoPanelComponent, ForumComponent, SongListComponent, EquipmentListComponent, UserListComponent, AddSongDialogComponent],
   imports: [
     CommonModule,
     JamEventRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    FormsModule
   
-  ]
+  ],
+  entryComponents: [
+    AddSongDialogComponent
+ ]
 })
 export class JamEventModule { }

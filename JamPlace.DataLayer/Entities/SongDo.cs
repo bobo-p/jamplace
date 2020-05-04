@@ -15,5 +15,8 @@ namespace JamPlace.DataLayer.Entities
         [ForeignKey("Id")]
         public int EventId { get; set; }
         public JamEventDo Event { get; set; }
+        [NotMapped]
+        public IJamEvent JamEvent { get; set; }
+        public DateTime AddDate { get; set; }
     }
 }

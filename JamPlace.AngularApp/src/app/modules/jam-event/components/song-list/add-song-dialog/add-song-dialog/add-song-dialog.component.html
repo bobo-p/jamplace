@@ -1,0 +1,31 @@
+<h5 *ngIf="!isEditingMode">Nowy utwór</h5>
+<h5 *ngIf="isEditingMode">Edycja utwóru</h5>
+<form [formGroup]="addSongForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="input-field col l6 m6 s12">
+        <input  id="song-name" type="text" formControlName="title" [ngClass]="{ 'invalid': (title.dirty || title.touched || submitted) && title.invalid && title.errors.required }">
+        <label  [class.active]="currentSong.title" for="song-name">Tytuł utworu *</label>
+        <span *ngIf="(title.dirty || title.touched || submitted) && title.invalid && title.errors.required" class="invalid">
+            <small>Nazwa utworu jest wymagana</small>
+        </span>
+    </div>
+    <div class="input-field col l6 m6 s12">
+        <input id="song-artist" type="text" formControlName="artist">
+        <label [class.active]="currentSong.artist" for="song-artist">Autor</label>
+    </div>
+    </div>
+
+    <div class="input-field">
+        <input id="song-link" type="text" formControlName="link">
+        <label [class.active]="currentSong.link" for="song-link">Link</label>
+    </div>
+    <div class="input-field">
+        <textarea class="materialize-textarea" rows="3" id="song-description" type="text" formControlName="description"></textarea>
+        <label [class.active]="currentSong.description" for="song-description">Opis</label>
+    </div>
+   <div class="modal-foote">
+    <button *ngIf="!isEditingMode" class="btn right" cdkFocusInitial type="submit">Dodaj</button>
+    <button *ngIf="isEditingMode" class="btn right" cdkFocusInitial type="submit">Aktualizuj</button>
+    <button class="btn right cancel-button" (click)="onNoClick()" type="button">Anuluj</button>    
+    </div>
+</form>

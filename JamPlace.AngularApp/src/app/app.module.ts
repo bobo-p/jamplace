@@ -9,7 +9,7 @@ import { LoginRedirectComponent } from './modules/auth/components/login-redirect
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
-import { HomeComponent } from './modules/home/home.component';
+import { ConfirmDialogComponent } from './modules/shared/components/confirm-dialog/confirm-dialog.component';
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
 }
@@ -17,8 +17,10 @@ export function getBaseUrl() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRedirectComponent
+    LoginRedirectComponent,
+    ConfirmDialogComponent
   ],
+  entryComponents: [ConfirmDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

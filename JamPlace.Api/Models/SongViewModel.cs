@@ -12,5 +12,7 @@ namespace JamPlace.Api.Models
         public string Artist { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
+        public int EventId { get; set; }
+        public DateTime AddDate { get; set; }
     }
 }

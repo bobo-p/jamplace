@@ -24,6 +24,7 @@ export class MainEventPanelComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
        this.eventId = params['id'];
        this.eventService.getJamEevent(this.eventId).then(result => {
+        console.log(result);
         this.jamEvent=result;   
         this.jamEventInfo=this.CreateEventInfo(this.jamEvent);    
         },

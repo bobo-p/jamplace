@@ -11,5 +11,7 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         string Artist { get; set; }
         string Description { get; set; }
         string Link { get; set; }
+        IJamEvent JamEvent { get; set; }
+        DateTime AddDate { get; set; }
     }
 }
