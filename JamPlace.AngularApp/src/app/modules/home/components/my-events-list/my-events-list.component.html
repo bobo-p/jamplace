@@ -9,7 +9,7 @@
     Pokaż listę wydarzeń w których bierzesz udział
   </p> -->
 </div>
-<ul class="collection">
+<ul class="collection collection-height">
   <li *ngFor="let myJamEvent of myEvents$ | async" (click)="onSelect(myJamEvent)" class="collection-item avatar event-collection">
     <i class="medium  material-icons icon-style">account_circle</i>
       <span class="title">{{myJamEvent.name}}</span>

@@ -8,6 +8,7 @@ import { EditJamEventDialogComponent } from './components/edit-jam-event-dialog/
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IgxTimePickerModule } from 'igniteui-angular';
 
 const components = [
     ConfirmDialogComponent,

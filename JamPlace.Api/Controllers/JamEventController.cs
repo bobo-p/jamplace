@@ -47,6 +47,7 @@ namespace JamPlace.Api.Controllers
         [HttpPost("UpdateJamEvent")]
         public IActionResult UpdateJamEvent(AddJamEventViewModel jamEventInfo)
         {
+
             string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var user = _jamUserService.GetByIdentityId(userId);
 
@@ -62,6 +63,7 @@ namespace JamPlace.Api.Controllers
         public GetJamEventViewModel GetEvent(int id)
         {
             var getJamEvent = _jamEventService.Get(id);
+            getJamEvent.Date = getJamEvent.Date.ToLocalTime();
             return _mapper.Map<GetJamEventViewModel>(getJamEvent);
         }
       

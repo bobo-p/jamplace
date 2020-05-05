@@ -21,6 +21,14 @@
                             </span>
                         </div>
                         <div class="input-field">
+                            <input id="event-date" type="text" class="datepicker" formControlName="date"> 
+                            <label class="active" for="event-date">Data</label>
+                        </div>
+                        <div class="input-field">
+                            <input id="event-time" type="text" class="timepicker" formControlName="time" >
+                            <label class="active" for="event-time">Godzina</label>
+                        </div>
+                        <div class="input-field">
                             <input id="event-size" type="text" class="validate" formControlName="size" />
                             <label for="event-size">Wielkość eventu</label>
                         </div>
@@ -48,6 +56,8 @@
                             <input id="event-country" type="text" class="validate" formControlName="country" />
                             <label for="event-country">Państwo</label>
                         </div>
+                      
+                        
                     </div>                
                     
                 </div>

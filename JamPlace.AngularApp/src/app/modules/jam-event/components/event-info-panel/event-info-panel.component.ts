@@ -3,9 +3,7 @@ import * as M from "materialize-css/dist/js/materialize";
 import { JamEventInfo } from '../../../shared/jam-event-info';
 import { MatDialog } from '@angular/material';
 import { EditJamEventDialogComponent } from 'src/app/modules/shared/components/edit-jam-event-dialog/edit-jam-event-dialog.component';
-import { JamEventViewModel } from '../../models/jam-event-viewmodel';
 import { Address } from 'src/app/modules/shared/addres';
-import { resolveTxt } from 'dns';
 
 @Component({
   selector: 'app-event-info-panel',

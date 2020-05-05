@@ -12,6 +12,14 @@
                 </span>
             </div>
             <div class="input-field">
+                <input id="event-date" type="text" class="datepicker" formControlName="date"> 
+                <label [class.active]="jamEventInfo.date" for="event-date">Data</label>
+            </div>
+            <div class="input-field">
+                <input id="event-time" type="text" class="timepicker" formControlName="time" >
+                <label [class.active]="jamEventInfo.date" for="event-time">Godzina</label>
+            </div>
+            <div class="input-field">
                 <input id="event-size" type="text" class="validate" formControlName="size" />
                 <label [class.active]="jamEventInfo.size" for="event-size">Wielkość eventu</label>
             </div>
@@ -42,7 +50,7 @@
         </div>                                   
     </div>
     <div class="row margin-bottom-0">
-        <button  class="col xl5  m5 s12 btn main-cancel-button"  name="action" (click)="onNoClick()">Anuluj
+        <button  class="col xl5  m5 s12 btn main-cancel-button"  type="button" name="action" (click)="onNoClick()">Anuluj
         </button>
         <button  class="col xl5  m5 s12 offset-l2 offset-m2 btn main-accept-button" type="submit" name="action" cdkFocusInitial >Zaktualizuj
         </button>        
