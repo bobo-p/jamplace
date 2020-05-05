@@ -37,7 +37,26 @@ namespace JamPlace.DomainLayer.Services
 
         public void Edit(IJamEvent item)
         {
-            _jamEventRepository.Update(item);
+            var currentEvent = _jamEventRepository.Get(item.Id);
+            if(item.Address!=null)
+            {
+                if (currentEvent.Address == null)
+                    currentEvent.Address = item.Address;
+                else
+                {
+                    currentEvent.Address.Street = item.Address.Street;
+                    currentEvent.Address.LocalNumber = item.Address.LocalNumber;
+                    currentEvent.Address.City = item.Address.City;
+                    currentEvent.Address.Country = item.Address.Country;
+                }
+            }
+            currentEvent.Name = item.Name;
+            currentEvent.Description = item.Description;
+            currentEvent.Date = item.Date;
+            currentEvent.Size = item.Size;
+            currentEvent.AccessType = item.AccessType;
+
+            _jamEventRepository.SimpleUpdate(currentEvent);
         }
 
         public IJamEvent Get(int id)

@@ -44,6 +44,19 @@ namespace JamPlace.Api.Controllers
 
             return Ok(addedEvent.Id);
         }
+        [HttpPost("UpdateJamEvent")]
+        public IActionResult UpdateJamEvent(AddJamEventViewModel jamEventInfo)
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user = _jamUserService.GetByIdentityId(userId);
+
+            var jamEvent = JamEventBuilder.BuildJamEventFromViewModels(jamEventInfo);
+            jamEvent.Users = new List<IJamUser>() { user };
+
+            _jamEventService.Edit(jamEvent);
+
+            return Ok();
+        }
         [HttpGet("GetEvent/{id}")]
         [ServiceFilter(typeof(UserAccessFilter))]
         public GetJamEventViewModel GetEvent(int id)

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './modules/material/material.module';
 
+
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
 }

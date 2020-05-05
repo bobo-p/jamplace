@@ -4,6 +4,10 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { CustomSearchFieldComponent } from './components/custom-search-field/custom-search-field.component';
 import { CommonModule } from '@angular/common';  
 import { FormsModule } from '@angular/forms';
+import { EditJamEventDialogComponent } from './components/edit-jam-event-dialog/edit-jam-event-dialog.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const components = [
     ConfirmDialogComponent,
@@ -13,18 +17,19 @@ const components = [
 
 @NgModule({
   declarations: [
-    ...components
+    ...components,
+    EditJamEventDialogComponent
   ],
-  entryComponents: [ConfirmDialogComponent],
+  entryComponents: [ConfirmDialogComponent, EditJamEventDialogComponent],
   imports: [
     MaterialModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
 
  exports: [
-     ...components,
-     MaterialModule
+     ...components
  ]
 })
 export class SharedModule { }

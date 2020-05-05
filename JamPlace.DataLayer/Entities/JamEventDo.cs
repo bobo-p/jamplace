@@ -20,7 +20,7 @@ namespace JamPlace.DataLayer.Entities
         public EventAccessTypeEnum AccessType { get; set; }
         public ICollection<SongDo> SongsDo { get; set; }
         [NotMapped]
-        public IAdress Adress { get; set; }
+        public IAdress Address { get; set; }
         [NotMapped]
         public ICollection<IJamUser> Users { get; set; }
         [NotMapped]

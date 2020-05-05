@@ -1,0 +1,50 @@
+<h5 class="card-header center-align">                
+    <strong>Edycja danych wydarzenia</strong>
+</h5>
+<form class ="margin-bottom-0" [formGroup]="editJamEventForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col xl6 l6 m8">
+            <div class="input-field">
+                <input id="event-name" type="text"  formControlName="name" require [ngClass]="{ 'invalid': (name.dirty || name.touched || submitted) && name.invalid && name.errors.required }"/>
+                <label [class.active]="jamEventInfo.name" for="event-name">Nazwa wydarzenia *</label>
+                <span *ngIf="(name.dirty || name.touched || submitted) && name.invalid && name.errors.required" class="invalid">
+                    <small>Nazwa wydarzenia jest wymagana</small>
+                </span>
+            </div>
+            <div class="input-field">
+                <input id="event-size" type="text" class="validate" formControlName="size" />
+                <label [class.active]="jamEventInfo.size" for="event-size">Wielkość eventu</label>
+            </div>
+            <div class="input-field">
+                <input id="event-desc" type="text" class="validate" formControlName="description" />
+                <label [class.active]="jamEventInfo.description" for="event-desc">Opis</label>
+            </div>
+        </div>
+        <div class="col xl6 l6 m8" formGroupName="address" novalidate>
+            <div class="row margin-bottom-0">
+                <div class="input-field col l6 m6 margin-bottom-0">
+                    <input id="event-street" type="text" class="validate" formControlName="street" />
+                    <label [class.active]="jamEventInfo.address.street" for="event-street">Ulica</label>
+                </div>
+                <div class="input-field col l6 m6 margin-bottom-0">
+                    <input id="event-locNr" type="text" class="validate" formControlName="localNumber" />
+                    <label [class.active]="jamEventInfo.address.localNumber" for="event-locNr">Nr</label>
+                </div>
+            </div>
+            <div class="input-field">
+                <input id="event-city" type="text" class="validate" formControlName="city" />
+                <label [class.active]="jamEventInfo.address.city" for="event-city">Miasto</label>
+            </div>
+            <div class="input-field">
+                <input id="event-country" type="text" class="validate" formControlName="country" />
+                <label [class.active]="jamEventInfo.address.country" for="event-country">Państwo</label>
+            </div>
+        </div>                                   
+    </div>
+    <div class="row margin-bottom-0">
+        <button  class="col xl5  m5 s12 btn main-cancel-button"  name="action" (click)="onNoClick()">Anuluj
+        </button>
+        <button  class="col xl5  m5 s12 offset-l2 offset-m2 btn main-accept-button" type="submit" name="action" cdkFocusInitial >Zaktualizuj
+        </button>        
+    </div>     
+</form>

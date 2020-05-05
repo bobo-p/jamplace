@@ -11,7 +11,7 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         string Name { get; set; }
         string Size { get; set; }
         string Description { get; set; }
-        IAdress Adress { get; set; }
+        IAdress Address { get; set; }
         ICollection<IJamUser> Users {get;set;}
         ICollection<ISong> Songs { get; set; }
         ICollection<IEquipment> NeededEquipment {get;set;}

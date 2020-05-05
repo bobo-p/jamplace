@@ -9,19 +9,24 @@
 .song-title{   
     line-height: 20px;
     margin-top: 1px;
-    font-size: 13px;   
+    font-size: 13px;
+    font-weight: 500;
 }
 .song-artist{
     color: #a9a9a9;
     font-size: 13px;
 }
-
+.song-link{
+    line-height: 20px;
+    font-size: 13px;
+}
+.ul-max-height{
+    max-height: 300px;
+}
 .content-desc{
     padding-left: 20px;
-    // background-color: #282D38;
     background-image: linear-gradient(to right, #5a6273 , #382828);
-    color: white;
-    
+    color: white;  
 }
 .row-desc{
     height:  $content-desc-height;
@@ -54,9 +59,6 @@
 .edit-song-button:hover{
     color:rgb(217, 235, 117);
     cursor: pointer;
-}
-.lack-od-elements {
-    
 }
 ul{
     border:none;

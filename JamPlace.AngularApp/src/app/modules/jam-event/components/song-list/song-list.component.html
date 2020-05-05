@@ -2,15 +2,13 @@
     <div class="row valign-wrapper row-desc">
       <div class="col l4 xl4 tile-title">Lista utworów</div>
       <div class="col l6 xl6 search-field">
-          <!-- <input #searchBox type="search" name="gsearch" placeholder="Szukaj po nazwie" class="right search-box-light" (input)="search(searchBox.value)"> 
-          <i class="material-icons right edit-song-button" >cancel</i> -->
           <app-custom-search-field (currentTerm)=search($event) class="right"></app-custom-search-field>
       </div>
       <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
     </div>
-
 </div>
-  <ul class="collection">
+
+  <ul class="collection ul-max-height">
     <li *ngFor="let song of songs$ | async" class="song-element card">
       <div class="row valign-wrapper song-row">
         <div class="col l1 center-align">
@@ -21,7 +19,7 @@
           <span class="song-artist truncate">{{song.artist}} </span>
         </div>
         <div class="col l5 truncate">
-          {{song.link}}
+          <a class="song-link" href="{{song.link}}" matTooltip="{{song.link}}">{{song.link}}</a>
         </div>
         <div class="col l3">
           <i class="material-icons right edit-song-button" (click)="openDialog(song)">edit</i>

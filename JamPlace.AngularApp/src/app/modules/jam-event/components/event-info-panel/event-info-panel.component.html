@@ -1,30 +1,24 @@
-
-    <!-- <li class="collection-item list-item">
-        <div class="item-header">Opis<br></div> 
-        <div class="item-desc">no elo tu jest jeden takiwielki opis poka go calego moze pozniej</div>
-    </li>
-    <li class="collection-item list-item">
-        <div class="item-header">Rozmiar<br></div> 
-        <div class="item-content">Duze</div>
-    </li>
-    <li class="collection-item list-item">
-        <div class="item-header">Adres<br></div> 
-        <div class="item-content">adres</div>
-    </li> -->
-    <ul class="collapsible collection-list" #collapsible >
-        <li class="collection-header event-title content-desc"><h1 class="event-name center-align">{{eventInfo.name}}</h1>
-        </li>
-        <li>
-          <!-- <div class="collapsible-header description"><i class="material-icons">description</i>Opis</div> -->
-          <div class="description"><span>Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">place</i>Adres</div>
-          <div class="collapsible-body list-content"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Rozmiar</div>
-          <div class="collapsible-body list-content"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-      </ul>
-  
+<div class="content-desc">
+  <div class="row valign-wrapper row-desc">
+    <div class="col l6 offset-l1">
+      <div class="event-name">{{eventInfo.name}}</div>
+    </div>
+    <div class="col l2 xl2 edit-btn" (click)="openDialog(eventInfo)"> <i class="material-icons left circle edit-icon">edit</i></div>
+  </div>
+</div>
+<ul class="collapsible collection-list" #collapsible >
+  <li>
+    <div class="description"><span>{{eventInfo.description}}</span></div>
+  </li>
+  <li>
+    <div class="address valign-wrapper row">
+      <i class="material-icons col l1 icon-padding">place</i>
+      <span class="col l11">{{addressText}}</span>
+    </div>
+    <div class="collapsible-body list-content"></div>
+  </li>
+  <li>
+    <div class="collapsible-header"><i class="material-icons">date_range</i>Data</div>
+    <div class="collapsible-body list-content"><span>Lorem ipsum dolor sit amet.</span></div>
+  </li>
+</ul>

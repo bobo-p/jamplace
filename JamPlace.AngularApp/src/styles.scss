@@ -70,3 +70,42 @@ input[class*="search-box"][class*="search-box-light"]::-webkit-search-cancel-but
     position:relative;
     right:-15px; 
 }
+
+.main-accept-button {
+    background-color: #364F6B;
+    color: #ffffff;
+
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color .3s ease-in-out;
+}
+
+    .main-accept-button:hover {
+        background-color: #446387;
+    }
+    .main-accept-button:focus {
+        background-color: #446387 !important;
+    }
+    .main-accept-button:focus {
+        outline: 0;
+    }
+.main-cancel-button {
+    background-color: rgb(59, 116, 126);
+    color: #ffffff;
+
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color .3s ease-in-out;
+}
+
+    .main-cancel-button:hover {
+        background-color: rgb(80, 145, 156);
+    }
+    .main-cancel-button:focus {
+        background-color: rgb(80, 145, 156) !important;
+    }
+    .main-cancel-button:focus {
+        outline: 0;
+    }

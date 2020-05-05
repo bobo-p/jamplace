@@ -14,10 +14,12 @@ namespace JamPlace.Api.Helpers
         {
             return new JamEvent()
             {
+                Id = addJamEvent.Id,
                 Name = addJamEvent.Name,
                 Size = addJamEvent.Size,
                 Description = addJamEvent.Description,
-                Adress = new Adress()
+                Date =addJamEvent.Date,
+                Address = new Adress()
                 {
                     City = addJamEvent.Address.City,
                     LocalNumber = addJamEvent.Address.LocalNumber,

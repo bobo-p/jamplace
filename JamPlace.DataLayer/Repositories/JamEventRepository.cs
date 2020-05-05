@@ -31,10 +31,10 @@ namespace JamPlace.DataLayer.Repositories
 
             jamEventDo.EventAdress = new AdressDo()
             {
-                City = item.Adress?.City,
-                Country = item.Adress?.Country,
-                LocalNumber = item.Adress?.LocalNumber,
-                Street = item.Adress?.Street
+                City = item.Address?.City,
+                Country = item.Address?.Country,
+                LocalNumber = item.Address?.LocalNumber,
+                Street = item.Address?.Street
             };
 
             jamEventDo.JamEventJamUser = new List<JamEventJamUserDo>();
@@ -70,7 +70,7 @@ namespace JamPlace.DataLayer.Repositories
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
             jamEvent.Songs = jamEvent.SongsDo?.OrderByDescending(item => item.AddDate).Select(CastToIsong).ToList();
-            jamEvent.Adress = (IAdress)jamEvent.EventAdress;
+            jamEvent.Address = (IAdress)jamEvent.EventAdress;
             return jamEvent as IJamEvent;
         }
 
@@ -93,22 +93,29 @@ namespace JamPlace.DataLayer.Repositories
                  .FirstOrDefault();
             if (userDo == null) return null;
             userDo.JamEvents = userDo.JamEventJamUser?.Select(p => p.JamEvent).ToList();
-            userDo.JamEvents?.ToList().ForEach(jamEvent => jamEvent.Adress = ((JamEventDo)jamEvent).EventAdress);
+            userDo.JamEvents?.ToList().ForEach(jamEvent => jamEvent.Address = ((JamEventDo)jamEvent).EventAdress);
             return userDo?.JamEvents;
         }
 
         public IEnumerable<IJamEvent> GetFilteredPage(int pageIndex, int pageSize, bool orderByDate, string city)
         {
             var jamEvents = Context.JamEvents?.AsNoTracking()
-                .Include(ev => ev.Adress)
-                .Where(p => (p.Adress==null || string.IsNullOrEmpty(city)) ? true : p.Adress.City.ToLower().Contains(city.ToLower())).Skip(pageIndex*pageSize).Take(pageSize);
+                .Include(ev => ev.Address)
+                .Where(p => (p.Address==null || string.IsNullOrEmpty(city)) ? true : p.Address.City.ToLower().Contains(city.ToLower())).Skip(pageIndex*pageSize).Take(pageSize);
             if (jamEvents == null)
                 return null;
             if (orderByDate)
                 jamEvents = jamEvents.OrderBy(p=>p.Date);
             return jamEvents?.ToList();
         }
-
+        public void SimpleUpdate(IJamEvent item)
+        {
+            var doEvent = _mapper.Map<JamEventDo>(item);
+            doEvent.EventAdress = _mapper.Map<AdressDo>(item.Address);
+            Context.Update(doEvent);
+            Context.SaveChanges();
+            Context.Entry(doEvent).State = EntityState.Detached;
+        }
         public new void Update(IJamEvent item)
         {
             var doEvent = _mapper.Map<JamEventDo>(item);

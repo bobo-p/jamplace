@@ -11,7 +11,7 @@ namespace JamPlace.Api.Models
         public string Name { get; set; }
         public string Size { get; set; }
         public string Description { get; set; }
-        public AddressViewModel Adress { get; set; }
+        public AddressViewModel Address { get; set; }
         public ICollection<JamEventUserViewModel> Users { get; set; }
         public ICollection<SongViewModel> Songs { get; set; }
         public ICollection<EquipmentViewModel> NeededEquipment { get; set; }

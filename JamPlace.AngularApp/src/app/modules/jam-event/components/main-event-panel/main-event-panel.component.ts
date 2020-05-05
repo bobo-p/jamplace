@@ -40,6 +40,7 @@ export class MainEventPanelComponent implements OnInit, OnDestroy {
   {
     var evInfo: JamEventInfo  =
     {
+      id: jamEvent.id,
       name: jamEvent.name,
       description: jamEvent.description,
       address: jamEvent.address,

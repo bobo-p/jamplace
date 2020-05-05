@@ -11,7 +11,7 @@ import { HomeRoutingModule } from './home.routing';
   declarations: [HomeComponent, MyEventsListComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ]
 })
 export class HomeModule { }
