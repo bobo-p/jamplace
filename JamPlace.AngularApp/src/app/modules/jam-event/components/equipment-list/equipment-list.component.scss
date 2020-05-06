@@ -1,0 +1,75 @@
+@import '../../../../../scss/variables';
+
+.icon-style {
+    position: absolute;
+    left: 5px;
+    vertical-align: middle;
+    color: grey;
+}
+.song-title{   
+    line-height: 20px;
+    margin-top: 1px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.song-artist{
+    color: #a9a9a9;
+    font-size: 13px;
+}
+.song-link{
+    line-height: 20px;
+    font-size: 13px;
+}
+.ul-max-height{
+    max-height: 300px;
+}
+.content-desc{
+    padding-left: 20px;
+    background-image: linear-gradient(to right, #382828 , #5a6273);
+    color: white;  
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+.row-desc{
+    height:  $content-desc-height;
+    margin: 0px;
+}
+.tile-title{
+    font-size: 15px;
+    font-weight: 400;
+    padding-bottom: 5px;
+}
+.add-btn{
+    //padding-bottom:5px;   
+}
+.add-icon{
+    transition: 0.4s;
+    color: #d8daab;
+    font-size: 2.7rem;
+}
+.add-icon:hover{
+    color:rgb(217, 235, 117);
+    cursor: pointer;
+}
+.delete-song-button:hover{
+    color:rgb(217, 235, 117);
+    cursor: pointer;
+}
+.edit-song-button:hover{
+    color:rgb(217, 235, 117);
+    cursor: pointer;
+}
+ul{
+    border:none;
+    margin-top: 0px;
+}
+li{
+    padding:10px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+}
+.song-row{
+    margin:0px;
+    height: 40px;
+}
+ 

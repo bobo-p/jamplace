@@ -1,1 +1,31 @@
-<p>equipment-list works!</p>
+<div class="content-desc">
+    <div class="row valign-wrapper row-desc">
+      <div class="col l4 xl4 tile-title truncate">Rzeczy użytkowników</div>
+      <div class="col l6 xl6 search-field">
+          <app-custom-search-field (currentTerm)=search($event) class="right"></app-custom-search-field>
+      </div>
+      <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
+    </div>
+</div>
+
+  <!-- <ul class="collection ul-max-height">
+    <li *ngFor="let song of songs$ | async" class="song-element card">
+      <div class="row valign-wrapper song-row">
+        <div class="col l1 center-align">
+          {{song.index}}
+        </div>
+        <div class="col l3">
+          <span class="song-title truncate">{{song.title}}</span>
+          <span class="song-artist truncate">{{song.artist}} </span>
+        </div>
+        <div class="col l5 truncate">
+          <a class="song-link" href="{{song.link}}" matTooltip="{{song.link}}">{{song.link}}</a>
+        </div>
+        <div class="col l3">
+          <i class="material-icons right edit-song-button" (click)="openDialog(song)">edit</i>
+          <i class="material-icons right delete-song-button" (click)="deleteSong(song)">delete</i>
+        </div>
+      </div>
+    </li>  
+   </ul> -->
+   <p  class="lack-od-elements center-align">Brak elementów</p>

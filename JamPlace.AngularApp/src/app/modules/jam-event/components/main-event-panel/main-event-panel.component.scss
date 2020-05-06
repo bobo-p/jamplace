@@ -22,16 +22,21 @@ $equipment-list-height: 40vh;
     margin: 0;
 }
 .equipment-list{
-    height: $equipment-list-height
+    height: $equipment-list-height;
+    padding: 0;
+    margin: 0;
 }
 .user-list{
     height: calc(100vh - #{$top-panel-height} - #{$event-info-height});
     position: relative;
-    z-index: -1;
+    //z-index: -1;
+    padding: 0;
 }
 .forum-panel{
     height: calc(100vh - #{$top-panel-height} - #{$song-list-height});
+    padding: 0;
 }
 .needed-equipment{
     height: calc(100vh - #{$top-panel-height} - #{$equipment-list-height});
+    padding: 0;
 }

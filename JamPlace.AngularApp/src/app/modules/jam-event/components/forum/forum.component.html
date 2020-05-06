@@ -1,1 +1,25 @@
-<p>forum works!</p>
+<div class="content-desc">
+    <div class="row valign-wrapper row-desc">
+      <div class="col l4 xl4 tile-title truncate">Wpisy</div>
+      <div class="col l6 xl6 search-field">
+          <app-custom-search-field (currentTerm)=search($event) class="right"></app-custom-search-field>
+      </div>
+      <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
+    </div>
+</div>
+
+<ul class="collection collection-height">
+    <li  class="collection-item avatar event-collection">
+      <i class="medium  material-icons icon-style">account_circle</i>
+        <span class="title">Zenek sdsdsadsadsadsadasd</span>
+          <p class="event-info">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+           Blyaaaat
+          </p>
+      <div class="secondary-content">
+            <i class="material-icons right delete-song-button" (click)="deleteSong(song)">delete</i>
+           <i class="material-icons right edit-song-button" (click)="openDialog(song)">edit</i>           
+        </div>
+    </li>  
+  </ul>
+
+ <p  class="lack-od-elements center-align">Brak elementów</p>
