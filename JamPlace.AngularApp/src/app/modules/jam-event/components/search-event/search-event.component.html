@@ -17,8 +17,8 @@
               <div class="col s4"><span class="title">{{myJamEvent.name}}</span>       
                 <p class="event-info">{{myJamEvent.date | date:'dd-MM-yyyy HH:mm'}} </p></div>
               <div class="col s6">Adres: {{myJamEvent.address.city}} <span *ngIf="myJamEvent.address.street">, ul.{{myJamEvent.address.street}} </span> {{myJamEvent.address.localNumber}}</div>
-              <div class="col s2"><span class="title">{{myJamEvent.name}}</span>
-            </div>
+              <!-- <div class="col s2"><span class="title">{{myJamEvent.name}}</span></div> -->
+          </div>
 
       <div class="secondary-content custom-buton" (click)="onJoin(myJamEvent)"> <span>Dołącz</span></div>
     </li>  

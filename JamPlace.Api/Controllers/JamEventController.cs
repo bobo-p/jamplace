@@ -92,7 +92,7 @@ namespace JamPlace.Api.Controllers
         {
             string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var userSpecificJamEvents = _jamEventService.GetFiltereByUser(userId);
-            return userSpecificJamEvents.Select(item => _mapper.Map<UserSpecificJamEventViewModel>(item));
+            return userSpecificJamEvents?.Select(item => _mapper.Map<UserSpecificJamEventViewModel>(item));
         }
         [HttpGet("SearchUserEventsByName/{seacrhText}")]
         [HttpGet("SearchUserEventsByName")]

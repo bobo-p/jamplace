@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -88,18 +90,26 @@ namespace JamPlace.IdentityServer4.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
+                    //}
+                    //else
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    return LocalRedirect(returnUrl);
+                    //}
+                    result = _userManager.AddClaimsAsync(user, new Claim[]
+                        {
+                            new Claim(ClaimTypes.Name, user.UserName),
+                            new Claim(ClaimTypes.Email, Input.Email),
+                            new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                        }).Result;
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
                 {

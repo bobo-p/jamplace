@@ -4,7 +4,7 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+@*<h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4">
@@ -62,6 +62,52 @@
     </div>
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@
+
+<div class="row">
+    <div class="card col xl4 push-xl4 m8 push-m2 s12 card-custom">
+        <div class="welocme-text center-align">Rejestracja</div>
+        <form id="account" method="post">
+
+            <div class="row no-bootom-margin">
+                <div class="input-field col l10 push-l1 s12">
+                    <label asp-for="Input.Email">Email</label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col l10 push-l1 s12">
+                    <label asp-for="Input.Password">Hasło</label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col l10 push-l1 s12">
+                    <label asp-for="Input.ConfirmPassword">Powtórz hasło</label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div asp-validation-summary="All" class="text-danger no_dots"></div>
+
+            <div class="row top-margin">
+
+                <div class="col l10 push-l1 s12">
+
+                    <!-- <button type="submit" class="mat-button"><img class="googleLogin" src="~/assets/img/search.svg" alt="">Zaloguj przez Google</button> -->
+                    <button type="submit" class="login-button">Zarejestruj</button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

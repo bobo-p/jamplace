@@ -19,6 +19,8 @@ using JamPlace.IdentityServer4.IdentityServerConfig;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IO;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using JamPlace.IdentityServer4.Utils;
 
 namespace JamPlace.IdentityServer4
 {
@@ -88,6 +90,7 @@ namespace JamPlace.IdentityServer4
 
             services.AddTransient<IIdentityServerConfigurationSetup, IdentityServerConfigurationSetup>();
             services.AddTransient<IDataSeeder, DataSeeder>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
             services.AddRazorPages().AddRazorPagesOptions(options =>

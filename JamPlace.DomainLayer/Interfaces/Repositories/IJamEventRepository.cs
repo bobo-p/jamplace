@@ -13,5 +13,6 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
         UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId);
         IEnumerable<IJamEvent> GetFiltereByUser(string userId);
         void SimpleUpdate(IJamEvent item);
+        void GrantGuestAccessUser(int eventId, int userId);
     }
 }

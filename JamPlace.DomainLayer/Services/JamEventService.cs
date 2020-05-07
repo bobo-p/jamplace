@@ -36,11 +36,8 @@ namespace JamPlace.DomainLayer.Services
             var userExsist = jamEvent.Users.FirstOrDefault(p => p.UserIdentityId == userId);
             if(userExsist ==null)
             {
-                if (jamEvent.Users == null)
-                    jamEvent.Users = new List<IJamUser>();
                 var user = _jamUserRepository.GetByIdentityId(userId);
-                jamEvent.Users.Add(user);
-                _jamEventRepository.Update(jamEvent);
+                _jamEventRepository.GrantGuestAccessUser(jamEvent.Id, user.Id);
             }
         }
         

@@ -59,6 +59,7 @@ namespace JamPlace.DataLayer.Repositories
         }
         public new IJamEvent Get(int id)
         {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             var jamEvent = Context.JamEvents.AsNoTracking().Where(p=>p.Id==id)
                 .Include(ev => ev.JamEventJamUser)
                     .ThenInclude(x => x.JamUser)
@@ -80,6 +81,7 @@ namespace JamPlace.DataLayer.Repositories
         }
         public new IEnumerable<IJamEvent> GetAll()
         {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             var jamEvents = Context.JamEvents.AsNoTracking()
                 .Include(ev => ev.JamEventJamUser)
                     .ThenInclude(x => x.JamUser)
@@ -113,7 +115,18 @@ namespace JamPlace.DataLayer.Repositories
             var jamEventJamUser = jamEvent?.JamEventJamUser?.FirstOrDefault(usr => usr?.JamUser.UserIdentityId == userId);
             return GetDomainAccesModeFromJamEventJamUser(jamEventJamUser);
         }
-
+        public void GrantGuestAccessUser(int eventId, int userId)
+        {
+            var jamEventJamUser = new JamEventJamUserDo()
+            {
+                AccessMode = Common.UserAccessModeEnum.Guest,
+                JamEventDoId = eventId,
+                JamUserDoId = userId
+            };
+            Context.Add(jamEventJamUser);
+            Context.SaveChanges();
+            Context.Entry(jamEventJamUser).State = EntityState.Detached;
+        }
         public IEnumerable<IJamEvent> GetFiltereByUser(string userId)
         {
             var userDo = Context.JamUsers.AsNoTracking().Where(user => user.UserIdentityId == userId)
@@ -142,12 +155,17 @@ namespace JamPlace.DataLayer.Repositories
         {
             var doEvent = _mapper.Map<JamEventDo>(item);
             doEvent.EventAdress = _mapper.Map<AdressDo>(item.Address);
+            if(item.Users != null)
+            {
+                
+            }
             Context.Update(doEvent);
             Context.SaveChanges();
             Context.Entry(doEvent).State = EntityState.Detached;
         }
         public new void Update(IJamEvent item)
         {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             var doEvent = _mapper.Map<JamEventDo>(item);
 
             doEvent.JamEventJamUser = doEvent.Users?.Select(p => new JamEventJamUserDo() { JamUserDoId = p.Id, JamUser = _mapper.Map<JamUserDo>(p), JamEventDoId = item.Id, JamEvent = doEvent })?.ToList();
