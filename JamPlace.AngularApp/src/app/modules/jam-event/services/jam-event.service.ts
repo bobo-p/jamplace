@@ -29,4 +29,10 @@ export class JamEventService {
     console.log(eventId);
     return this.authService.get(this.api + '/JamEvent/JoinJamEvent/'+ eventId);
   }
+  public deleteJamEevent(eventId: number): any {
+    return this.authService.get(this.api + '/JamEvent/DeleteEvent/' + eventId);
+  }
+  public leaveJamEevent(eventId: number): any {
+    return this.authService.get(this.api + '/JamEvent/LeaveEvent/' + eventId);
+  }
 }

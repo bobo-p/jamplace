@@ -4,6 +4,7 @@ import { throwError, Subscription, Observable } from 'rxjs';
 import { catchError, debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { OidcSecurityService, OpenIdConfiguration, AuthWellKnownEndpoints, AuthorizationResult, AuthorizationState } from 'angular-auth-oidc-client';
+import * as M from "materialize-css/dist/js/materialize";
 
 @Injectable()
 export class AuthService {
@@ -184,12 +185,15 @@ export class AuthService {
         this.login();
         break;
       case 403:
+        M.toast({html: 'Brak dostępu do zasobu!',displayLength: 1500,classes: 'rounded'})
         this._router.navigate(['/']);
         break;
       case 404:
+        M.toast({html: 'Nie znaleziono strony!',displayLength: 1500,classes: 'rounded'})
         this._router.navigate(['/not-found'])
         break;      
       case 500:
+        M.toast({html: 'Błąd serwera podczas wykonywania zapytania!',displayLength: 1500,classes: 'rounded'})
         this._router.navigate(['/internal-error']);
         break;
     }

@@ -19,5 +19,6 @@ namespace JamPlace.DomainLayer.Models
         public DateTime Date { get; set; }
         public EventAccessTypeEnum AccessType { get; set; }
         public ICollection<IComment> Comments { get; set; }
+        public IJamUser Creator { get; set; }
     }
 }

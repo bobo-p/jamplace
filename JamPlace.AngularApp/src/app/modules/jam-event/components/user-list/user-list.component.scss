@@ -2,9 +2,12 @@
 
 .content-desc{
     padding-left: 20px;
-    background-image: linear-gradient(to right, #382828 , #5a6273);
+    background-image: linear-gradient(to right, $secondGradientColor, $firstGradientColor);
     color: white;  
     border-left: 1px solid #ddd;
+}
+.user-collection {  
+    overflow: auto;
 }
 .content{
     font-size: 15px;;
@@ -27,18 +30,16 @@
     color:rgb(217, 235, 117);
     cursor: pointer;
 }
-.collection-height{
-    
-    overflow: auto;
-}
 .icon-style {
     position: absolute;
     left: 5px;
     vertical-align: middle;
     color: grey;
 }
-.event-collection {
+.user-collection {
+    min-height: 60px !important;
     line-height: 1.35rem;
+    overflow: hidden;
     .title {
         font-size: 18px;
         font-weight: 700;
@@ -63,10 +64,6 @@
         }        
     }
 }
-li:hover {
-    background-color: #ededed;
-    cursor: pointer;
-}
 .delete-song-button:hover, .edit-song-button:hover{
     color:rgb(217, 235, 117);
     cursor: pointer;
@@ -78,4 +75,39 @@ ul{
     border:none;
     margin-top: 0px;
     height: 400px;
+}
+.user-button {
+    background-color: #364F6B;
+    color: #ffffff;
+    border-radius: 20px;;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color .3s ease-in-out;
+}
+
+    .user-button:hover {
+        background-color: #446387;
+    }
+    .user-button:focus {
+        background-color: #446387 !important;
+    }
+    .user-button:focus {
+        outline: 0;
+    }
+.current-user-li{
+    border: 2px solid #d8daab;
+    box-shadow: 0px 1px 3px #d8daab !important;
+    background-color: #e0eaf9;
+}
+.delete-event-button, .edit-button {
+    color: $action-button-color;
+    font-size: 2.5em;
+    right:16px;
+    position: absolute;
+}
+.delete-event-button:hover, .edit-button:hover{
+    color:$action-button-hover-color;
+    cursor: pointer;
+    transition: 0.3s;
 }

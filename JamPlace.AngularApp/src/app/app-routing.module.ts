@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'auth-callback', component: AuthCallbackComponent },
   { path: 'unauthorized', component: LoginRedirectComponent, },
   { path: 'jamevent', loadChildren: './modules/jam-event/jam-event.module#JamEventModule' },
+  { path: '**', redirectTo: '/'}
 ];
 
 @NgModule({

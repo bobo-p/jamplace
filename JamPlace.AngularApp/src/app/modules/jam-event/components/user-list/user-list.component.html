@@ -8,10 +8,14 @@
   </div>
 </div>
 
-<ul class="collection collection-height">
-  <li  *ngFor="let user of users$ | async" class="collection-item avatar event-collection valign-wrapper">
+<ul class="collection user-collection" *ngIf="loggedUserId">
+  <li  *ngFor="let user of users$ | async" class="collection-item avatar user-collection valign-wrapper" [class.current-user-li]="user.id==loggedUserId">
     <i class="medium  material-icons icon-style">account_circle</i>
-      <span class="title"> {{user.userName}}</span>   
+      <span class="title"> {{user.userName}}<span *ngIf="user.id==loggedUserId"> (Ty)</span> </span> 
+      
+        <i *ngIf="user.id==loggedUserId && eventOwnerId==loggedUserId" class="material-icons delete-event-button" matTooltip="Usuń to wydarzenie">delete_forever</i>   
+        <i *ngIf="user.id==loggedUserId && eventOwnerId!=loggedUserId" class="material-icons delete-event-button" matTooltip="Opuść to wydarzenie">close</i>
+        
   </li>  
 </ul>
 

@@ -15,4 +15,5 @@ export class JamEventViewModel {
     neededEquipment: EquipmentViewModel[];
     comments: CommentViewModel[];
     date: Date;
+    ownerId: number;
 }

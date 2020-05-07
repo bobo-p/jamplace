@@ -18,7 +18,7 @@ namespace JamPlace.Api.Mapper
             CreateMap<ISong, SongViewModel>().ForMember(dest => dest.EventId, opt => opt.MapFrom(src => src.JamEvent.Id));
             CreateMap<IComment, CommentViewModel>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.JamUser.UserName));
             CreateMap<IAdress, AddressViewModel>();
-            CreateMap<IJamEvent, GetJamEventViewModel>();
+            CreateMap<IJamEvent, GetJamEventViewModel>().ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.Creator.Id)); ;
             CreateMap<IJamEvent, UserSpecificJamEventViewModel>();
 
             CreateMap<SongViewModel, ISong>();

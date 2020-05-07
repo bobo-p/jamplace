@@ -7,6 +7,6 @@ namespace JamPlace.DomainLayer.Interfaces.Services
 {
     public interface IJamUserService : IService<IJamUser>
     {
-        IJamUser GetByIdentityId(string Id);
+        IJamUser GetByIdentityId(string Id, string email = null);
     }
 }

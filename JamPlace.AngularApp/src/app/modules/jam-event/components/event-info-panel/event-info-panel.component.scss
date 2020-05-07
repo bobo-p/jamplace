@@ -6,10 +6,11 @@
 }
 .content-desc{
     padding-left: 20px;
-    background-image: linear-gradient(to right, #382828 , #5a6273);
+    background-image: linear-gradient(to right, $firstGradientColor, $secondGradientColor);
     color: white;  
     border-right: 1px solid #ddd;
     border-left: 1px solid #ddd;
+    margin: 0px;
 }
 .row-desc{
     height:  $content-desc-height;

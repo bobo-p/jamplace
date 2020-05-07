@@ -35,12 +35,12 @@ namespace JamPlace.DomainLayer.Services
             return _jamUserRepository.Get(id);
         }
 
-        public IJamUser GetByIdentityId(string Id)
+        public IJamUser GetByIdentityId(string Id,string email = null)
         {
             var user = _jamUserRepository.GetByIdentityId(Id);
             if (user != null)
                 return user;
-            user = new JamUser() { UserIdentityId = Id };
+            user = new JamUser() { UserIdentityId = Id, UserName = email };
             user = _jamUserRepository.Add(user);
             return user;
         }

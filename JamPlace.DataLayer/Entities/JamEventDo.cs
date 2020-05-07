@@ -30,6 +30,8 @@ namespace JamPlace.DataLayer.Entities
         public ICollection<IEquipment> NeededEquipment { get; set; }
         [NotMapped]
         public ICollection<IComment> Comments { get; set; }
+        [NotMapped]
+        public IJamUser Creator { get; set; }
         internal ICollection<EventEquipmentDo> EventEquipmentDos { get; set; }
         internal ICollection<JamEventJamUserDo> JamEventJamUser { get; set; }
         internal ICollection<NeededEquipmentEventDo> NeededEventEquipment { get; set; }

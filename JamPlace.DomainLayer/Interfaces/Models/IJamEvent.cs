@@ -18,6 +18,7 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         DateTime Date { get; set; }
         EventAccessTypeEnum AccessType { get; set; }
         ICollection<IComment> Comments { get; set; }
+        IJamUser Creator { get; set; }
 
     }
 }

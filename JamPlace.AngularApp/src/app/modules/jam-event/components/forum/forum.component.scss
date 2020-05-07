@@ -2,7 +2,7 @@
 
 .content-desc{
     padding-left: 20px;
-    background-image: linear-gradient(to right, #382828 , #5a6273);
+    background-image: linear-gradient(to right, $firstGradientColor, $secondGradientColor);
     color: white;  
     border-left: 1px solid #ddd;
 }
@@ -27,8 +27,7 @@
     color:rgb(217, 235, 117);
     cursor: pointer;
 }
-.collection-height{
-    
+.collection-height{   
     overflow: auto;
 }
 .icon-style {
@@ -37,13 +36,15 @@
     vertical-align: middle;
     color: grey;
 }
-.event-collection {
+.comment-collection {
     line-height: 1.35rem;
+    padding: 5px 15px;
+    min-height: 65px !important;
     .title {
         font-size: 13px;
         font-weight: 700;
     }
-    .event-info {
+    .comment {
         padding-top: 11px;
         font-size: 15px;
        
@@ -62,17 +63,16 @@
         }        
     }
 }
-li:hover {
-    background-color: #ededed;
+
+.delete-comment-button, .edit-comment-button {
+    color: $action-button-color;
+}
+.delete-comment-button:hover, .edit-comment-button:hover{
+    color:$action-button-hover-color;
     cursor: pointer;
+    transition: 0.3s;
 }
-.delete-song-button:hover, .edit-song-button:hover{
-    color:rgb(217, 235, 117);
-    cursor: pointer;
-}
-.edit-song-button, .delete-song-button{
-    color: black;
-}
+
 ul{
     border:none;
     margin-top: 0px;

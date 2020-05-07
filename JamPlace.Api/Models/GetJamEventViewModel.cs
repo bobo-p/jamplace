@@ -17,5 +17,6 @@ namespace JamPlace.Api.Models
         public ICollection<EquipmentViewModel> NeededEquipment { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
         public DateTime Date { get; set; }
+        public int OwnerId { get; set; }
     }
 }

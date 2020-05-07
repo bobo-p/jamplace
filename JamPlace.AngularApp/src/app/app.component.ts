@@ -2,6 +2,7 @@ import { Component,ChangeDetectorRef } from '@angular/core';
 import { AuthService } from './modules/auth/services/auth.service';
 import {HomeService} from './modules/home/services/home.service';
 import {MediaMatcher} from '@angular/cdk/layout';
+import { LoggedUserService } from './modules/shared/services/logged-user.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +19,8 @@ export class AppComponent {
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef,
     public authService: AuthService,   
-    private homeService: HomeService
+    private homeService: HomeService,
+    private loggedUserService: LoggedUserService
    ) { 
     this.loading = true;
     this.mobileQuery = media.matchMedia('(max-width: 650px)');
@@ -33,16 +35,13 @@ export class AppComponent {
     // {
     //   window.location.href="http://localhost:5006/Identity/Account/Login";
     // }
-    this.text="Aaaaa";
+
     const tryGetMail = setInterval(() => {
       if (this.authService.isAuthorized) {
-        this.homeService.getTestString().then(data => {
-          this.text = data;
-          console.log(data);
+        this.loggedUserService.tryGetLoggedUser().then(data => {
           this.loading = false;
           this.showNavbar = true;
-        }, fail => {
-          
+        }, fail => {         
           console.log(fail);
           this.loading = false;
         });

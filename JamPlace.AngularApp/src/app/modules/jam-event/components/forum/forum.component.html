@@ -9,15 +9,15 @@
 </div>
 
 <ul class="collection collection-height">
-    <li  *ngFor="let comment of comments$ | async" class="collection-item avatar event-collection">
+    <li  *ngFor="let comment of comments$ | async" class="collection-item avatar comment-collection">
       <i class="medium  material-icons icon-style">account_circle</i>
         <span class="title">Dnia {{comment.date | date:'dd.MM.yyyy'}} o {{comment.date | date:'HH:mm'}} użytkownik {{comment.userName}} napisał(a)</span>
-          <p class="event-info">
+          <p class="comment">
             {{comment.content}}
           </p>
       <div class="secondary-content">
-            <i class="material-icons right delete-song-button" (click)="deleteComment(comment)">delete</i>
-           <i class="material-icons right edit-song-button" (click)="openDialog(comment)">edit</i>           
+            <i class="material-icons right delete-comment-button" (click)="deleteComment(comment)">delete</i>
+           <i class="material-icons right edit-comment-button" (click)="openDialog(comment)">edit</i>           
         </div>
     </li>  
   </ul>

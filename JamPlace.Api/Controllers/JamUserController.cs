@@ -23,11 +23,12 @@ namespace JamPlace.Api.Controllers
             _jamUserService = jamUserService;
             _mapper = mapper;
         }
-        [HttpGet("getUserInfo")]
+        [HttpGet("GetLoggedUserInfo")]
         public JamUserViewModel GetUserInfo()
         {
             string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = _jamUserService.GetByIdentityId(userId);
+            string email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var user = _jamUserService.GetByIdentityId(userId,email);
             return new JamUserViewModel()
             {
                 Id = user.Id,

@@ -25,8 +25,9 @@
 }
 .content-desc{
     padding-left: 20px;
-    background-image: linear-gradient(to right, #5a6273 , #382828);
+    background-image: linear-gradient(to right, $secondGradientColor, $firstGradientColor);
     color: white;  
+    margin: 0px;
 }
 .row-desc{
     height:  $content-desc-height;
@@ -52,13 +53,13 @@
     color:rgb(217, 235, 117);
     cursor: pointer;
 }
-.delete-song-button:hover{
-    color:rgb(217, 235, 117);
-    cursor: pointer;
+.delete-song-button, .edit-song-button {
+    color: $action-button-color;
 }
-.edit-song-button:hover{
-    color:rgb(217, 235, 117);
+.delete-song-button:hover, .edit-song-button:hover{
+    color: $action-button-hover-color;
     cursor: pointer;
+    transition: 0.3s;
 }
 ul{
     border:none;

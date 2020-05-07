@@ -73,6 +73,7 @@ namespace JamPlace.DataLayer.Repositories
 
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
+            jamEvent.Creator = jamEvent.JamEventJamUser?.Where(p => p.AccessMode == Common.UserAccessModeEnum.Creator)?.Select(p => (IJamUser)p.JamUser).FirstOrDefault();
             jamEvent.Songs = jamEvent.SongsDo?.OrderByDescending(item => item.AddDate).Select(CastToIsong).ToList();
             jamEvent.Address = (IAdress)jamEvent.EventAdress;
             jamEvent?.CommentsDo?.ToList()?.ForEach(comment => comment.JamUser = comment?.User);
