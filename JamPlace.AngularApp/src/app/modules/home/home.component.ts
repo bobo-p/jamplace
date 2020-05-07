@@ -26,4 +26,7 @@ export class HomeComponent implements OnInit {
   clickAddEvent(){
     this.router.navigate(['/jamevent/addJamEvent']);
   }
+  clickSearchEvent(){
+    this.router.navigate(['/jamevent/searchJamEvent']);
+  }
 }

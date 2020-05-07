@@ -27,14 +27,14 @@ namespace JamPlace.DataLayer.Repositories
             user.PersonalEquipment = user.UserPersonalEquipment?.Select(p => (IEquipment)p.Equipment).ToList();
             return user as IJamUser;
         }
-        public new int Add(IJamUser item)
+        public new IJamUser Add(IJamUser item)
         {
 
             var doUser = _mapper.Map<JamUserDo>(item);
             doUser.UserPersonalEquipment = item?.PersonalEquipment?.Select(p => new PersonalEquipmentUserDo() { EquipmentDoId = p.Id, JamUser = doUser, JamUserDoId = item.Id, Equipment = _mapper.Map<EquipmentDo>(p) }).ToList();
             Context.Add(doUser);
             Context.SaveChanges();
-            return doUser.Id;
+            return doUser;
         }
         public new void Update(IJamUser item)
         {

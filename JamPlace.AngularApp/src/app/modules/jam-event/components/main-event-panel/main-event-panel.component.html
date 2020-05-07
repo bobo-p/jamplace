@@ -5,7 +5,7 @@
                 <app-event-info-panel *ngIf="jamEventInfo" [event-info]="jamEventInfo"></app-event-info-panel>
             </div>
             <div class="col xl12 l12 m12 s12 user-list grey lighten-3">
-                <app-user-list></app-user-list>
+                <app-user-list *ngIf="jamEvent" [event-id]="jamEvent.id" [user-list]="jamEvent.users"></app-user-list>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
                 <app-song-list  *ngIf="jamEvent" [event-id]="jamEvent.id" [song-list]="jamEvent.songs"></app-song-list>
             </div>
             <div class="col xl12 l12 m12 s12 forum-panel grey lighten-4">
-                <app-forum></app-forum>
+                <app-forum *ngIf="jamEvent" [event-id]="jamEvent.id" [comment-list]="jamEvent.comments"></app-forum>
             </div>
         </div>
     </div>

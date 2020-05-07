@@ -1,4 +1,4 @@
-<div class="navContainer">
+<div *ngIf="!loading" class="navContainer">
     <mat-toolbar *ngIf="showNavbar">
       <mat-toolbar-row class="position-relative">
         <button mat-icon-button  id="menuIconButton">
@@ -37,4 +37,5 @@
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
+  <mat-spinner *ngIf="loading"></mat-spinner>
   

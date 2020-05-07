@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JamPlace.IdentityServer4.Models.AppConfigModels;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,15 +17,22 @@ namespace JamPlace.IdentityServer4.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
-
-        public LogoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger)
+        private readonly Urls _urls;
+        public LogoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger, Urls urls)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _urls = urls;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            //await HttpContext.SignOutAsync(IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme);
+            await _signInManager.SignOutAsync();
+
+            _logger.LogInformation("User logged out.");
+
+            return Redirect(_urls.AppUrl);
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)

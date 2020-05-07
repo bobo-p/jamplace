@@ -10,6 +10,7 @@ namespace JamPlace.DataLayer.Entities
     public class JamUserDo : AbstractParrentModelDo, IJamUser
     {
         public string UserName { get; set; }
+        public ICollection<CommentDo> CommentsDo { get; set; }
         [NotMapped]
         public IEnumerable<IEquipment> PersonalEquipment { get; set; }
         [NotMapped]
@@ -21,5 +22,7 @@ namespace JamPlace.DataLayer.Entities
         internal ICollection<JamEventJamUserDo> JamEventJamUser { get; set ; }
         [NotMapped]
         public IEnumerable<IJamEvent> JamEvents { get; set; }
+        [NotMapped]
+        public ICollection<IComment> Comments { get; set; }
     }
 }

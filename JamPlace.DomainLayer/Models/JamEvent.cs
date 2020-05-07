@@ -18,5 +18,6 @@ namespace JamPlace.DomainLayer.Models
         public ICollection<IEquipment> NeededEquipment { get; set; }
         public DateTime Date { get; set; }
         public EventAccessTypeEnum AccessType { get; set; }
+        public ICollection<IComment> Comments { get; set; }
     }
 }

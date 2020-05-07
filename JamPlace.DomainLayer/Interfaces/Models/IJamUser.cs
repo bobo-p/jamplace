@@ -12,5 +12,6 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         IEnumerable<IEquipment> PersonalEquipment { get; set; }
         IEnumerable<IEventEquipment> EventEquipment { get; set; }
         IEnumerable<IJamEvent> JamEvents { get; set; }
+        ICollection<IComment> Comments { get; set; }
     }
 }

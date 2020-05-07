@@ -53,10 +53,20 @@ namespace JamPlace.DataLayer.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -250,6 +260,21 @@ namespace JamPlace.DataLayer.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("JamPlace.DataLayer.Entities.CommentDo", b =>
+                {
+                    b.HasOne("JamPlace.DataLayer.Entities.JamEventDo", "Event")
+                        .WithMany("CommentsDo")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JamPlace.DataLayer.Entities.JamUserDo", "User")
+                        .WithMany("CommentsDo")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("JamPlace.DataLayer.Entities.EquipmentEventEquipmentDo", b =>

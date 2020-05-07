@@ -14,5 +14,7 @@ namespace JamPlace.DomainLayer.Interfaces.Services
         UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId);
         IEnumerable<IJamEvent> GetFiltereByUser(string userId);
         IEnumerable<IJamEvent> GetFiltereByNameForUser(string seacrhText, string userId);
+        IEnumerable<IJamEvent> GetAllNotJoined(string userId);
+        void Join(int eventId, string userId);
     }
 }

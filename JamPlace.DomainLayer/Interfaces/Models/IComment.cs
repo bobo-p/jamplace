@@ -8,6 +8,8 @@ namespace JamPlace.DomainLayer.Interfaces.Models
     {
         int Id { get; set; }
         string Content { get; set; }
-        string UserId { get; set; }
+        DateTime Date { get; set; }
+        int EventId { get; set; }
+        IJamUser JamUser { get; set; }
     }
 }

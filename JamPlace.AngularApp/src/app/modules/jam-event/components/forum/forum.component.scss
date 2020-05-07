@@ -6,6 +6,9 @@
     color: white;  
     border-left: 1px solid #ddd;
 }
+.content{
+    font-size: 15px;;
+}
 .row-desc{
     height:  $content-desc-height;
     margin: 0px;
@@ -25,7 +28,7 @@
     cursor: pointer;
 }
 .collection-height{
-    height: 270px;
+    
     overflow: auto;
 }
 .icon-style {
@@ -37,12 +40,14 @@
 .event-collection {
     line-height: 1.35rem;
     .title {
-        font-size: 15px;
-        font-weight: bold;
+        font-size: 13px;
+        font-weight: 700;
     }
     .event-info {
         padding-top: 11px;
-        font-size: 15px
+        font-size: 15px;
+       
+        word-wrap: break-word;
     }
     .custom-buton {      
         color: inherit;
@@ -71,4 +76,5 @@ li:hover {
 ul{
     border:none;
     margin-top: 0px;
+    height: 400px;
 }

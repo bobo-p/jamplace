@@ -44,6 +44,15 @@ namespace JamPlace.Api.Controllers
 
             return Ok(addedEvent.Id);
         }
+        [HttpGet("JoinJamEvent/{eventId}")]
+        public IActionResult JoinJamEvent(int eventId)
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            _jamEventService.Join(eventId, userId);
+
+            return Ok();
+        }
         [HttpPost("UpdateJamEvent")]
         public IActionResult UpdateJamEvent(AddJamEventViewModel jamEventInfo)
         {
@@ -64,9 +73,19 @@ namespace JamPlace.Api.Controllers
         {
             var getJamEvent = _jamEventService.Get(id);
             getJamEvent.Date = getJamEvent.Date.ToLocalTime();
-            return _mapper.Map<GetJamEventViewModel>(getJamEvent);
+            var model = _mapper.Map<GetJamEventViewModel>(getJamEvent);
+            return model;
         }
-      
+        [HttpGet("GetEvents")]
+        public IEnumerable<GetJamEventViewModel> GetEvents()
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var getJamEvents = _jamEventService.GetAllNotJoined(userId).ToList();
+            getJamEvents.ForEach(prop => prop.Date = prop.Date.ToLocalTime());
+            var models = getJamEvents.Select(_mapper.Map<GetJamEventViewModel>);
+            return models;
+        }
+
         [HttpGet("GetCurrentUserEvents")]
         [ServiceFilter(typeof(UserAccessFilter))]
         public IEnumerable<UserSpecificJamEventViewModel> GetCurrentUserEvents()

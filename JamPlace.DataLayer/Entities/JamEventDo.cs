@@ -19,6 +19,7 @@ namespace JamPlace.DataLayer.Entities
         public DateTime Date { get; set; }
         public EventAccessTypeEnum AccessType { get; set; }
         public ICollection<SongDo> SongsDo { get; set; }
+        public ICollection<CommentDo> CommentsDo { get; set; }
         [NotMapped]
         public IAdress Address { get; set; }
         [NotMapped]
@@ -26,7 +27,9 @@ namespace JamPlace.DataLayer.Entities
         [NotMapped]
         public ICollection<ISong> Songs { get; set; }
         [NotMapped]
-        public ICollection<IEquipment> NeededEquipment { get; set; }       
+        public ICollection<IEquipment> NeededEquipment { get; set; }
+        [NotMapped]
+        public ICollection<IComment> Comments { get; set; }
         internal ICollection<EventEquipmentDo> EventEquipmentDos { get; set; }
         internal ICollection<JamEventJamUserDo> JamEventJamUser { get; set; }
         internal ICollection<NeededEquipmentEventDo> NeededEventEquipment { get; set; }

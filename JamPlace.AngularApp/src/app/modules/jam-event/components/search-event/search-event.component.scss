@@ -1,0 +1,47 @@
+.icon-style {
+    position: absolute;
+    left: 5px;
+    vertical-align: middle;
+    color: grey;
+}
+.event-collection {
+    line-height: 1.35rem;
+    border-bottom: 1px solid #e0e0e0 !important;
+    .title {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .event-info {
+        padding-top: 3px;
+        font-size: 15px
+    }
+    .custom-buton {      
+        color: inherit;
+        border-radius: 20px;
+        border: 1px solid rgb(29, 161, 242);
+        padding: 10px 25px 10px 25px;
+
+        span{
+            color:  rgb(29, 161, 242);
+            font-size: 15px;
+            font-weight: bold;
+        }        
+    }
+}
+.custom-buton:hover {
+    background-color: #ededed;
+    cursor: pointer;
+}
+.content-desc{
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+.tile-title{
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px !important;
+}
+.collection-height{
+    height: 270px;
+    overflow: auto;
+}

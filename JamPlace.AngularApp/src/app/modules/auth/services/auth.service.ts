@@ -184,7 +184,7 @@ export class AuthService {
         this.login();
         break;
       case 403:
-        this._router.navigate(['/forbidden']);
+        this._router.navigate(['/']);
         break;
       case 404:
         this._router.navigate(['/not-found'])

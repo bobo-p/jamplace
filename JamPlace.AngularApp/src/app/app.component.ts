@@ -13,12 +13,14 @@ export class AppComponent {
   showNavbar = false;
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
+  private loading: boolean;
   constructor(
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef,
     public authService: AuthService,   
     private homeService: HomeService
    ) { 
+    this.loading = true;
     this.mobileQuery = media.matchMedia('(max-width: 650px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -37,12 +39,17 @@ export class AppComponent {
         this.homeService.getTestString().then(data => {
           this.text = data;
           console.log(data);
+          this.loading = false;
           this.showNavbar = true;
         }, fail => {
           
           console.log(fail);
+          this.loading = false;
         });
         clearInterval(tryGetMail);
+      }
+      else{
+        this.authService.login();
       }
       
     }, 500);

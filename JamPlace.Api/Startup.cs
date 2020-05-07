@@ -97,9 +97,11 @@ namespace JamPlace.Api
             services.AddTransient<IJamUserRepository, JamUserRepository>();
             services.AddTransient<ISongRepository, SongRepository>();
             services.AddTransient<IEquipmentRepository, EquipmentRepository>();
+
             services.AddTransient<IJamEventService, JamEventService>();
             services.AddTransient<IJamUserService, JamUserService>();
             services.AddTransient<ISongService, SongService>();
+            services.AddTransient<ICommentService, CommentService>();
             services.AddScoped<UserAccessFilter>();
         }
 

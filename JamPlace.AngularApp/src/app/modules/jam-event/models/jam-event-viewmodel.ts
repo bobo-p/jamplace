@@ -2,6 +2,7 @@ import { Address } from '../../shared/addres';
 import { JamUserViewModel } from './jam-user-viewmodel';
 import { SongViewModel } from './song-vewmodel';
 import { EquipmentViewModel } from './equipment-vewmodel';
+import { CommentViewModel } from './comment-viewmodel';
 
 export class JamEventViewModel {
     id: number;
@@ -12,5 +13,6 @@ export class JamEventViewModel {
     users: JamUserViewModel[];
     songs: SongViewModel[];
     neededEquipment: EquipmentViewModel[];
+    comments: CommentViewModel[];
     date: Date;
 }

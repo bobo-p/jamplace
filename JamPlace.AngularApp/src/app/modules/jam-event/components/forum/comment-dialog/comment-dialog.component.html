@@ -1,0 +1,18 @@
+<h5 *ngIf="!isEditingMode">Nowy komentarz</h5>
+<h5 *ngIf="isEditingMode">Edycja komentarza</h5>
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="input-field">
+        <textarea  class="materialize-textarea" id="comment-content" type="text" formControlName="content" [ngClass]="{ 'invalid': (content.dirty || content.touched || submitted) && content.invalid && content.errors.required }"></textarea>
+        <label  [class.active]="currentComment.content" for="comment-content">Komentarz *</label>
+        <span *ngIf="(content.dirty || content.touched || submitted) && content.invalid && content.errors.required" class="invalid">
+            <small>Komentarz jest wymagany</small>
+        </span>
+    </div>
+</div>
+   <div class="modal-foote">
+    <button *ngIf="!isEditingMode" class="btn right" cdkFocusInitial type="submit">Dodaj</button>
+    <button *ngIf="isEditingMode" class="btn right" cdkFocusInitial type="submit">Aktualizuj</button>
+    <button class="btn right cancel-button" (click)="onNoClick()" type="button">Anuluj</button>    
+    </div>
+</form>

@@ -8,5 +8,6 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
     public interface ICommentRepository : IRepository<IComment>
     {
+        IEnumerable<IComment> GetFilteredByEvent(int eventId);
     }
 }

@@ -6,6 +6,9 @@
     color: white;  
     border-left: 1px solid #ddd;
 }
+.content{
+    font-size: 15px;;
+}
 .row-desc{
     height:  $content-desc-height;
     margin: 0px;
@@ -23,4 +26,56 @@
 .add-icon:hover{
     color:rgb(217, 235, 117);
     cursor: pointer;
+}
+.collection-height{
+    
+    overflow: auto;
+}
+.icon-style {
+    position: absolute;
+    left: 5px;
+    vertical-align: middle;
+    color: grey;
+}
+.event-collection {
+    line-height: 1.35rem;
+    .title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-left: 15px;
+    }
+    .event-info {
+        padding-top: 11px;
+        font-size: 15px;
+       
+        word-wrap: break-word;
+    }
+    .custom-buton {      
+        color: inherit;
+        border-radius: 20px;
+        border: 1px solid rgb(29, 161, 242);
+        padding: 10px 25px 10px 25px;
+
+        span{
+            color:  rgb(29, 161, 242);
+            font-size: 15px;
+            font-weight: bold;
+        }        
+    }
+}
+li:hover {
+    background-color: #ededed;
+    cursor: pointer;
+}
+.delete-song-button:hover, .edit-song-button:hover{
+    color:rgb(217, 235, 117);
+    cursor: pointer;
+}
+.edit-song-button, .delete-song-button{
+    color: black;
+}
+ul{
+    border:none;
+    margin-top: 0px;
+    height: 400px;
 }

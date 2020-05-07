@@ -27,9 +27,23 @@ namespace JamPlace.DomainLayer.Services
 
         public void Add(IJamEvent jamEvent, IJamUser eventUser)
         {
+           
             throw new NotImplementedException();
         }
-
+        public void Join(int eventId, string userId)
+        {
+            var jamEvent = _jamEventRepository.Get(eventId);
+            var userExsist = jamEvent.Users.FirstOrDefault(p => p.UserIdentityId == userId);
+            if(userExsist ==null)
+            {
+                if (jamEvent.Users == null)
+                    jamEvent.Users = new List<IJamUser>();
+                var user = _jamUserRepository.GetByIdentityId(userId);
+                jamEvent.Users.Add(user);
+                _jamEventRepository.Update(jamEvent);
+            }
+        }
+        
         public void Delete(IJamEvent item)
         {
             _jamEventRepository.Delete(item);
@@ -67,6 +81,13 @@ namespace JamPlace.DomainLayer.Services
         public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)
         {
             return _jamEventRepository.GetAccesTypeForUser(eventId,userId);
+        }
+
+        public IEnumerable<IJamEvent> GetAllNotJoined(string userId)
+        {
+            var jams = _jamEventRepository.GetAll();
+            var output = jams.Where(p => p?.Users.FirstOrDefault(u => u.UserIdentityId == userId) == null);
+            return output;
         }
 
         public IEnumerable<IJamEvent> GetFiltereByNameForUser(string seacrhText, string userId)

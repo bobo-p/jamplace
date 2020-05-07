@@ -66,12 +66,42 @@ namespace JamPlace.DataLayer.Repositories
                     .ThenInclude(x => x.Equipment)                
                 .Include(ev => ev.EventAdress)
                 .Include(ev => ev.SongsDo)
+                .Include(ev => ev.CommentsDo)
+                    .ThenInclude(x => x.User)
                  .FirstOrDefault();
+
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
             jamEvent.Songs = jamEvent.SongsDo?.OrderByDescending(item => item.AddDate).Select(CastToIsong).ToList();
             jamEvent.Address = (IAdress)jamEvent.EventAdress;
+            jamEvent?.CommentsDo?.ToList()?.ForEach(comment => comment.JamUser = comment?.User);
+            jamEvent.Comments = jamEvent.CommentsDo?.Select(p => (IComment)p).ToList();
             return jamEvent as IJamEvent;
+        }
+        public new IEnumerable<IJamEvent> GetAll()
+        {
+            var jamEvents = Context.JamEvents.AsNoTracking()
+                .Include(ev => ev.JamEventJamUser)
+                    .ThenInclude(x => x.JamUser)
+                .Include(ev => ev.NeededEventEquipment)
+                    .ThenInclude(x => x.Equipment)
+                .Include(ev => ev.EventAdress)
+                .Include(ev => ev.SongsDo)
+                .Include(ev => ev.CommentsDo)
+                    .ThenInclude(x => x.User);
+
+            if (jamEvents == null) return null;
+            var outputList = new List<IJamEvent>();
+            foreach (var jamEvent in jamEvents)
+            {
+                jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
+                jamEvent.Songs = jamEvent.SongsDo?.OrderByDescending(item => item.AddDate).Select(CastToIsong).ToList();
+                jamEvent.Address = (IAdress)jamEvent.EventAdress;
+                jamEvent?.CommentsDo?.ToList()?.ForEach(comment => comment.JamUser = comment?.User);
+                jamEvent.Comments = jamEvent.CommentsDo?.Select(p => (IComment)p).ToList();
+                outputList.Add(jamEvent);
+            }
+            return outputList;
         }
 
         public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)
