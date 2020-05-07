@@ -10,10 +10,10 @@ import { CommentService } from '../../../services/comment.service';
 })
 export class CommentDialogComponent implements OnInit {
   
-  private commentForm: FormGroup;
-  private submitted = false;
-  private currentComment: CommentViewModel;
-  private isEditingMode: boolean;
+   commentForm: FormGroup;
+   submitted = false;
+   currentComment: CommentViewModel;
+   isEditingMode: boolean;
   constructor(
     public dialogRef: MatDialogRef<CommentDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public comment: CommentViewModel,

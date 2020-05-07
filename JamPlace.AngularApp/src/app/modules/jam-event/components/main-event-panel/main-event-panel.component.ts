@@ -11,10 +11,10 @@ import { JamEventInfo } from '../../../shared/jam-event-info';
 })
 export class MainEventPanelComponent implements OnInit, OnDestroy {
 
-  private eventId: number;
-  private sub: any;
-  private jamEvent: JamEventViewModel;
-  private jamEventInfo: JamEventInfo;
+   eventId: number;
+   sub: any;
+   jamEvent: JamEventViewModel;
+   jamEventInfo: JamEventInfo;
   
   constructor(
     private route: ActivatedRoute,

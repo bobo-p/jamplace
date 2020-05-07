@@ -13,7 +13,7 @@ export class AppComponent {
   showNavbar = false;
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-  private loading: boolean;
+  loading: boolean;
   constructor(
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef,

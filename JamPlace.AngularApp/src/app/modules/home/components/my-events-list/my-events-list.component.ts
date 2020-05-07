@@ -14,9 +14,9 @@ import {
 })
 export class MyEventsListComponent implements OnInit {
 
-  private myEvents$: Observable<UserSpecificJamEvent[]>;
+   myEvents$: Observable<UserSpecificJamEvent[]>;
   private searchTerms: BehaviorSubject <string>;
-  private firstSearch: boolean;
+   firstSearch: boolean;
 
   constructor( 
     private userJamEventsService: UserEventsService,

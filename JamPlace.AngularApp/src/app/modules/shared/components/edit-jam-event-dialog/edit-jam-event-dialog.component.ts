@@ -15,9 +15,9 @@ export class EditJamEventDialogComponent implements OnInit {
 
   editJamEventForm: FormGroup;
   submitted = false;
-  private datePicker;
-  private timePicker;
-  private selectedTime: string;
+   datePicker;
+   timePicker;
+   selectedTime: string;
 
   constructor(public dialogRef: MatDialogRef<EditJamEventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public jamEventInfo: JamEventInfo,

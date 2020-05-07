@@ -15,7 +15,7 @@ export class EventInfoPanelComponent implements OnInit, OnDestroy {
 
   @Input('event-info') eventInfo: JamEventInfo;
   @ViewChild('collapsible',{static: false}) elCollapsible: ElementRef;
-  private addressText: string;
+  addressText: string;
 
   constructor(public dialog: MatDialog) { }
 

@@ -15,9 +15,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SearchEventComponent implements OnInit {
 
-  private myEvents$: Observable<JamEventViewModel[]>;
+  myEvents$: Observable<JamEventViewModel[]>;
   private searchTerms: BehaviorSubject <string>;
-  private firstSearch: boolean;
+  firstSearch: boolean;
   
   constructor(private jamEventsService: JamEventService,
     private router: Router, private r:ActivatedRoute) { }

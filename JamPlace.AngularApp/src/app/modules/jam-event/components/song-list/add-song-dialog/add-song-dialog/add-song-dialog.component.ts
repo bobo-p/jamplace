@@ -11,10 +11,10 @@ import { SongService } from 'src/app/modules/jam-event/services/song.service';
 })
 export class AddSongDialogComponent implements OnInit {
 
-  private addSongForm: FormGroup;
-  private submitted = false;
-  private currentSong: SongViewModel;
-  private isEditingMode: boolean;
+   addSongForm: FormGroup;
+   submitted = false;
+   currentSong: SongViewModel;
+   isEditingMode: boolean;
   constructor(
     public dialogRef: MatDialogRef<AddSongDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public song: SongViewModel,

@@ -14,10 +14,10 @@ export class UserListComponent implements OnInit {
   @Input('event-id') eventId: number;
   @Input('user-list') userList: JamUserViewModel[];
 
-  private users$: BehaviorSubject<JamUserViewModel[]>;
-  private searchTerms: BehaviorSubject <string>;
-  private firstSearch: boolean;
-  private listEmpty: boolean;
+   users$: BehaviorSubject<JamUserViewModel[]>;
+   searchTerms: BehaviorSubject <string>;
+   firstSearch: boolean;
+   listEmpty: boolean;
 
   constructor(private jamUserService : JamUserService) { }
 

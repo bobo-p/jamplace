@@ -8,8 +8,8 @@ import { Observable, Subject } from 'rxjs';
 export class CustomSearchFieldComponent implements OnInit {
 
   @Output() currentTerm: Subject<string>;
-  private showClear: boolean;
-  private searchText: string;
+   showClear: boolean;
+   searchText: string;
 
   constructor() { 
     this.currentTerm=new Subject<string>();

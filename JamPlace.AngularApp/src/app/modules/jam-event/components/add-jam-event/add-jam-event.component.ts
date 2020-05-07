@@ -21,11 +21,11 @@ import * as M from "materialize-css/dist/js/materialize";
 })
 export class AddJamEventComponent implements OnInit {
 
-  private addJamEventForm: FormGroup;
-  private submitted = false;
+   addJamEventForm: FormGroup;
+   submitted = false;
 
-  private datePicker;
-  private timePicker;
+   datePicker;
+   timePicker;
   constructor(
     private addEventService: JamEventService,
     private router: Router, private r:ActivatedRoute ) {

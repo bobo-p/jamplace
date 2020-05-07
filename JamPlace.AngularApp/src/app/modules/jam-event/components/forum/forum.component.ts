@@ -18,11 +18,11 @@ export class ForumComponent implements OnInit {
   @Input('event-id') eventId: number;
   @Input('comment-list') commentist: CommentViewModel[];
 
-  private comments$: BehaviorSubject<CommentViewModel[]>;
+   comments$: BehaviorSubject<CommentViewModel[]>;
   private searchTerms: BehaviorSubject <string>;
-  private firstSearch: boolean;
-  private listEmpty: boolean;
-  private searchRequest: CommentSearchRequest;
+   firstSearch: boolean;
+   listEmpty: boolean;
+   searchRequest: CommentSearchRequest;
 
   constructor(public dialog: MatDialog,
     private commentService: CommentService) { }
@@ -35,7 +35,7 @@ export class ForumComponent implements OnInit {
     }
   }
 
-  openDialog(model: CommentViewModel): void {
+  openDialog(model?: CommentViewModel): void {
     if(!model)
       model = new CommentViewModel();
       

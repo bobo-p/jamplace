@@ -21,11 +21,11 @@ export class SongListComponent implements OnInit {
   @Input('event-id') eventId: number;
   @Input('song-list') songList: SongViewModel[];
 
-  private songs$: BehaviorSubject<SongViewModel[]>;
-  private searchTerms: BehaviorSubject <string>;
-  private firstSearch: boolean;
-  private listEmpty: boolean;
-  private searchRequest: SongSearchRequest;
+   songs$: BehaviorSubject<SongViewModel[]>;
+   searchTerms: BehaviorSubject <string>;
+   firstSearch: boolean;
+   listEmpty: boolean;
+   searchRequest: SongSearchRequest;
 
   constructor(public dialog: MatDialog,
     private songService: SongService
@@ -40,7 +40,7 @@ export class SongListComponent implements OnInit {
     }
   }
 
-  openDialog(model: SongViewModel): void {
+  openDialog(model?: SongViewModel): void {
     if(!model)
       model = new SongViewModel();
       
