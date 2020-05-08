@@ -16,5 +16,7 @@ namespace JamPlace.DomainLayer.Interfaces.Services
         IEnumerable<IJamEvent> GetFiltereByNameForUser(string seacrhText, string userId);
         IEnumerable<IJamEvent> GetAllNotJoined(string userId);
         void Join(int eventId, string userId);
+        void Delete(int id);
+        void LeaveEvent(int eventId, string userId);
     }
 }

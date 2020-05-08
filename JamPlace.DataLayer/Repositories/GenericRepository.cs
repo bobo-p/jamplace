@@ -14,6 +14,7 @@ namespace JamPlace.DataLayer.Repositories
         public GenericRepository(ApplicationDbContext context)
         {
             Context = context;
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
         public T Add(T item)
         {

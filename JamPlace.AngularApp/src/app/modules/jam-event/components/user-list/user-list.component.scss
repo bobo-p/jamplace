@@ -40,9 +40,10 @@
     min-height: 60px !important;
     line-height: 1.35rem;
     overflow: hidden;
+    border-bottom: 1px solid #e0e0e0 !important;
     .title {
-        font-size: 18px;
-        font-weight: 700;
+        font-size: 15px;
+        font-weight: 500;
         margin-left: 15px;
     }
     .event-info {
@@ -74,30 +75,14 @@
 ul{
     border:none;
     margin-top: 0px;
-    height: 400px;
-}
-.user-button {
-    background-color: #364F6B;
-    color: #ffffff;
-    border-radius: 20px;;
-    font-size: 12px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color .3s ease-in-out;
+    margin-bottom: 0px;
+    height: calc(100vh - #{$top-panel-height} - #{$event-info-height} - #{$content-desc-height});
+    background-color: #F5F5F5;
+    border-right: 1px solid #ddd;
 }
 
-    .user-button:hover {
-        background-color: #446387;
-    }
-    .user-button:focus {
-        background-color: #446387 !important;
-    }
-    .user-button:focus {
-        outline: 0;
-    }
 .current-user-li{
-    border: 2px solid #d8daab;
-    box-shadow: 0px 1px 3px #d8daab !important;
+   
     background-color: #e0eaf9;
 }
 .delete-event-button, .edit-button {

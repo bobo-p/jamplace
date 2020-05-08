@@ -1,8 +1,5 @@
 @import '../../../../../scss/variables';
 
-$event-info-height: 35vh;
-$song-list-height: 40vh;
-$equipment-list-height: 40vh;
 
 .full-height {
     height: calc(100vh - #{$top-panel-height});

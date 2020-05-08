@@ -36,6 +36,7 @@ namespace JamPlace.DataLayer.Repositories
                 LocalNumber = item.Address?.LocalNumber,
                 Street = item.Address?.Street
             };
+            jamEventDo = Context.Add(jamEventDo).Entity;
 
             jamEventDo.JamEventJamUser = new List<JamEventJamUserDo>();
             if (item.Users != null)
@@ -52,25 +53,15 @@ namespace JamPlace.DataLayer.Repositories
                 }
             }
 
-            var data = Context.Add(jamEventDo);
+            
             Context.SaveChanges();
             Context.Entry(jamEventDo).State = EntityState.Detached;
-            return data.Entity;
+            return jamEventDo;
         }
         public new IJamEvent Get(int id)
         {
             Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            var jamEvent = Context.JamEvents.AsNoTracking().Where(p=>p.Id==id)
-                .Include(ev => ev.JamEventJamUser)
-                    .ThenInclude(x => x.JamUser)
-                .Include(ev => ev.NeededEventEquipment)
-                    .ThenInclude(x => x.Equipment)                
-                .Include(ev => ev.EventAdress)
-                .Include(ev => ev.SongsDo)
-                .Include(ev => ev.CommentsDo)
-                    .ThenInclude(x => x.User)
-                 .FirstOrDefault();
-
+            var jamEvent = GetDoById(id);
             if (jamEvent == null) return null;
             jamEvent.Users = jamEvent.JamEventJamUser?.Select(p => (IJamUser)p.JamUser).ToList();
             jamEvent.Creator = jamEvent.JamEventJamUser?.Where(p => p.AccessMode == Common.UserAccessModeEnum.Creator)?.Select(p => (IJamUser)p.JamUser).FirstOrDefault();
@@ -109,10 +100,12 @@ namespace JamPlace.DataLayer.Repositories
 
         public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)
         {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             var jamEvent = Context.JamEvents.AsNoTracking().Where(p => p.Id == eventId)
                 .Include(ev => ev.JamEventJamUser)
                 .ThenInclude(p => p.JamUser)
                 .FirstOrDefault();
+            Context.Entry(jamEvent).State = EntityState.Detached;
             var jamEventJamUser = jamEvent?.JamEventJamUser?.FirstOrDefault(usr => usr?.JamUser.UserIdentityId == userId);
             return GetDomainAccesModeFromJamEventJamUser(jamEventJamUser);
         }
@@ -127,6 +120,15 @@ namespace JamPlace.DataLayer.Repositories
             Context.Add(jamEventJamUser);
             Context.SaveChanges();
             Context.Entry(jamEventJamUser).State = EntityState.Detached;
+        }
+        public void RemoveAccessForUser(int eventId, int userId)
+        {          
+            var entity = GetDoById(eventId);
+            var jamUserjamEvents = entity.JamEventJamUser?.Where(p => p.JamEventDoId == eventId && p.JamUserDoId == userId && p.AccessMode != Common.UserAccessModeEnum.Creator).ToList();
+            jamUserjamEvents.ForEach(prop => prop.JamEvent = null);
+            jamUserjamEvents.ForEach(prop => prop.JamUser = null);
+            Context.RemoveRange(jamUserjamEvents);
+            Context.SaveChanges();
         }
         public IEnumerable<IJamEvent> GetFiltereByUser(string userId)
         {
@@ -156,13 +158,20 @@ namespace JamPlace.DataLayer.Repositories
         {
             var doEvent = _mapper.Map<JamEventDo>(item);
             doEvent.EventAdress = _mapper.Map<AdressDo>(item.Address);
-            if(item.Users != null)
-            {
-                
-            }
             Context.Update(doEvent);
             Context.SaveChanges();
             Context.Entry(doEvent).State = EntityState.Detached;
+        }
+        public void Delete(int id)
+        {
+            var entity = GetDoById(id);
+            Context.Entry(entity).State = EntityState.Deleted;
+            Context.JamEvents.Remove(entity);
+            var jamUserjamEvents = entity.JamEventJamUser?.Where(p => p.JamEventDoId == id);
+            var neededEqEJamEvent = entity.NeededEventEquipment?.Where(p => p.JamEventDoId == id);
+            Context.RemoveRange(jamUserjamEvents);
+            Context.RemoveRange(neededEqEJamEvent);
+            Context.SaveChanges();
         }
         public new void Update(IJamEvent item)
         {
@@ -200,7 +209,20 @@ namespace JamPlace.DataLayer.Repositories
 
             Context.SaveChanges();
         }
-
+        private JamEventDo GetDoById(int id)
+        {
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            return Context.JamEvents.AsNoTracking().Where(p => p.Id == id)
+                .Include(ev => ev.JamEventJamUser)
+                    .ThenInclude(x => x.JamUser)
+                .Include(ev => ev.NeededEventEquipment)
+                    .ThenInclude(x => x.Equipment)
+                .Include(ev => ev.EventAdress)
+                .Include(ev => ev.SongsDo)
+                .Include(ev => ev.CommentsDo)
+                    .ThenInclude(x => x.User).AsNoTracking()
+                 .FirstOrDefault();
+        }
         private UserAccessModeEnum GetDomainAccesModeFromJamEventJamUser(JamEventJamUserDo jamEventJamUser)
         {
             if (jamEventJamUser == null)
@@ -211,7 +233,6 @@ namespace JamPlace.DataLayer.Repositories
         {
             song.JamEvent = song.Event;
             return (ISong)song;
-        }
-
+        }    
     }
 }

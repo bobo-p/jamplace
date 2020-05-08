@@ -9,7 +9,7 @@
 </div>
 
   <ul class="collection ul-max-height">
-    <li *ngFor="let song of songs$ | async" class="song-element card">
+    <li *ngFor="let song of songs$ | async" class="song-element">
       <div class="row valign-wrapper song-row">
         <div class="col l1 center-align">
           {{song.index}}
@@ -28,4 +28,12 @@
       </div>
     </li>  
    </ul>
-   <p *ngIf="listEmpty" class="lack-od-elements center-align">Brak elementów</p>
+   <div *ngIf="listEmpty" class="lack-od-elements center-align">
+     <div class="row center-align card empty-card">
+        <h5 class="col s12 m12 xl12">Brak elementów</h5>
+        <p class="col s12 m12 xl12">Dodaj teraz nowe piosenki</p>
+        <div class="add-btn col s12 m12 xl12 center-align" (click)="openDialog()"> 
+          <i class="material-icons left circle add-icon empty-icon">add_circle_outline</i>
+        </div>
+      </div>
+    </div>

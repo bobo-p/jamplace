@@ -76,6 +76,21 @@ namespace JamPlace.Api.Controllers
             var model = _mapper.Map<GetJamEventViewModel>(getJamEvent);
             return model;
         }
+        [HttpDelete("DeleteEvent/{id}")]
+        [ServiceFilter(typeof(UserAccessFilter))]
+        public IActionResult DeleteEvent(int id)
+        {
+            _jamEventService.Delete(id);
+            return Ok();
+        }
+        [HttpDelete("LeaveEvent/{id}")]
+        [ServiceFilter(typeof(UserAccessFilter))]
+        public IActionResult LeaveEvent(int id)
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            _jamEventService.LeaveEvent(id, userId);
+            return Ok();
+        }
         [HttpGet("GetEvents")]
         public IEnumerable<GetJamEventViewModel> GetEvents()
         {

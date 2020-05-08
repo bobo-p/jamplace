@@ -26,7 +26,7 @@ namespace JamPlace.Api.Controllers
             _mapper = mapper;
         }
         [HttpPost("AddSong")]
-        public ActionResult<SongViewModel> AddSong(SongViewModel song)
+        public IActionResult AddSong(SongViewModel song)
         {
             var added = _songService.Add(_mapper.Map<ISong>(song), song.EventId);
             return Ok(_mapper.Map<SongViewModel>(added));
@@ -44,7 +44,7 @@ namespace JamPlace.Api.Controllers
             return Ok();
         }
         [HttpPost("SearchSongByName")]
-        public ActionResult SearchUserEventsByName(SongSearchRequest request)
+        public IActionResult SearchUserEventsByName(SongSearchRequest request)
         {
             var songs = _songService.GetFilteredByTitle(request.SearchText, request.EventId).ToList();
             return Ok(songs.Select(item => _mapper.Map<SongViewModel>(item)));

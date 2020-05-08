@@ -189,7 +189,7 @@ export class AuthService {
         this._router.navigate(['/']);
         break;
       case 404:
-        M.toast({html: 'Nie znaleziono strony!',displayLength: 1500,classes: 'rounded'})
+        M.toast({html: 'Nie znaleziono zasobu!',displayLength: 1500,classes: 'rounded'})
         this._router.navigate(['/not-found'])
         break;      
       case 500:

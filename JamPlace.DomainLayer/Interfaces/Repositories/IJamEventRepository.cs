@@ -14,5 +14,7 @@ namespace JamPlace.DomainLayer.Interfaces.Repositories
         IEnumerable<IJamEvent> GetFiltereByUser(string userId);
         void SimpleUpdate(IJamEvent item);
         void GrantGuestAccessUser(int eventId, int userId);
+        void Delete(int id);
+        void RemoveAccessForUser(int eventId, int userId);
     }
 }

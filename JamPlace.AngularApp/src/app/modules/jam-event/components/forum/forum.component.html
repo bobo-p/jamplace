@@ -10,7 +10,7 @@
 
 <ul class="collection collection-height">
     <li  *ngFor="let comment of comments$ | async" class="collection-item avatar comment-collection">
-      <i class="medium  material-icons icon-style">account_circle</i>
+      <i class="medium  material-icons icon-style" matTooltip="{{comment.userName}}">account_circle</i>
         <span class="title">Dnia {{comment.date | date:'dd.MM.yyyy'}} o {{comment.date | date:'HH:mm'}} użytkownik {{comment.userName}} napisał(a)</span>
           <p class="comment">
             {{comment.content}}
@@ -20,6 +20,16 @@
            <i class="material-icons right edit-comment-button" (click)="openDialog(comment)">edit</i>           
         </div>
     </li>  
+
+    <div *ngIf="listEmpty" class="lack-od-elements center-align">
+      <div class="row center-align card empty-card">
+         <h5 class="col s12 m12 xl12">Brak elementów</h5>
+         <p class="col s12 m12 xl12">Dodaj wpis teraz</p>
+         <div class="add-btn col s12 m12 xl12 center-align" (click)="openDialog()"> 
+           <i class="material-icons left circle add-icon empty-icon">add_circle_outline</i>
+         </div>
+       </div>
+    </div>
+
   </ul>
 
- <p  *ngIf="listEmpty" class="lack-od-elements center-align">Brak elementów</p>

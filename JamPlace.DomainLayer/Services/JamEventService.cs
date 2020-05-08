@@ -40,7 +40,16 @@ namespace JamPlace.DomainLayer.Services
                 _jamEventRepository.GrantGuestAccessUser(jamEvent.Id, user.Id);
             }
         }
-        
+        public void LeaveEvent(int eventId, string userId)
+        {
+            var jamEvent = _jamEventRepository.Get(eventId);
+            var userExsist = jamEvent.Users.FirstOrDefault(p => p.UserIdentityId == userId);
+            if (userExsist != null)
+            {
+                _jamEventRepository.RemoveAccessForUser(jamEvent.Id, userExsist.Id);
+            }
+        }
+
         public void Delete(IJamEvent item)
         {
             _jamEventRepository.Delete(item);
@@ -107,6 +116,11 @@ namespace JamPlace.DomainLayer.Services
         public IEnumerable<IJamEvent> GetFilteredPageByUserId(int pageIndex, int pageSize, bool orderByDate, string city, int userId)
         {
             return _jamUserRepository.GetEventsFilteredPageByUserId(pageIndex, pageSize, orderByDate, city,userId);
+        }
+
+        public void Delete(int id)
+        {
+            _jamEventRepository.Delete(id);
         }
     }
 }

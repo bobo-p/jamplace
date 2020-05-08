@@ -86,6 +86,26 @@ export class UserListComponent implements OnInit {
      }      
    });
   }
+  leaveEvent(): void
+  {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: {
+          title: "Na pewno chcesz opuścić to wydarzenie?",
+          message: "Będziesz mógł dołączyć ponownie w każdej chwili"}
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+     if(dialogResult)
+     {
+        this.jamEventService.leaveJamEevent(this.eventId).then(response => {   
+          this.router.navigate(['/']);
+          },
+           error => {
+            console.log(error);
+        }); 
+     }      
+   });
+  }
 
   sortArrayWithCurrentUserOnTop() {
     var currentUserInList = this.userList.filter(item => item.id === this.loggedUserId)[0];
