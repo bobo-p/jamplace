@@ -3,6 +3,10 @@ WORKDIR /app
 
 COPY . ./
 
+#RUN dotnet build  ./JamPlace.TeamCity.TestLogger/JamPlace.TeamCity.TestLogger.csproj -c Release -o out
+#RUN cp ./JamPlace.TeamCity.TestLogger/out/JamPlace.TeamCity.TestLogger.dll ~/../usr/share/dotnet/sdk/*/Extensions/
+#RUN dotnet test --logger teamcity  JamPlace.DomainLayer.Tests
+
 RUN dotnet publish JamPlace.Api -c Release -o out 
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1

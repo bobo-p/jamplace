@@ -90,8 +90,11 @@ namespace JamPlace.Api
                 cfg.AddProfile(new DataObjectsMapperProfile());
                 cfg.AddProfile(new ApiMapperProfile());
             }).CreateMapper());
+            services.AddMvcCore(options =>
+            {
+                options.Filters.Add(new ApiExceptionFilter());
+            });
 
-            
             services.AddTransient<IJamEventRepository, JamEventRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IJamUserRepository, JamUserRepository>();
