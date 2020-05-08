@@ -1,4 +1,5 @@
 ﻿using JamPlace.DomainLayer.Common;
+using JamPlace.DomainLayer.Exceptions;
 using JamPlace.DomainLayer.Interfaces.Models;
 using JamPlace.DomainLayer.Interfaces.Repositories;
 using JamPlace.DomainLayer.Interfaces.Services;
@@ -34,7 +35,8 @@ namespace JamPlace.DomainLayer.Services
         {
             var jamEvent = _jamEventRepository.Get(eventId);
             var userExsist = jamEvent.Users.FirstOrDefault(p => p.UserIdentityId == userId);
-            if(userExsist ==null)
+
+            if(userExsist == null)
             {
                 var user = _jamUserRepository.GetByIdentityId(userId);
                 _jamEventRepository.GrantGuestAccessUser(jamEvent.Id, user.Id);
@@ -43,7 +45,11 @@ namespace JamPlace.DomainLayer.Services
         public void LeaveEvent(int eventId, string userId)
         {
             var jamEvent = _jamEventRepository.Get(eventId);
+            if (jamEvent == null)
+                throw new EventNotExsistsException($"Event with id: {eventId} does not exsist");
             var userExsist = jamEvent.Users.FirstOrDefault(p => p.UserIdentityId == userId);
+            if (userExsist == null)
+                throw new UserNotExsistsException($"User with id: {userId} does not exsist");
             if (userExsist != null)
             {
                 _jamEventRepository.RemoveAccessForUser(jamEvent.Id, userExsist.Id);
