@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using JamPlace.Api.Models;
+using JamPlace.DomainLayer.Interfaces.Models;
 using JamPlace.DomainLayer.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +33,18 @@ namespace JamPlace.Api.Controllers
             return new JamUserViewModel()
             {
                 Id = user.Id,
-                UserName = user.UserName
+                UserName = user.UserName,
+                PhotoBase64 = user.PhotoBase64
             };
+        }
+        [HttpPost("SaveUserData")]
+        public IActionResult SaveUserData(JamUserViewModel userData)
+        {
+            string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var domainModel = _mapper.Map<IJamUser>(userData);
+            domainModel.UserIdentityId = userId;
+            _jamUserService.Edit(domainModel);
+            return Ok();
         }
     }
 }

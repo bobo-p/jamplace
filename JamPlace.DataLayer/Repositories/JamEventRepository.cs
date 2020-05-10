@@ -93,6 +93,7 @@ namespace JamPlace.DataLayer.Repositories
                 jamEvent.Address = (IAdress)jamEvent.EventAdress;
                 jamEvent?.CommentsDo?.ToList()?.ForEach(comment => comment.JamUser = comment?.User);
                 jamEvent.Comments = jamEvent.CommentsDo?.Select(p => (IComment)p).ToList();
+                jamEvent.Creator = jamEvent?.JamEventJamUser.Where(p => p.AccessMode == Common.UserAccessModeEnum.Creator)?.Select(p => (IJamUser)p.JamUser).FirstOrDefault();
                 outputList.Add(jamEvent);
             }
             return outputList;
@@ -134,12 +135,20 @@ namespace JamPlace.DataLayer.Repositories
         {
             var userDo = Context.JamUsers.AsNoTracking().Where(user => user.UserIdentityId == userId)
                 .Include(ev => ev.JamEventJamUser)
-                    .ThenInclude(ev => ev.JamEvent)
+                    .ThenInclude(ev => ev.JamEvent)                  
                     .ThenInclude(x => x.EventAdress)
                  .FirstOrDefault();
             if (userDo == null) return null;
             userDo.JamEvents = userDo.JamEventJamUser?.Select(p => p.JamEvent).ToList();
             userDo.JamEvents?.ToList().ForEach(jamEvent => jamEvent.Address = ((JamEventDo)jamEvent).EventAdress);
+            foreach(var ev in userDo.JamEvents)
+            {
+                var jamEvent = Context.JamEvents.AsNoTracking().Where(p => p.Id == ev.Id)
+                    .Include(x => x.JamEventJamUser)
+                    .ThenInclude(x => x.JamUser)
+                    .FirstOrDefault() ;
+                ev.Creator = jamEvent?.JamEventJamUser.Where(p => p.AccessMode == Common.UserAccessModeEnum.Creator)?.Select(p => (IJamUser)p.JamUser).FirstOrDefault();
+            }
             return userDo?.JamEvents;
         }
 

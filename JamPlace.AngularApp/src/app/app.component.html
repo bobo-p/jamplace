@@ -1,7 +1,7 @@
 <div *ngIf="!loading" class="navContainer">
     <mat-toolbar *ngIf="showNavbar">
       <mat-toolbar-row class="position-relative">
-        <button mat-icon-button  id="menuIconButton">
+        <button mat-icon-button  id="menuIconButton" class="menuIconButton">
           <mat-icon class="menuIcon" (click)="sidenav.toggle()">menu</mat-icon>
         </button>
         <a class="logoContainer" [routerLink]="'/'" routerLinkActive="router-link-active"><img class="logo" src="jamplace.png" alt=""></a>

@@ -27,7 +27,11 @@ namespace JamPlace.DomainLayer.Services
 
         public void Edit(IJamUser item)
         {
-            _jamUserRepository.Update(item);
+            var exsistingUser = _jamUserRepository.Get(item.Id);
+            if (exsistingUser != null)
+            {
+                _jamUserRepository.Update(item);
+            }
         }
 
         public IJamUser Get(int id)

@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
   
   @Input('event-id') eventId: number;
   @Input('user-list') userList: JamUserViewModel[];
-  @Input('event-owner-id') eventOwnerId: number;
+  @Input('event-owner') eventOwner: JamUserViewModel;
 
    users$: BehaviorSubject<JamUserViewModel[]>;
    searchTerms: BehaviorSubject <string>;

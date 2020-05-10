@@ -1,0 +1,67 @@
+<div class="full-height container-margin-top">
+    <div class="row">
+        <div class="card col xl6 l7 m7 s12 card-border" [@flyInOut]>
+            <div class="row margin-bottom-0">
+                <h5 class="card-header center-align">                
+                        <strong>Edycja profilu</strong>
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div *ngIf="currentUser" class="input-field col xl6 l6 m10 s11 user-name-input" ngDefaultControl>
+                        <input id="event-name" type="text"  [(ngModel)]="currentUser.userName" [ngClass]="{ 'invalid': !currentUser.userName }"/>
+                        <label [class.active]="currentUser.userName" for="event-name">Nazwa użytkownika *</label>
+                        
+                        <span *ngIf="!currentUser.userName" class="invalid">
+                            <small>Nazwa użytkownika jest wymagana</small>
+                        </span>
+                    </div>
+                </div>
+                        <!-- <input  id="file-input" multiple class="file-path validate" type="file" (change)="fileChangeEvent($event)" /> -->
+                        
+                         <!-- <label class="mat-raised-button mat-button-base mat-primary" for="file-input" >
+                          {{text}}
+                        </label> -->
+                <div class="row">
+                    <p class="subsesction-title">Edycja zdjęcia</p>
+                    <div class="file-field input-field row  col xl6 l6 m10 s12">
+                        <div class="btn main-accept-button input-btn">
+                          <span>Wybierz plik</span>
+                          <input type="file" (change)="fileChangeEvent($event)">                         
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input id="user-photo" class="file-path validate" type="text" placeholder="Brak pliku">
+                        </div>
+                    </div>
+                    <div *ngIf="showCropper" class="row col xl12 l12">
+                        <div class="crop-container col xl6 l6 m12">
+                            <h5>Przytnij obraz</h5>
+                            <image-cropper class="image-cropper"
+                            [imageChangedEvent]="imageChangedEvent" 
+                            [maintainAspectRatio]="true" 
+                            [aspectRatio]="4 / 4"
+                            [imageBase64]="loadedImage"
+                            [resizeToWidth]="256" 
+                            format="png" 
+                            (imageCropped)="imageCropped($event)" 
+                            (imageLoaded)="imageLoaded()"
+                            (cropperReady)="cropperReady()" 
+                            (loadImageFailed)="loadImageFailed()"></image-cropper>
+                        </div>
+                        <div class="col xl6 l6 m12">
+                            <h5>Podgląd</h5>
+                            <img class="user-avatar" [src]="croppedImage" />
+                        </div>
+                    </div>
+                </div>
+                 
+                        
+                <div class="row margin-bottom-0">
+                    <button  class="col xl12  m12 s12 btn-large btn-bottom-radius main-button" type="button" name="action" (click)="onUpdateClick()">Aktualizuj
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

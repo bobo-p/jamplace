@@ -11,7 +11,8 @@
 </div>
 <ul class="collection collection-height">
   <li *ngFor="let myJamEvent of myEvents$ | async" (click)="onSelect(myJamEvent)" class="collection-item avatar event-collection">
-    <i class="medium  material-icons icon-style">account_circle</i>
+    <i *ngIf="!(myJamEvent.creator.photoBase64)" class="medium  material-icons icon-style" matTooltip="{{myJamEvent.creator.userName}}">account_circle</i>
+    <img  *ngIf="myJamEvent.creator.photoBase64" [src]="myJamEvent.creator.photoBase64" alt="mage" class="circle custom-avatar-size" matTooltip="{{myJamEvent.creator.userName}}"/>
       <span class="title">{{myJamEvent.name}}</span>
         <p class="event-info">{{myJamEvent.date | date:'dd-MM-yyyy HH:mm'}} <br>
          {{myJamEvent.address}}

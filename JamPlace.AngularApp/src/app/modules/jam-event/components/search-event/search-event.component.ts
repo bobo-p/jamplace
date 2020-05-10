@@ -25,6 +25,7 @@ export class SearchEventComponent implements OnInit {
   ngOnInit() {
     this.firstSearch = true;
     this.jamEventsService.getJamEevents().then(result => {
+      console.log(result);
         this.myEvents$ = new Observable<JamEventViewModel[]>(observer => observer.next(result));   
       },
        error => {

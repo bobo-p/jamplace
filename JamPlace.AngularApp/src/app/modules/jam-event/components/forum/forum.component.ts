@@ -29,6 +29,7 @@ export class ForumComponent implements OnInit {
 
   ngOnInit() {
     this.firstSearch = true;
+    console.log(this.commentist);
     this.comments$ = new BehaviorSubject<CommentViewModel[]>(this.commentist);
     if(!this.commentist || this.commentist.length === 0) {
       this.listEmpty=true;

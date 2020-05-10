@@ -8,5 +8,5 @@ export class UserSpecificJamEvent{
     description: string;
     address: Address;
     date: Date;
-    creatorUser: JamUserModel
+    creator: JamUserModel
 }

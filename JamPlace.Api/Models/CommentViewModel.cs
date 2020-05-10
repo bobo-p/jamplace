@@ -9,8 +9,8 @@ namespace JamPlace.Api.Models
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public string UserName{ get; set; }
         public DateTime Date { get; set; }
         public int EventId { get; set; }
+        public JamEventUserViewModel JamUser { get; set; }
     }
 }

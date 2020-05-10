@@ -13,6 +13,6 @@ namespace JamPlace.Api.Models
         public string Description { get; set; }
         public AddressViewModel Adress { get; set; }
         public DateTime Date { get; set; }
-        public JamUserViewModel CreatorUser { get; set; }
+        public JamUserViewModel Creator { get; set; }
     }
 }

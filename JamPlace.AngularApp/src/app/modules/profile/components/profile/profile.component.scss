@@ -1,24 +1,38 @@
 @import '../../../../../scss/variables';
 
-.create-event{
-    background-image: url("../../../../../assets/add-event.jpg");
-    background-size: 100% 100%;
+.container-margin-top{
+    margin-top: 60px;
 }
 .full-height {
     height: calc(100vh - #{$top-panel-height} *2);
 }
-.card img {
-    height: 81px;
-    object-fit: cover;
-  }
 .margin-bottom-0{
     margin-bottom: 0 !important;
 }
 .margin-top-0{
     margin-top: 0 !important;
 }
-.container-margin-top{
-    margin-top: 60px;
+.crop-container{
+    max-width: 50%;  
+  }
+.image-cropper{
+    max-height:250px;
+}
+.input-btn{
+    background-color: $main-button-color !important;
+}
+.subsesction-title{
+    margin-left:20px;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.user-avatar {
+  border-radius: 100%;
+  max-width: 200px;
+  height:128px;
+}
+.user-name-input{
+    margin-left:15px !important;
 }
 .card-border{
     border-radius: 0px 30px 30px 0px;
@@ -57,17 +71,17 @@
     }
     .card-border{
         border-radius: 0px;
-      }
-      .btn-bottom-radius{
-        border-radius: 0px;
-      }
-      .create-event{
-        background-image: none;
     }
-      .card{
-          margin: 0px !important;
-      }
-}
-.helper-text {
-    font-size: 15px;
+    .btn-bottom-radius{
+      border-radius: 0px;
+    }
+    .create-event{
+      background-image: none;
+    }
+    .card{
+        margin: 0px !important;
+    }
+    .user-name-input{
+        margin-left:0px !important;
+    }
 }

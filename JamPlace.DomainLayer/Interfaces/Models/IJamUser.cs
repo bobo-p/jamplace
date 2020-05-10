@@ -13,5 +13,6 @@ namespace JamPlace.DomainLayer.Interfaces.Models
         IEnumerable<IEventEquipment> EventEquipment { get; set; }
         IEnumerable<IJamEvent> JamEvents { get; set; }
         ICollection<IComment> Comments { get; set; }
+        string PhotoBase64 { get; set; }
     }
 }

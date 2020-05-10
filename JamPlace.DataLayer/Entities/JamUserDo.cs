@@ -24,5 +24,6 @@ namespace JamPlace.DataLayer.Entities
         public IEnumerable<IJamEvent> JamEvents { get; set; }
         [NotMapped]
         public ICollection<IComment> Comments { get; set; }
+        public string PhotoBase64 { get; set; }
     }
 }

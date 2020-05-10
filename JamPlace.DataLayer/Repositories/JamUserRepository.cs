@@ -39,6 +39,12 @@ namespace JamPlace.DataLayer.Repositories
         public new void Update(IJamUser item)
         {
             var doUser = _mapper.Map<JamUserDo>(item);
+            Context.Update(doUser);
+            Context.SaveChanges();
+        }
+        public void ComplexUpdate(IJamUser item)
+        {
+            var doUser = _mapper.Map<JamUserDo>(item);
             //mange PersonalEquipment relation
             var removedPersonalEquipmentRelations = new List<PersonalEquipmentUserDo>();
             var addedPersonalEquipmentRelations = new List<PersonalEquipmentUserDo>();

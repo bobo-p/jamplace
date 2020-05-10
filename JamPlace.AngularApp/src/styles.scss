@@ -113,3 +113,8 @@ input[class*="search-box"][class*="search-box-light"]::-webkit-search-cancel-but
     left: calc(50vw - 50px);
     top: calc(50vh - 50px);
   }
+.custom-avatar-size{
+    height: 54px  !important;
+    width:54px  !important;
+    left: 8px !important;
+}
