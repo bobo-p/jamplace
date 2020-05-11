@@ -20,5 +20,6 @@ namespace JamPlace.DomainLayer.Models
         public EventAccessTypeEnum AccessType { get; set; }
         public ICollection<IComment> Comments { get; set; }
         public IJamUser Creator { get; set; }
+        public ICollection<IEquipment> ProvidedEquipment { get; set; }
     }
 }

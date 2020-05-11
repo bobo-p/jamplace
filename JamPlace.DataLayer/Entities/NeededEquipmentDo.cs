@@ -6,7 +6,7 @@ using System.Text;
 
 namespace JamPlace.DataLayer.Entities
 {
-    public class EquipmentDo : AbstractParrentModelDo, IEquipment
+    public class NeededEquipmentDo : AbstractParrentModelDo, IEquipment
     {
         public string Name { get; set; }
         public string Description { get; set; }

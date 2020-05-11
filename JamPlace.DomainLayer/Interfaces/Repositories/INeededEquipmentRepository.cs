@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JamPlace.DomainLayer.Interfaces.Repositories
 {
-    public interface IEquipmentRepository : IRepository<IEquipment>
+    public interface INeededEquipmentRepository : IRepository<IEquipment>
     {
         IEnumerable<IEquipment> GetFilteredByEvent(int eventId);
     }

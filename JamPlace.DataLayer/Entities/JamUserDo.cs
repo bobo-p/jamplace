@@ -11,14 +11,15 @@ namespace JamPlace.DataLayer.Entities
     {
         public string UserName { get; set; }
         public ICollection<CommentDo> CommentsDo { get; set; }
+        public ICollection<EquipmentDo> ProvidedEquipmentDos { get; set; }
+        public ICollection<NeededEquipmentDo> NeededEquipmentDos { get; set; }
         [NotMapped]
         public IEnumerable<IEquipment> PersonalEquipment { get; set; }
-        [NotMapped]
-        public IEnumerable<PersonalEquipmentUserDo> UserPersonalEquipment { get; set; }
         public string UserIdentityId { get; set; }
         [NotMapped]
-        public IEnumerable<IEventEquipment> EventEquipment { get; set ; }
-        public ICollection<EventEquipmentDo> EventEquipmentDos { get; set ; }
+        public IEnumerable<IEquipment> EventEquipment { get; set ; }
+        [NotMapped]
+        public IEnumerable<IEquipment> NeededEquipment { get; set; }
         internal ICollection<JamEventJamUserDo> JamEventJamUser { get; set ; }
         [NotMapped]
         public IEnumerable<IJamEvent> JamEvents { get; set; }

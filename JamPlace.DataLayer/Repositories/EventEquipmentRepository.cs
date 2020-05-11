@@ -20,7 +20,7 @@ namespace JamPlace.DataLayer.Repositories
         public new IEventEquipment Get(int id)
         {
             var eventEquipment = Context.EventEquipment.AsNoTracking()
-                .Include(eventEq => eventEq.Equpiment)
+                .Include(eventEq => eventEq.Event)
                  .FirstOrDefault(p => p.Id == id);
             if (eventEquipment == null) return null;
            

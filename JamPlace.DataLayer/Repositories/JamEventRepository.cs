@@ -69,6 +69,14 @@ namespace JamPlace.DataLayer.Repositories
             jamEvent.Address = (IAdress)jamEvent.EventAdress;
             jamEvent?.CommentsDo?.ToList()?.ForEach(comment => comment.JamUser = comment?.User);
             jamEvent.Comments = jamEvent.CommentsDo?.Select(p => (IComment)p).ToList();
+            jamEvent?.NeededEquipmentDos?.ToList()?.ForEach(p => p.JamUser = p?.User);
+            jamEvent.NeededEquipment = jamEvent.NeededEquipmentDos?.Select(p => (IEquipment)p).ToList();
+
+            jamEvent?.ProvidedEquipmentDos?.ToList()?.ForEach(p => p.JamUser = p?.User);
+            jamEvent.ProvidedEquipment = jamEvent.ProvidedEquipmentDos?.Select(p => (IEquipment)p).ToList();
+
+            jamEvent?.CommentsDo?.ToList()?.ForEach(comment => comment.JamUser = comment?.User);
+            jamEvent.Comments = jamEvent.CommentsDo?.Select(p => (IComment)p).ToList();
             return jamEvent as IJamEvent;
         }
         public new IEnumerable<IJamEvent> GetAll()
@@ -77,8 +85,6 @@ namespace JamPlace.DataLayer.Repositories
             var jamEvents = Context.JamEvents.AsNoTracking()
                 .Include(ev => ev.JamEventJamUser)
                     .ThenInclude(x => x.JamUser)
-                .Include(ev => ev.NeededEventEquipment)
-                    .ThenInclude(x => x.Equipment)
                 .Include(ev => ev.EventAdress)
                 .Include(ev => ev.SongsDo)
                 .Include(ev => ev.CommentsDo)
@@ -177,9 +183,7 @@ namespace JamPlace.DataLayer.Repositories
             Context.Entry(entity).State = EntityState.Deleted;
             Context.JamEvents.Remove(entity);
             var jamUserjamEvents = entity.JamEventJamUser?.Where(p => p.JamEventDoId == id);
-            var neededEqEJamEvent = entity.NeededEventEquipment?.Where(p => p.JamEventDoId == id);
             Context.RemoveRange(jamUserjamEvents);
-            Context.RemoveRange(neededEqEJamEvent);
             Context.SaveChanges();
         }
         public new void Update(IJamEvent item)
@@ -188,8 +192,6 @@ namespace JamPlace.DataLayer.Repositories
             var doEvent = _mapper.Map<JamEventDo>(item);
 
             doEvent.JamEventJamUser = doEvent.Users?.Select(p => new JamEventJamUserDo() { JamUserDoId = p.Id, JamUser = _mapper.Map<JamUserDo>(p), JamEventDoId = item.Id, JamEvent = doEvent })?.ToList();
-            doEvent.NeededEventEquipment = doEvent.NeededEquipment?.Select(p => new NeededEquipmentEventDo() { Equipment= _mapper.Map<EquipmentDo>(p),EquipmentDoId=p.Id, JamEventDoId = item.Id, JamEvent = doEvent })?.ToList();
-
 
             //mange JamEventJamUser relation
             var removedJamEventtRelations = new List<JamEventJamUserDo>();
@@ -199,22 +201,12 @@ namespace JamPlace.DataLayer.Repositories
                     .Where(p => p.JamEventDoId == doEvent.Id).ToList();
             removedJamEventtRelations = existintJamEventRelations.Except(doEvent.JamEventJamUser).ToList();
             addedJamEventRelations = doEvent.JamEventJamUser.Except(existintJamEventRelations).ToList();
-            addedJamEventRelations.ForEach(p => p.AccessMode = Common.UserAccessModeEnum.Guest);
-
-            //mange NeedeEventEquipment relation
-            var removeNeedeEventEquipmentRelations = new List<NeededEquipmentEventDo>();
-            var addedNeedeEventEquipmentRelations = new List<NeededEquipmentEventDo>();
-            var existintNeedeEventEquipmentRelations = Context.Set<NeededEquipmentEventDo>()?
-                    .AsNoTracking()
-                    .Where(p => p.JamEventDoId == doEvent.Id).ToList();
-            removeNeedeEventEquipmentRelations = existintNeedeEventEquipmentRelations.Except(doEvent.NeededEventEquipment).ToList();
-            addedNeedeEventEquipmentRelations = doEvent.NeededEventEquipment.Except(existintNeedeEventEquipmentRelations).ToList();
+            addedJamEventRelations.ForEach(p => p.AccessMode = Common.UserAccessModeEnum.Guest);           
 
             Context.Update(doEvent);
             Context.Set<JamEventJamUserDo>().RemoveRange(removedJamEventtRelations);
             Context.Set<JamEventJamUserDo>().AddRange(addedJamEventRelations);
-            Context.Set<NeededEquipmentEventDo>().RemoveRange(removeNeedeEventEquipmentRelations);
-            Context.Set<NeededEquipmentEventDo>().AddRange(addedNeedeEventEquipmentRelations);
+
 
             Context.SaveChanges();
         }
@@ -224,8 +216,10 @@ namespace JamPlace.DataLayer.Repositories
             return Context.JamEvents.AsNoTracking().Where(p => p.Id == id)
                 .Include(ev => ev.JamEventJamUser)
                     .ThenInclude(x => x.JamUser)
-                .Include(ev => ev.NeededEventEquipment)
-                    .ThenInclude(x => x.Equipment)
+                .Include(ev => ev.NeededEquipmentDos)
+                    .ThenInclude(x => x.User)
+                .Include(ev => ev.ProvidedEquipmentDos)
+                    .ThenInclude(x => x.User)
                 .Include(ev => ev.EventAdress)
                 .Include(ev => ev.SongsDo)
                 .Include(ev => ev.CommentsDo)

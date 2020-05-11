@@ -11,9 +11,10 @@ namespace JamPlace.DomainLayer.Models
         public string UserName { get; set; }
         public IEnumerable<IEquipment> PersonalEquipment { get; set; }
         public string UserIdentityId { get; set; }
-        public IEnumerable<IEventEquipment> EventEquipment { get; set; }
+        public IEnumerable<IEquipment> EventEquipment { get; set; }
         public IEnumerable<IJamEvent> JamEvents { get; set; }
         public ICollection<IComment> Comments { get; set; }
         public string PhotoBase64 { get; set; }
+        public IEnumerable<IEquipment> NeededEquipment { get; set; }
     }
 }

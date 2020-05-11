@@ -19,7 +19,7 @@ namespace JamPlace.DataLayer.Mapper
             CreateMap<IAdress, AdressDo>();
             CreateMap<IComment, CommentDo>();
 
-            CreateMap<EquipmentDo, Equipment>().ForSourceMember(src => src.EquipmentEventEquipmentDos, opt => opt.DoNotValidate());
+            CreateMap<EquipmentDo, Equipment>();
             CreateMap<JamUserDo, JamUser>();
             CreateMap<SongDo, Song>();
             CreateMap<JamEventDo, JamEvent>();

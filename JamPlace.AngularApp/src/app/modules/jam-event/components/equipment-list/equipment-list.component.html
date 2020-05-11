@@ -4,36 +4,32 @@
       <div class="col l6 xl6 search-field">
           <app-custom-search-field  class="right"></app-custom-search-field>
       </div>
-      <div class="col l2 xl2 add-btn"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
+      <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
     </div>
 </div>
 
-  <!-- <ul class="collection ul-max-height">
-    <li *ngFor="let song of songs$ | async" class="song-element card">
-      <div class="row valign-wrapper song-row">
-        <div class="col l1 center-align">
-          {{song.index}}
-        </div>
-        <div class="col l3">
-          <span class="song-title truncate">{{song.title}}</span>
-          <span class="song-artist truncate">{{song.artist}} </span>
-        </div>
-        <div class="col l5 truncate">
-          <a class="song-link" href="{{song.link}}" matTooltip="{{song.link}}">{{song.link}}</a>
-        </div>
-        <div class="col l3">
-          <i class="material-icons right edit-song-button" (click)="openDialog(song)">edit</i>
-          <i class="material-icons right delete-song-button" (click)="deleteSong(song)">delete</i>
-        </div>
+<ul class="collection collection-height">
+  <li  *ngFor="let equipment of equipment$ | async" class="collection-item avatar comment-collection">
+    <i class="medium  material-icons icon-style">account_circle</i>
+    <i *ngIf="!(equipment.jamUser.photoBase64)" class="medium  material-icons icon-style" matTooltip="{{equipment.jamUser.userName}}">account_circle</i>
+    <img  *ngIf="equipment.jamUser.photoBase64" [src]="equipment.jamUser.photoBase64" alt="mage" class="circle custom-avatar-size"matTooltip="{{equipment.jamUser.userName}}"/>
+      <span class="title">Użytkownik {{equipment.jamUser.userName}} dodał(a):</span>
+        <p class="comment">
+          {{equipment.name}}
+        </p>
+      <div class="secondary-content">
+          <i class="material-icons right delete-comment-button" (click)="deleteEquipment(equipment)">delete</i>
+          <i class="material-icons right edit-comment-button" (click)="openDialog(equipment)">edit</i>           
       </div>
-    </li>  
-   </ul> -->
-   <div  class="lack-od-elements center-align">
+  </li>  
+
+   <div  *ngIf="listEmpty" class="lack-od-elements center-align">
     <div class="row center-align card empty-card">
        <h5 class="col s12 m12 xl12">Brak elementów</h5>
        <p class="col s12 m12 xl12">Dodaj teraz nowy ekwipunek</p>
-       <div class="add-btn col s12 m12 xl12 center-align"> 
+       <div class="add-btn col s12 m12 xl12 center-align" (click)="openDialog()"> 
          <i class="material-icons left circle add-icon empty-icon">add_circle_outline</i>
        </div>
      </div>
    </div>
+</ul>
