@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output,Input } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 @Component({
   selector: 'app-custom-search-field',
@@ -8,10 +8,13 @@ import { Observable, Subject } from 'rxjs';
 export class CustomSearchFieldComponent implements OnInit {
 
   @Output() currentTerm: Subject<string>;
+  @Input('placeholder-text') placeholderText: string;
    showClear: boolean;
    searchText: string;
 
   constructor() { 
+    if(!this.placeholderText)
+      this.placeholderText="Szukaj po nazwie";
     this.currentTerm=new Subject<string>();
   }
 

@@ -25,4 +25,16 @@ export class EquipmentService {
   public searchNeededEquipment(request: EqupimentSearchRequest): Observable<EquipmentViewModel[]> {
     return this.authService.postAsObservable(this.api + '/NeededEquipment/SearchEquipment/', request, 'application/json; charset=utf-8');
   }
+  public addProvidedEquipment(comment: EquipmentViewModel): Promise<any> {
+    return this.authService.post(this.api + '/EventEquipment/AddEquipment', comment, 'application/json; charset=utf-8');
+  }
+  public updateProvidedEquipment(comment: EquipmentViewModel): Promise<any> {
+    return this.authService.post(this.api + '/EventEquipment/UpdateEquipment', comment, 'application/json; charset=utf-8');
+  }
+  public deleteProvidedEquipment(comment: EquipmentViewModel): Promise<any> {
+    return this.authService.post(this.api + '/EventEquipment/DeleteEquipment', comment, 'application/json; charset=utf-8');
+  }
+  public searchProvidedEquipment(request: EqupimentSearchRequest): Observable<EquipmentViewModel[]> {
+    return this.authService.postAsObservable(this.api + '/EventEquipment/SearchEquipment/', request, 'application/json; charset=utf-8');
+  }
 }

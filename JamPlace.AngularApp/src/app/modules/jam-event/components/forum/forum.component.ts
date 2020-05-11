@@ -18,11 +18,13 @@ export class ForumComponent implements OnInit {
   @Input('event-id') eventId: number;
   @Input('comment-list') commentist: CommentViewModel[];
 
-   comments$: BehaviorSubject<CommentViewModel[]>;
+
+  public placeholderTxt = "Szukaj po użytkowniku";
+  comments$: BehaviorSubject<CommentViewModel[]>;
   private searchTerms: BehaviorSubject <string>;
-   firstSearch: boolean;
-   listEmpty: boolean;
-   searchRequest: CommentSearchRequest;
+  firstSearch: boolean;
+  listEmpty: boolean;
+  searchRequest: CommentSearchRequest;
 
   constructor(public dialog: MatDialog,
     private commentService: CommentService) { }

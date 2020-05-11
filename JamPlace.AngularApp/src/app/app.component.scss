@@ -14,8 +14,8 @@
     margin-left: 10px;
   }
   .logOutBtn {
-    position: absolute;
-    right: 2%;
+    // position: absolute;
+    // right: 2%;
   }
   .user-mail-container {
     font-size: 0.8em;
@@ -79,4 +79,19 @@
 }
 .menuIconButton:focus{
   background: transparent !important;
+}
+.user-info
+{
+  margin:5px;
+  padding:10px;
+  border: 1px solid #dedede;
+  border-radius: 10px;
+}
+.user-name{
+  font-weight: 600;
+  font-size: 17px;;
+}
+.welcome{
+  font-weight: 400;
+  font-size: 15px;;
 }

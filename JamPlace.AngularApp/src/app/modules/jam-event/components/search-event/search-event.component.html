@@ -22,4 +22,5 @@
 
       <div class="secondary-content custom-buton" (click)="onJoin(myJamEvent)"> <span>Dołącz</span></div>
     </li>  
+    <p  class="no-events" *ngIf="listEmpty">Brak dostępnych wydarzeń.</p>
   </ul>

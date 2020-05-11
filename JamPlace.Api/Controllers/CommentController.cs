@@ -30,7 +30,7 @@ namespace JamPlace.Api.Controllers
         {
             string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var added = _commentService.Add(_mapper.Map<IComment>(comment), userId);
-            return Ok(_mapper.Map<CommentViewModel>(comment));
+            return Ok(_mapper.Map<CommentViewModel>(added));
         }
         [HttpPost("UpdateComment")]
         public IActionResult UpdateComment(CommentViewModel comment)

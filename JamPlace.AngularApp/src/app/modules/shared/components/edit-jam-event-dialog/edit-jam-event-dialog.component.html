@@ -21,7 +21,7 @@
             </div>
             <div class="input-field">
                 <input id="event-size" type="text" class="validate" formControlName="size" />
-                <label [class.active]="jamEventInfo.size" for="event-size">Wielkość eventu</label>
+                <label [class.active]="jamEventInfo.size" for="event-size">Wielkość sceny - opisowo</label>
             </div>
             <div class="input-field">
                 <input id="event-desc" type="text" class="validate" formControlName="description" />
@@ -50,9 +50,9 @@
         </div>                                   
     </div>
     <div class="row margin-bottom-0">
-        <button  class="col xl5  m5 s12 btn main-cancel-button"  type="button" name="action" (click)="onNoClick()">Anuluj
+        <button  class="col xl5 l5 m5 s12 btn main-cancel-button"  type="button" name="action" (click)="onNoClick()">Anuluj
         </button>
-        <button  class="col xl5  m5 s12 offset-l2 offset-m2 btn main-accept-button" type="submit" name="action" cdkFocusInitial >Zaktualizuj
+        <button  class="col xl5 l5 m5 s12 offset-xl2 offset-l2 offset-m2 btn main-accept-button" type="submit" name="action">Zaktualizuj
         </button>        
     </div>     
 </form>

@@ -25,7 +25,7 @@
                 <app-equipment-list *ngIf="jamEvent" [event-id]="jamEvent.id" [needed-eq-list]="jamEvent.neededEquipment"></app-equipment-list>
             </div>
             <div class="col xl12 l6 m6 s12 needed-equipment grey lighten-3">
-                <app-equipment-list *ngIf="jamEvent" [event-id]="jamEvent.id" [needed-eq-list]="jamEvent.neededEquipment"></app-equipment-list>
+                <app-provided-equipment-list *ngIf="jamEvent" [event-id]="jamEvent.id" [eq-list]="jamEvent.providedEquipment"></app-provided-equipment-list>
             </div>
         </div>
     </div>

@@ -45,7 +45,8 @@ export class MainEventPanelComponent implements OnInit, OnDestroy {
       description: jamEvent.description,
       address: jamEvent.address,
       size: jamEvent.size,
-      date: jamEvent.date
+      date: jamEvent.date,
+      ownerId: jamEvent.creator.id
     };
     return evInfo;
   }

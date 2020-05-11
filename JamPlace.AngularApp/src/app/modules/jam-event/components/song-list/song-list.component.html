@@ -14,26 +14,27 @@
         <div class="col l1 center-align">
           {{song.index}}
         </div>
-        <div class="col l3">
+        <div class="col l3 m3 s3">
           <span class="song-title truncate" matTooltip="{{song.description}}">{{song.title}}</span>
           <span class="song-artist truncate">{{song.artist}} </span>
         </div>
-        <div class="col l5 truncate">
+        <div class="col l5 m5 s5 truncate">
           <a class="song-link" href="{{song.link}}" matTooltip="{{song.link}}">{{song.link}}</a>
         </div>
-        <div class="col l3">
+        <div class="col l3 m3 s3">
           <i class="material-icons right edit-song-button" (click)="openDialog(song)">edit</i>
           <i class="material-icons right delete-song-button" (click)="deleteSong(song)">delete</i>
         </div>
       </div>
     </li>  
+    <div *ngIf="listEmpty" class="lack-od-elements center-align">
+      <div class="row center-align card empty-card">
+         <h5 class="col s12 m12 xl12">Brak elementów</h5>
+         <p class="col s12 m12 xl12">Dodaj teraz nowe piosenki</p>
+         <div class="add-btn col s12 m12 xl12 center-align" (click)="openDialog()"> 
+           <i class="material-icons left circle add-icon empty-icon">add_circle_outline</i>
+         </div>
+       </div>
+     </div>
    </ul>
-   <div *ngIf="listEmpty" class="lack-od-elements center-align">
-     <div class="row center-align card empty-card">
-        <h5 class="col s12 m12 xl12">Brak elementów</h5>
-        <p class="col s12 m12 xl12">Dodaj teraz nowe piosenki</p>
-        <div class="add-btn col s12 m12 xl12 center-align" (click)="openDialog()"> 
-          <i class="material-icons left circle add-icon empty-icon">add_circle_outline</i>
-        </div>
-      </div>
-    </div>
+   

@@ -20,9 +20,11 @@ import { MaterialModule } from '../material/material.module';
 import { CommentDialogComponent } from './components/forum/comment-dialog/comment-dialog.component';
 import { SearchEventComponent } from './components/search-event/search-event.component';
 import { AddEquipmentComponent } from './components/equipment-list/add-equipment/add-equipment.component';
+import { ProvidedEquipmentListComponent } from './components/provided-equipment-list/provided-equipment-list.component';
+import { AddProvidedEquipmentDialogComponent } from './components/provided-equipment-list/add-provided-equipment-dialog/add-provided-equipment-dialog.component';
 
 @NgModule({
-  declarations: [AddJamEventComponent, JamEventRouterComponent, MainEventPanelComponent, EventInfoPanelComponent, ForumComponent, SongListComponent, EquipmentListComponent, UserListComponent, AddSongDialogComponent, CommentDialogComponent, SearchEventComponent, AddEquipmentComponent],
+  declarations: [AddJamEventComponent, JamEventRouterComponent, MainEventPanelComponent, EventInfoPanelComponent, ForumComponent, SongListComponent, EquipmentListComponent, UserListComponent, AddSongDialogComponent, CommentDialogComponent, SearchEventComponent, AddEquipmentComponent, ProvidedEquipmentListComponent, AddProvidedEquipmentDialogComponent],
   imports: [
     CommonModule,
     JamEventRoutingModule,
@@ -32,7 +34,7 @@ import { AddEquipmentComponent } from './components/equipment-list/add-equipment
     SharedModule
   ],
   entryComponents: [
-    AddSongDialogComponent,CommentDialogComponent,AddEquipmentComponent
+    AddSongDialogComponent,CommentDialogComponent,AddEquipmentComponent, AddProvidedEquipmentDialogComponent
  ]
 })
 export class JamEventModule { }

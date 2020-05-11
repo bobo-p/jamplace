@@ -15,12 +15,13 @@ export class AppComponent {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   loading: boolean;
+  userName: string;
   constructor(
     media: MediaMatcher,
     changeDetectorRef: ChangeDetectorRef,
     public authService: AuthService,   
     private homeService: HomeService,
-    private loggedUserService: LoggedUserService
+    public loggedUserService: LoggedUserService
    ) { 
     this.loading = true;
     this.mobileQuery = media.matchMedia('(max-width: 650px)');
@@ -41,6 +42,7 @@ export class AppComponent {
         this.loggedUserService.tryGetLoggedUser().then(data => {
           this.loading = false;
           this.showNavbar = true;
+          this.userName = this.loggedUserService.getCurrentLoggedUser().userName;
         }, fail => {         
           console.log(fail);
           this.loading = false;

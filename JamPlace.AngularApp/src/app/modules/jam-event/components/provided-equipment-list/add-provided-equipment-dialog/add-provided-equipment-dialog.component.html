@@ -1,0 +1,18 @@
+<h5 *ngIf="!isEditingMode">Dostarcz nowy przedmiot</h5>
+<h5 *ngIf="isEditingMode">Edycja przedmiotu</h5>
+<form [formGroup]="eqForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="input-field">
+        <textarea  class="materialize-textarea" id="comment-content" type="text" formControlName="name" [ngClass]="{ 'invalid': (name.dirty || name.touched || submitted) && name.invalid && name.errors.required }"></textarea>
+        <label  [class.active]="currentEq.name" for="comment-content">Nazwa przedmiotu *</label>
+        <span *ngIf="(name.dirty || name.touched || submitted) && name.invalid && name.errors.required" class="invalid">
+            <small>Nazwa jest wymagana</small>
+        </span>
+    </div>
+   </div>
+   <div class="modal-foote">
+    <button *ngIf="!isEditingMode" class="btn right" cdkFocusInitial type="submit">Dodaj</button>
+    <button *ngIf="isEditingMode" class="btn right" cdkFocusInitial type="submit">Aktualizuj</button>
+    <button class="btn right cancel-button" (click)="onNoClick()" type="button">Anuluj</button>    
+    </div>
+</form>

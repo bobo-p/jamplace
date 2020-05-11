@@ -73,10 +73,11 @@
     color: black;
 }
 ul{
+    overflow: auto;
     border:none;
     margin-top: 0px;
     margin-bottom: 0px;
-    height: calc(96% - #{$content-desc-height});
+    height: calc(100% - #{$content-desc-height});
     background-color: #F5F5F5;
     border-right: 1px solid #ddd;
 }

@@ -13,6 +13,7 @@ export class JamEventService {
     private api) { }
 
   public addJamEvent(jamEventInfo: JamEventInfo): Promise<any> {
+    console.log(jamEventInfo);
     return this.authService.post(this.api + '/JamEvent/AddJamEvent', jamEventInfo, 'application/json; charset=utf-8');
   }
 

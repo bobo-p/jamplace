@@ -15,6 +15,7 @@ namespace JamPlace.Api.Models
         public ICollection<JamEventUserViewModel> Users { get; set; }
         public ICollection<SongViewModel> Songs { get; set; }
         public ICollection<EquipmentViewModel> NeededEquipment { get; set; }
+        public ICollection<EquipmentViewModel> ProvidedEquipment { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
         public DateTime Date { get; set; }
         public JamEventUserViewModel Creator { get; set; }

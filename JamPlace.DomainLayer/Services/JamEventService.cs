@@ -87,7 +87,12 @@ namespace JamPlace.DomainLayer.Services
 
         public IJamEvent Get(int id)
         {
-            return _jamEventRepository.Get(id);
+            var jamEvent = _jamEventRepository.Get(id);
+            jamEvent.Comments  = jamEvent.Comments?.OrderByDescending(p => p.Date).ToList();
+            jamEvent.NeededEquipment = jamEvent.NeededEquipment?.OrderByDescending(p => p.Date).ToList();
+            jamEvent.ProvidedEquipment = jamEvent.ProvidedEquipment?.OrderByDescending(p => p.Date).ToList();
+            jamEvent.Songs = jamEvent.Songs?.OrderByDescending(p => p.AddDate).ToList();
+            return jamEvent;
         }
 
         public UserAccessModeEnum GetAccesTypeForUser(int eventId, string userId)

@@ -4,6 +4,7 @@ import { JamEventInfo } from '../../../shared/jam-event-info';
 import { MatDialog } from '@angular/material';
 import { EditJamEventDialogComponent } from 'src/app/modules/shared/components/edit-jam-event-dialog/edit-jam-event-dialog.component';
 import { Address } from 'src/app/modules/shared/addres';
+import { LoggedUserService } from 'src/app/modules/shared/services/logged-user.service';
 
 @Component({
   selector: 'app-event-info-panel',
@@ -17,14 +18,19 @@ export class EventInfoPanelComponent implements OnInit, OnDestroy {
   @ViewChild('collapsible',{static: false}) elCollapsible: ElementRef;
   addressText: string;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public loggedUserService: LoggedUserService) { 
+
+  }
 
   ngOnInit() {
     this.addressText = this.prepareAddrressString(this.eventInfo.address);
+    if(!this.eventInfo.description)
+      this.eventInfo.description="Brak opisu."
   }
 
   ngAfterViewInit() {
     let instanceCollapsible = new M.Collapsible(this.elCollapsible.nativeElement, {});
+    
     
   }
 
@@ -34,7 +40,8 @@ export class EventInfoPanelComponent implements OnInit, OnDestroy {
   openDialog(model: JamEventInfo): void {  
     const dialogRef = this.dialog.open(EditJamEventDialogComponent, {
       width: '550px',
-      data: model
+      maxHeight: '90vh', 
+      data: model,     
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,23 +1,27 @@
 <div *ngIf="!loading" class="navContainer">
     <mat-toolbar *ngIf="showNavbar">
       <mat-toolbar-row class="position-relative">
+
         <button mat-icon-button  id="menuIconButton" class="menuIconButton">
           <mat-icon class="menuIcon" (click)="sidenav.toggle()">menu</mat-icon>
         </button>
+
         <a class="logoContainer" [routerLink]="'/'" routerLinkActive="router-link-active"><img class="logo" src="jamplace.png" alt=""></a>
-        <div class="user-mail-container">
-         
-        </div>
-        <mat-divider [vertical]="true"></mat-divider>
-        <div class="logOutBtn">
-          <a class="LogOutLink" (click)="authService.logout()">Wyloguj</a>
-        </div>
+
+        <!-- <mat-divider [vertical]="true"></mat-divider> -->
+       
+        <a class="LogOutLink" (click)="authService.logout()">Wyloguj</a>
+       
   
       </mat-toolbar-row>
     </mat-toolbar>
   
     <mat-sidenav-container>
       <mat-sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" #sidenav>
+        <div class="user-info" *ngIf="userName">
+          <p class="welcome center-align">Witaj,</p>
+          <p class="user-name center-align">{{loggedUserService.getCurrentLoggedUser().userName}}</p>
+        </div>
         <mat-nav-list>
           <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/'">
             <mat-icon>folder</mat-icon> Główna
@@ -25,8 +29,8 @@
           <!-- <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/price-list'">
             <mat-icon>attach_money</mat-icon> Cennik
           </a> -->
-          <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/settings'">
-            <mat-icon>settings_applications</mat-icon> Ustawienia
+          <a (click)="sidenav.toggle()" mat-list-item [routerLink]="'/profile'">
+            <mat-icon>settings_applications</mat-icon> Profil
           </a>
         </mat-nav-list>
       </mat-sidenav>

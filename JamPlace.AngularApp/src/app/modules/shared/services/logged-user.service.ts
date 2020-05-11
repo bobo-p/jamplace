@@ -26,9 +26,13 @@ export class LoggedUserService {
       return false;
     });
   }
-  getCurrentLoggedUser() : JamUserModel {
+  public getCurrentLoggedUser() : JamUserModel {
     if(!this.loggedUser)
       this.tryGetLoggedUser();
     return this.loggedUser;
+  }
+  public updateUserData()
+  {
+    this.tryGetLoggedUser();
   }
 }

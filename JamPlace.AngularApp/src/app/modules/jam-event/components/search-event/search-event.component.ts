@@ -18,14 +18,16 @@ export class SearchEventComponent implements OnInit {
   myEvents$: Observable<JamEventViewModel[]>;
   private searchTerms: BehaviorSubject <string>;
   firstSearch: boolean;
-  
+  listEmpty: boolean;
+
   constructor(private jamEventsService: JamEventService,
-    private router: Router, private r:ActivatedRoute) { }
+    private router: Router, private r:ActivatedRoute) { this.listEmpty=true;}
 
   ngOnInit() {
     this.firstSearch = true;
     this.jamEventsService.getJamEevents().then(result => {
-      console.log(result);
+      if(result && result.length > 0)
+        this.listEmpty = false;
         this.myEvents$ = new Observable<JamEventViewModel[]>(observer => observer.next(result));   
       },
        error => {

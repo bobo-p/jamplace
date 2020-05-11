@@ -24,6 +24,7 @@ namespace JamPlace.DataLayer.Repositories
             {
                 Name = item.Name,
                 EventId = item.EventId,
+                Date = item.Date
             };
             commentDo.UserId = item.JamUser.Id;
             var added = Context.Add(commentDo);

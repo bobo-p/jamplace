@@ -1,7 +1,7 @@
 <div class="content-desc card">
     <div class="row valign-wrapper row-desc">
-      <div class="col l4 xl4 tile-title truncate" matTooltip="Potrzebne przedmioty">Potrzebne przedmioty</div>
-      <div class="col l6 xl6 search-field">
+      <div class="col l6 xl6 m6 s6 tile-title truncate" matTooltip="Zapewnione przez użytkowników">Zapewnione przez użytkowników</div>
+      <div class="col l4 xl4 m4 s4 search-field">
           <app-custom-search-field  (currentTerm)=search($event) class="right"></app-custom-search-field>
       </div>
       <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
@@ -13,7 +13,7 @@
     <i class="medium  material-icons icon-style">account_circle</i>
     <i *ngIf="!(equipment.jamUser.photoBase64)" class="medium  material-icons icon-style" matTooltip="{{equipment.jamUser.userName}}">account_circle</i>
     <img  *ngIf="equipment.jamUser.photoBase64" [src]="equipment.jamUser.photoBase64" alt="mage" class="circle custom-avatar-size"matTooltip="{{equipment.jamUser.userName}}"/>
-      <span class="title">Użytkownik {{equipment.jamUser.userName}} dodał(a):</span>
+      <span class="title">Użytkownik {{equipment.jamUser.userName}} dostarczy:</span>
         <p class="comment">
           {{equipment.name}}
         </p>
@@ -26,7 +26,7 @@
    <div  *ngIf="listEmpty" class="lack-od-elements center-align">
     <div class="row center-align card empty-card">
        <h5 class="col s12 m12 xl12">Brak elementów</h5>
-       <p class="col s12 m12 xl12">Dodaj teraz zapotrzebowanie na nowy sprzęt</p>
+       <p class="col s12 m12 xl12">Dodaj teraz nowy przedmiot</p>
        <div class="add-btn col s12 m12 xl12 center-align" (click)="openDialog()"> 
          <i class="material-icons left circle add-icon empty-icon">add_circle_outline</i>
        </div>

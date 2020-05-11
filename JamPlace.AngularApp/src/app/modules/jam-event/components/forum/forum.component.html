@@ -2,7 +2,7 @@
     <div class="row valign-wrapper row-desc">
       <div class="col l4 xl4 tile-title truncate">Wpisy</div>
       <div class="col l6 xl6 search-field">
-          <app-custom-search-field (currentTerm)=search($event) class="right"></app-custom-search-field>
+          <app-custom-search-field (currentTerm)=search($event) [placeholder-text]="placeholderTxt" class="right"></app-custom-search-field>
       </div>
       <div class="col l2 xl2 add-btn" (click)="openDialog()"> <i class="material-icons left circle add-icon">add_circle_outline</i></div>
     </div>

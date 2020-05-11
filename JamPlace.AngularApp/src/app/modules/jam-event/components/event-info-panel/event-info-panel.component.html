@@ -1,19 +1,19 @@
 <div class="content-desc card">
   <div class="row valign-wrapper row-desc">
-    <div class="col l6 offset-l1">
-      <div class="event-name">{{eventInfo.name}}</div>
+    <div class="col m10 s10 l10  truncate name-row">
+      <div class="event-name" matTooltip="{{eventInfo.name}}" >{{eventInfo.name}}</div>
     </div>
-    <div class="col l2 xl2 edit-btn" (click)="openDialog(eventInfo)"> <i class="material-icons left circle edit-icon">edit</i></div>
+    <div *ngIf="loggedUserService.getCurrentLoggedUser().id==eventInfo.ownerId" class="col s2 m2 l2 xl2 edit-btn" (click)="openDialog(eventInfo)"> <i class="material-icons left circle edit-icon">edit</i></div>
   </div>
 </div>
 <ul class="collapsible collection-list" #collapsible >
   <li class="description-li">
-    <div class="description"><span>{{eventInfo.description}}</span></div>
+    <div *ngIf="eventInfo.description" class="description" matTooltip="{{eventInfo.size}}"><span>{{eventInfo.description}}</span></div>
   </li>
   <li class="address-li">
     <div class="address valign-wrapper row">
       <i class="material-icons col l1 icon-padding">place</i>
-      <span class="col l11">{{addressText}}</span>
+      <span class="col l11 truncate" matTooltip="{{addressText}}">{{addressText}}</span>
     </div>
     <div class="collapsible-body list-content"></div>
   </li>

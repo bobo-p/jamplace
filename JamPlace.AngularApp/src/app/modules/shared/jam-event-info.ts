@@ -7,4 +7,5 @@ export class JamEventInfo{
     description: string;
     address: Address;
     date: Date;
+    ownerId: number;
 }

@@ -31,9 +31,17 @@ export class EditJamEventDialogComponent implements OnInit {
   ngOnInit() {
   }
   ngAfterViewInit() {
+    
     var options = {
-      //format : 'dd.mm.yyyy',
+      format : 'dd.mm.yyyy',
       setDefaultDate: true,
+      i18n: {
+        months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wezesień','Październik','Listopad','Grudzień'],
+        monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
+        weekdaysShort: ['Nd','Pon','Wt','Śr','Czw','Pt','So'],
+        weekdaysAbbrev:	['N','P','W','S','C','P','S'],
+        cancel: 'Anuluj'
+      }
     };  
     var elems = document.querySelectorAll('.datepicker');
     var datapickers = M.Datepicker.init(elems, options);
@@ -67,7 +75,8 @@ export class EditJamEventDialogComponent implements OnInit {
     const result: JamEventInfo = Object.assign({}, this.editJamEventForm.value);
     result.address = Object.assign({}, result.address);
     result.id = this.jamEventInfo.id;
-    var tempDate=new Date(this.datePicker.toString());
+    result.ownerId = this.jamEventInfo.ownerId;
+    var tempDate=this.getFormattedDate(this.datePicker.toString());
     var timeDate=this.timePicker.time.split(":");
     result.date = new Date(tempDate.getFullYear(),tempDate.getMonth(),tempDate.getDate(),timeDate[0],timeDate[1]); 
     this.jamEventInfoService.updateJamEvent(result).then(response => {   
@@ -114,6 +123,11 @@ export class EditJamEventDialogComponent implements OnInit {
       minutes = "0" + minutes;
     var res= hours +":"+ minutes;
     return res;
+  }
+  private getFormattedDate(date: string): Date {
+    
+    var parts = date.split(".");
+    return new Date(Number(parts[2]),Number(parts[1])-1,Number(parts[0]));
   }
   
 }

@@ -23,7 +23,7 @@ export class AddJamEventComponent implements OnInit {
 
    addJamEventForm: FormGroup;
    submitted = false;
-
+   monthsPl = ['STY', 'LUT', 'MAR', 'KWI', 'MAJ', 'CZE', 'LIP', 'SIE', 'WRZ', 'PAŹ', 'LIS', 'GRU'];
    datePicker;
    timePicker;
   constructor(
@@ -37,8 +37,15 @@ export class AddJamEventComponent implements OnInit {
 
   ngAfterViewInit() {
     var options = {
-      //format : 'dd.mm.yyyy',
+      format : 'dd.mm.yyyy',
       setDefaultDate: true,
+      i18n: {
+        months: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wezesień','Październik','Listopad','Grudzień'],
+        monthsShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
+        weekdaysShort: ['Nd','Pon','Wt','Śr','Czw','Pt','So'],
+        weekdaysAbbrev:	['N','P','W','S','C','P','S'],
+        cancel: 'Anuluj'
+      }
     };  
     var elems = document.querySelectorAll('.datepicker');
     var datapickers = M.Datepicker.init(elems, options);
@@ -69,7 +76,7 @@ export class AddJamEventComponent implements OnInit {
     const result: JamEventInfo = Object.assign({}, this.addJamEventForm.value);
     result.address = Object.assign({}, result.address);
 
-    var tempDate=new Date(this.datePicker.toString());
+    var tempDate=this.getFormattedDate(this.datePicker.toString());
     var timeDate=this.timePicker.time.split(":");
     result.date = new Date(tempDate.getFullYear(),tempDate.getMonth(),tempDate.getDate(),timeDate[0],timeDate[1]); 
     this.addEventService.addJamEvent(result).then(resultId => {
@@ -117,5 +124,10 @@ export class AddJamEventComponent implements OnInit {
       minutes = "0" + minutes;
     var res= hours +":"+ minutes;
     return res;
+  }
+  private getFormattedDate(date: string): Date {
+    
+    var parts = date.split(".");
+    return new Date(Number(parts[2]),Number(parts[1])-1,Number(parts[0]));
   }
 }

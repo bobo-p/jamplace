@@ -15,5 +15,6 @@ namespace JamPlace.Api.Models
         public string Description { get; set; }
         public AddressViewModel Address { get; set; }
         public DateTime Date { get; set; }
+        public int OwnerId { get; set; }
     }
 }

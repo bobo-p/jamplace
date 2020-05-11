@@ -13,6 +13,7 @@ export class JamEventViewModel {
     users: JamUserViewModel[];
     songs: SongViewModel[];
     neededEquipment: EquipmentViewModel[];
+    providedEquipment: EquipmentViewModel[];
     comments: CommentViewModel[];
     date: Date;
     creator: JamUserViewModel;

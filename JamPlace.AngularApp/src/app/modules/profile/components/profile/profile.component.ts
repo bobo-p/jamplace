@@ -81,7 +81,9 @@ export class ProfileComponent implements OnInit {
     }
     this.currentUser.photoBase64 = this.croppedImage;
     this.userProfileService.updateUserInfo(this.currentUser).then(result => {
-      M.toast({html: 'Dane zostały pomyślnie zaktualizowane',displayLength: 1500,classes: 'rounded'})  
+      this.loggedUserService.updateUserData();
+      M.toast({html: 'Dane zostały pomyślnie zaktualizowane',displayLength: 1500,classes: 'rounded'})  ;
+      this.router.navigate(["/"]);
     },
      error => {
       console.log(error);

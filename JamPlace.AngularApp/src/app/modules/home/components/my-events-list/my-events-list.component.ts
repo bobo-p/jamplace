@@ -14,18 +14,22 @@ import {
 })
 export class MyEventsListComponent implements OnInit {
 
-   myEvents$: Observable<UserSpecificJamEvent[]>;
+  myEvents$: Observable<UserSpecificJamEvent[]>;
   private searchTerms: BehaviorSubject <string>;
-   firstSearch: boolean;
+  firstSearch: boolean;
+  listEmpty: boolean;
 
   constructor( 
     private userJamEventsService: UserEventsService,
     private router: Router,
-    private r:ActivatedRoute ) { }
+    private r:ActivatedRoute ) { this.listEmpty = true; }
 
   ngOnInit() {
     this.firstSearch = true;
     this.userJamEventsService.getCurrentUserEventevents().then(result => {
+      if(result && result.length > 0)
+        this.listEmpty = false;
+
         this.myEvents$ = new Observable<UserSpecificJamEvent[]>(observer => observer.next(result));   
       },
        error => {

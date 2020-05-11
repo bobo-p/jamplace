@@ -1,4 +1,4 @@
 <div [class.custom-search-wrap-highlight]='showClear' class="custom-search-wrap custom-search-wrap-highlight">
-    <input #searchBox [(ngModel)]="searchText" type="search" name="gsearch" placeholder="Szukaj po nazwie" class="custom-search-box-light" (input)="search(searchBox.value)" > 
+    <input #searchBox [(ngModel)]="searchText" type="search" name="gsearch" placeholder="{{placeholderText}}" class="custom-search-box-light" (input)="search(searchBox.value)" > 
     <i *ngIf="showClear" class="material-icons clear-button" (click) = "clear()">clear</i>
 </div>

@@ -28,6 +28,7 @@
     background-color: white;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    overflow: auto;
 }
 .address{
     height: 100%;
@@ -65,4 +66,7 @@
 .edit-icon:hover{
     color:rgb(217, 235, 117);
     cursor: pointer;
+}
+.name-row{
+    margin-left: 0px !important;
 }
