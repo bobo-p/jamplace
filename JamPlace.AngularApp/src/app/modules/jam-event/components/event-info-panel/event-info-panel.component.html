@@ -7,17 +7,17 @@
   </div>
 </div>
 <ul class="collapsible collection-list" #collapsible >
-  <li>
+  <li class="description-li">
     <div class="description"><span>{{eventInfo.description}}</span></div>
   </li>
-  <li>
+  <li class="address-li">
     <div class="address valign-wrapper row">
       <i class="material-icons col l1 icon-padding">place</i>
       <span class="col l11">{{addressText}}</span>
     </div>
     <div class="collapsible-body list-content"></div>
   </li>
-  <li>
+  <li class="address-li">
     <div class="address valign-wrapper row">
       <i class="material-icons col l1 icon-padding">date_range</i>
       <span class="col l11">{{eventInfo.date | date:'dd.MM.yyyy HH:mm'}}</span>

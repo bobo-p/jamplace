@@ -13,5 +13,6 @@ namespace JamPlace.Api.Models
         public DateTime Date { get; set; }
         public int EventId { get; set; }
         public JamEventUserViewModel JamUser { get; set; }
+
     }
 }

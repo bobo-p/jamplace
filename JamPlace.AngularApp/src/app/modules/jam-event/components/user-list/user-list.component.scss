@@ -76,7 +76,7 @@ ul{
     border:none;
     margin-top: 0px;
     margin-bottom: 0px;
-    height: calc(100vh - #{$top-panel-height} - #{$event-info-height} - #{$content-desc-height});
+    height: calc(96% - #{$content-desc-height});
     background-color: #F5F5F5;
     border-right: 1px solid #ddd;
 }

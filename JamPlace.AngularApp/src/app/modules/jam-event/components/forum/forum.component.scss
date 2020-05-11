@@ -75,7 +75,8 @@
 ul{
     border:none;
     margin-top: 0px;
-    height: 400px;
+    height: calc(96% - #{$content-desc-height});
+    margin-bottom: 0px;
 }
 .empty-icon{
     width: 100%;

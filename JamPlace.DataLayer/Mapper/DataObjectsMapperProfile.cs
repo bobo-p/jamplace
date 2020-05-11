@@ -14,12 +14,14 @@ namespace JamPlace.DataLayer.Mapper
         {
             CreateMap<IJamUser, JamUserDo>();
             CreateMap<IEquipment, EquipmentDo>();
+            CreateMap<IEquipment, NeededEquipmentDo>();
             CreateMap<IJamEvent, JamEventDo>();
             CreateMap<ISong, SongDo>();
             CreateMap<IAdress, AdressDo>();
             CreateMap<IComment, CommentDo>();
 
             CreateMap<EquipmentDo, Equipment>();
+            CreateMap<NeededEquipmentDo, Equipment>();
             CreateMap<JamUserDo, JamUser>();
             CreateMap<SongDo, Song>();
             CreateMap<JamEventDo, JamEvent>();

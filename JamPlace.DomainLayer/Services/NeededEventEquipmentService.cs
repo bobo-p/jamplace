@@ -62,7 +62,7 @@ namespace JamPlace.DomainLayer.Services
         {
             var eqs = _equipmenttRepository.GetFilteredByEvent(eventId).ToList();
             if (string.IsNullOrEmpty(seacrhText)) return eqs.OrderByDescending(p => p.Date);
-            return eqs.Where(ev => !string.IsNullOrEmpty(ev.JamUser.UserName) && ev.JamUser.UserName.ToLower().Contains(seacrhText.ToLower())).OrderByDescending(p => p.Date);
+            return eqs.Where(ev => !string.IsNullOrEmpty(ev.Name) && ev.Name.ToLower().Contains(seacrhText.ToLower())).OrderByDescending(p => p.Date);
         }
     }
 }

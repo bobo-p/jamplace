@@ -21,8 +21,9 @@
     font-size: 13px;
 }
 .ul-max-height{
-    max-height: 300px;
+    height:calc(100% - #{$content-desc-height});
     overflow: auto;
+    margin-bottom: 0px;
 }
 .content-desc{
     padding-left: 20px;

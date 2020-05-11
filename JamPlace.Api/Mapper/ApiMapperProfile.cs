@@ -21,12 +21,12 @@ namespace JamPlace.Api.Mapper
             CreateMap<IAdress, AddressViewModel>();
             CreateMap<IJamEvent, GetJamEventViewModel>();
             CreateMap<IJamEvent, UserSpecificJamEventViewModel>();
-            CreateMap<IEquipment, EquipmentViewModel>();
 
             CreateMap<SongViewModel, ISong>();
             CreateMap<CommentViewModel, IComment>();
             CreateMap<JamUserViewModel, IJamUser>();
             CreateMap<EquipmentViewModel, IEquipment>();
+            CreateMap<JamEventUserViewModel, IJamUser>();
 
         }
     }

@@ -30,7 +30,7 @@ namespace JamPlace.Api.Controllers
         {
             string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var added = _neededEquipmentService.Add(_mapper.Map<IEquipment>(comment), userId);
-            return Ok(_mapper.Map<EquipmentViewModel>(comment));
+            return Ok(_mapper.Map<EquipmentViewModel>(added));
         }
         [HttpPost("UpdateEquipment")]
         public IActionResult UpdateEquipment(EquipmentViewModel comment)
@@ -39,7 +39,7 @@ namespace JamPlace.Api.Controllers
             return Ok();
         }
         [HttpPost("DeleteEquipment")]
-        public IActionResult DeleteEquipment(CommentViewModel comment)
+        public IActionResult DeleteEquipment(EquipmentViewModel comment)
         {
             _neededEquipmentService.Delete(_mapper.Map<IEquipment>(comment));
             return Ok();
@@ -48,7 +48,7 @@ namespace JamPlace.Api.Controllers
         public ActionResult SearchEquipment(EquipmentSearchRequest request)
         {
             var songs = _neededEquipmentService.GetFilteredByName(request.SearchText, request.EventId).ToList();
-            return Ok(songs.Select(item => _mapper.Map<CommentViewModel>(item)));
+            return Ok(songs.Select(item => _mapper.Map<EquipmentViewModel>(item)));
         }
     }
 }

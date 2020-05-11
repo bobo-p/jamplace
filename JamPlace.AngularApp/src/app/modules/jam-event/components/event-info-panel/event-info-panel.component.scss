@@ -21,18 +21,26 @@
     padding:0;
     border-top: 0px;
     border-left: 0px;
+    height: calc(100% - #{$content-desc-height});
 }
 .description{
-    min-height: 202px;
+    height: 100%;
     background-color: white;
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
 .address{
+    height: 100%;
     background-color: white;
     padding: 13px;
     border-bottom: 1px solid #ddd;
     margin: 0px;
+}
+.description-li{
+    height: 62%;
+}
+.address-li{
+    height: 19%;
 }
 .address > span {
     margin-left: 10px;;

@@ -38,7 +38,6 @@ export class EquipmentListComponent implements OnInit {
   openDialog(model?: EquipmentViewModel): void {
     if(!model)
       model = new EquipmentViewModel();
-      console.log(this.equipmentList);
     model.eventId = this.eventId;
     const dialogRef = this.dialog.open(AddEquipmentComponent, {
       width: '450px',
