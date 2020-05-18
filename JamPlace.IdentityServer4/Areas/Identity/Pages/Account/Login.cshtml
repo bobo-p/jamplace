@@ -5,6 +5,7 @@
     ViewData["Title"] = "Log in";
 }
 
+
 <div class="row">
     <div class="card col xl4 push-xl4 m8 push-m2 s12 card-custom">
         <div class="welocme-text center-align">Witamy w JamPlace</div>
@@ -12,19 +13,21 @@
 
             <div class="row no-bootom-margin">
                 <div class="input-field col l10 push-l1 s12">
-                    <input asp-for="Input.Email" id="last_name" class="validate" type="email" />
+                    <input asp-for="Input.Email" id="last_name" class="validate" type="email" required />
                     <label for="last_name">E-mail</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
                 <div class="input-field col l10 push-l1 s12">
                     @*<label asp-for="Input.Password">Hasło</label>*@
-                    <input asp-for="Input.Password" id="password" type="password" class="validate" />
+                    <input asp-for="Input.Password" id="password" type="password" class="validate" required />
                     <label for="password">Hasło</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
             </div>
-            <div asp-validation-summary="All" class="text-danger no_dots"></div>
+            @*<div asp-validation-summary="All" class="text-danger no_dots"></div>*@
             <!-- <div asp-validation-for="All" class="text-danger"></div>    -->
             <!-- <div> -->
             <!-- <div class="checkbox">

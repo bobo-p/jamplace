@@ -21,6 +21,7 @@ using System.IO;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using JamPlace.IdentityServer4.Utils;
+using JamPlace.IdentityServer4.IdentityExtensions;
 
 namespace JamPlace.IdentityServer4
 {
@@ -55,6 +56,7 @@ namespace JamPlace.IdentityServer4
                 options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddErrorDescriber<CustomIdentityErrorDescriber>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -91,6 +93,7 @@ namespace JamPlace.IdentityServer4
             services.AddTransient<IIdentityServerConfigurationSetup, IdentityServerConfigurationSetup>();
             services.AddTransient<IDataSeeder, DataSeeder>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ICustomEmailSender, EmailSender>();
 
             services.AddControllersWithViews(options => options.EnableEndpointRouting = false);
             services.AddRazorPages().AddRazorPagesOptions(options =>
@@ -118,13 +121,11 @@ namespace JamPlace.IdentityServer4
                 {
                     policy.AllowAnyHeader()
                           .AllowAnyMethod().AllowAnyOrigin();
-                          //.AllowCredentials()
-                          //.WithOrigins(Configuration.GetValue<string>("Urls:AppUrl"));
+
                 });
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(CorsPolicyName);
@@ -136,11 +137,10 @@ namespace JamPlace.IdentityServer4
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
+
             }
             app.UseForwardedHeaders();
-            //app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -148,13 +148,7 @@ namespace JamPlace.IdentityServer4
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseIdentityServer();
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Home}/{action=Index}/{id?}");
-            //    endpoints.MapRazorPages();
-            //});
+
             app.UseMvcWithDefaultRoute();
         }
     }

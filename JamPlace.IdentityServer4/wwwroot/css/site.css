@@ -118,10 +118,13 @@ body {
     border-radius: 10px;
     transition: background-color .3s ease-in-out;
 }
+.reset-padding{
+    margin:20px;
+}
 
-    .login-button:hover {
-        background-color: #446387;
-    }
+.login-button:hover {
+    background-color: #446387;
+}
     .login-button:focus {
         background-color: #446387 !important;
     }
@@ -137,4 +140,10 @@ body {
     .logo-container {
         margin-bottom: 25px;
     }
+}
+.text-danger {
+    color: #b93f3f;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 550;
 }

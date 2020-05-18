@@ -45,11 +45,13 @@ namespace JamPlace.IdentityServer4.IdentityServerConfig
             {
                  new Client
                  {
-                    ClientId = _identityServerConfigData.ClientId,
-                    ClientName = _identityServerConfigData.ClientName,
+                    ClientId = _identityServerConfigData
+                    .ClientId,
+                    ClientName = _identityServerConfigData
+                    .ClientName,
                     AccessTokenType = AccessTokenType.Jwt,
                     RequireConsent = false,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    AccessTokenLifetime = 330,
                     IdentityTokenLifetime = 9000,
                     RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Code,
@@ -81,7 +83,6 @@ namespace JamPlace.IdentityServer4.IdentityServerConfig
                         StandardScopes.Email,
                         StandardScopes.Profile,
                         _identityServerConfigData.ApiResourceName,
-                        //IdentityServerConstants.LocalApi.ScopeName
                     },
                 },
             };
